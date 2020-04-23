@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#B5E5EA"
     tools:context=".Login">
 
     <ImageView
@@ -33,17 +34,18 @@
 
     <EditText
         android:id="@+id/emailEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/emailtextView"
         app:layout_constraintStart_toStartOf="@+id/emailtextView"
         app:layout_constraintTop_toBottomOf="@+id/emailtextView" />
 
     <EditText
         android:id="@+id/passwordEeditText"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
@@ -55,12 +57,15 @@
 
     <Button
         android:id="@+id/loginButton"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
+        android:background="@color/mc_logo_blueDark"
+        android:elevation="16dp"
         android:text="@string/login"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="#0D0E0E"
+        app:layout_constraintEnd_toEndOf="@+id/passwordEeditText"
+        app:layout_constraintStart_toStartOf="@+id/passwordEeditText"
         app:layout_constraintTop_toBottomOf="@+id/passwordEeditText" />
 
     <TextView
