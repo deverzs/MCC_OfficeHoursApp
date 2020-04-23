@@ -1,0 +1,2 @@
+rootProject.name='MCC_OfficeHoursApp'
+include ':app'
