@@ -7,4 +7,75 @@
     android:background="@color/mc_logo_blueLighter"
     tools:context=".StudentRegistration">
 
+    <ImageView
+        android:id="@+id/spartaImageView_ST_REG"
+        android:layout_width="298dp"
+        android:layout_height="153dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_spartan_world" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/register"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:layout_constraintEnd_toEndOf="@+id/spartaImageView_ST_REG"
+        app:layout_constraintStart_toStartOf="@+id/spartaImageView_ST_REG"
+        app:layout_constraintTop_toBottomOf="@+id/spartaImageView_ST_REG" />
+
+    <EditText
+        android:id="@+id/emailEditText_ST_REG"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/passwordEditText_ST_REG"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/emailEditText_ST_REG"
+        app:layout_constraintStart_toStartOf="@+id/emailEditText_ST_REG"
+        app:layout_constraintTop_toBottomOf="@+id/emailEditText_ST_REG" />
+
+    <EditText
+        android:id="@+id/passwordConfirmEditText_ST_REG"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="@string/passwordConfirm"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/passwordEditText_ST_REG"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/passwordEditText_ST_REG"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText_ST_REG" />
+
+    <Button
+        android:id="@+id/registerButton_ST_REG"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@color/mc_logo_blueDark"
+        android:elevation="@android:dimen/notification_large_icon_height"
+        android:text="@string/register"
+        app:layout_constraintEnd_toEndOf="@+id/passwordConfirmEditText_ST_REG"
+        app:layout_constraintStart_toStartOf="@+id/passwordConfirmEditText_ST_REG"
+        app:layout_constraintTop_toBottomOf="@+id/passwordConfirmEditText_ST_REG" />
 </androidx.constraintlayout.widget.ConstraintLayout>
