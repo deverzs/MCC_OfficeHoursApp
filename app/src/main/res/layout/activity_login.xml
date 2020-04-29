@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#B5E5EA"
+    android:background="@color/mc_logo_blueLighter"
     tools:context=".Login">
 
     <ImageView
