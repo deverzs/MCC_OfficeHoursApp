@@ -36,7 +36,7 @@
         android:id="@+id/emailEditText_LOGIN"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:ems="10"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="@+id/emailTextView_LOGIN"
