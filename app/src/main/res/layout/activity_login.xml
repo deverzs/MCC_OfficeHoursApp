@@ -8,9 +8,9 @@
     tools:context=".Login">
 
     <ImageView
-        android:id="@+id/MiraCiosta_imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/MiraCosta_imageView_LOGIN"
+        android:layout_width="304dp"
+        android:layout_height="192dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
@@ -21,55 +21,55 @@
         app:srcCompat="@drawable/miracosta_logo" />
 
     <TextView
-        android:id="@+id/emailtextView"
+        android:id="@+id/emailTextView_LOGIN"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/email"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/MiraCiosta_imageView"
+        app:layout_constraintEnd_toEndOf="@+id/MiraCosta_imageView_LOGIN"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/MiraCiosta_imageView"
-        app:layout_constraintTop_toBottomOf="@+id/MiraCiosta_imageView" />
+        app:layout_constraintStart_toStartOf="@+id/MiraCosta_imageView_LOGIN"
+        app:layout_constraintTop_toBottomOf="@+id/MiraCosta_imageView_LOGIN" />
 
     <EditText
-        android:id="@+id/emailEditText"
+        android:id="@+id/emailEditText_LOGIN"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/emailtextView"
-        app:layout_constraintStart_toStartOf="@+id/emailtextView"
-        app:layout_constraintTop_toBottomOf="@+id/emailtextView" />
+        app:layout_constraintEnd_toEndOf="@+id/emailTextView_LOGIN"
+        app:layout_constraintStart_toStartOf="@+id/emailTextView_LOGIN"
+        app:layout_constraintTop_toBottomOf="@+id/emailTextView_LOGIN" />
 
     <EditText
-        android:id="@+id/passwordEeditText"
+        android:id="@+id/passwordEditText_LOGIN"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/emailEditText"
-        app:layout_constraintStart_toStartOf="@+id/emailEditText"
-        app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
+        app:layout_constraintEnd_toEndOf="@+id/emailEditText_LOGIN"
+        app:layout_constraintStart_toStartOf="@+id/emailEditText_LOGIN"
+        app:layout_constraintTop_toBottomOf="@+id/emailEditText_LOGIN" />
 
     <Button
-        android:id="@+id/loginButton"
+        android:id="@+id/loginButton_LOGIN"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="32dp"
         android:background="@color/mc_logo_blueDark"
         android:elevation="16dp"
         android:text="@string/login"
         android:textColor="#0D0E0E"
-        app:layout_constraintEnd_toEndOf="@+id/passwordEeditText"
-        app:layout_constraintStart_toStartOf="@+id/passwordEeditText"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEeditText" />
+        app:layout_constraintEnd_toEndOf="@+id/passwordEditText_LOGIN"
+        app:layout_constraintStart_toStartOf="@+id/passwordEditText_LOGIN"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText_LOGIN" />
 
     <TextView
-        android:id="@+id/registerTextView"
+        android:id="@+id/registerTextView_LOGIN"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="44dp"
@@ -77,5 +77,5 @@
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+        app:layout_constraintTop_toBottomOf="@+id/loginButton_LOGIN" />
 </androidx.constraintlayout.widget.ConstraintLayout>
