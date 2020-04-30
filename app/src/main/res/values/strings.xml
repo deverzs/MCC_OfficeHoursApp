@@ -6,4 +6,5 @@
     <string name="passwordConfirm">Reenter Password</string>
     <string name="register">Register</string>
     <string name="needAccount">No account yet? Create one.</string>
+    <string name="ProfessorOption">Are you a MCC Professor?</string>
 </resources>

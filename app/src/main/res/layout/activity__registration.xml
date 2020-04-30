@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mc_logo_blueLighter"
-    tools:context=".StudentRegistration">
+    tools:context=".Registration">
 
     <ImageView
         android:id="@+id/spartaImageView_ST_REG"
@@ -58,7 +58,7 @@
         android:id="@+id/passwordConfirmEditText_ST_REG"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/passwordConfirm"
         android:inputType="textPassword"
@@ -67,15 +67,29 @@
         app:layout_constraintStart_toStartOf="@+id/passwordEditText_ST_REG"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditText_ST_REG" />
 
+    <CheckBox
+        android:id="@+id/professorOptionCheckBox_REG"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/ProfessorOption"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/passwordConfirmEditText_ST_REG"
+        app:layout_constraintStart_toStartOf="@+id/passwordConfirmEditText_ST_REG"
+        app:layout_constraintTop_toBottomOf="@+id/passwordConfirmEditText_ST_REG"
+        tools:visibility="visible" />
+
     <Button
         android:id="@+id/registerButton_ST_REG"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="100dp"
         android:background="@color/mc_logo_blueDark"
         android:elevation="@android:dimen/notification_large_icon_height"
         android:text="@string/register"
-        app:layout_constraintEnd_toEndOf="@+id/passwordConfirmEditText_ST_REG"
-        app:layout_constraintStart_toStartOf="@+id/passwordConfirmEditText_ST_REG"
-        app:layout_constraintTop_toBottomOf="@+id/passwordConfirmEditText_ST_REG" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/professorOptionCheckBox_REG"
+        app:layout_constraintStart_toStartOf="@+id/professorOptionCheckBox_REG"
+        app:layout_constraintTop_toBottomOf="@+id/professorOptionCheckBox_REG" />
 </androidx.constraintlayout.widget.ConstraintLayout>
