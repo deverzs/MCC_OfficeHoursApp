@@ -11,8 +11,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".AnonymousStudentSearch"></activity>
         <activity android:name=".Registration" />
-        <activity android:name=".Login" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
