@@ -9,8 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".LoggedinSavedProfs"></activity>
         <activity android:name=".StudentSearch" />
-        <activity android:name=".ProfessorDetails"/>
+        <activity android:name=".ProfessorDetails" />
         <activity android:name=".Registration" />
         <activity android:name=".Login">
             <intent-filter>
