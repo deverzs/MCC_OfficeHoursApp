@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/mc_logo_blueLighter"
     android:orientation="vertical"
     tools:context=".ProfessorDetails">
 
@@ -21,7 +22,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/professorNametextView_DETAILS"
+            android:id="@+id/professorNameTextView_DETAILS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -64,7 +65,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
-            android:id="@+id/monHourstextView_DETAILS"
+            android:id="@+id/monHoursTextView_DETAILS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -104,7 +105,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
-            android:id="@+id/tuesHourstextView_DETAILS"
+            android:id="@+id/tuesHoursTextView_DETAILS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -143,7 +144,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
-            android:id="@+id/wedHourstextView_DETAILS"
+            android:id="@+id/wedHoursTextView_DETAILS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -181,7 +182,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
-            android:id="@+id/thurHourstextView_DETAILS"
+            android:id="@+id/thurHoursTextView_DETAILS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -219,7 +220,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
-            android:id="@+id/friHourstextView_DETAILS"
+            android:id="@+id/friHoursTextView_DETAILS"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -247,7 +248,7 @@
         android:background="@color/mc_logo_blueDark" />
 
     <TextView
-        android:id="@+id/availableByAppttextView_DETAILS"
+        android:id="@+id/availableByApptTextView_DETAILS"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
@@ -266,7 +267,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorLightGreen"
+        android:elevation="8dp"
         android:text="@string/saveProf"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 
 </LinearLayout>

@@ -4,13 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
-public class AnonymousStudentSearch extends AppCompatActivity {
+public class StudentSearch extends AppCompatActivity {
 
 
     //testig branch
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_anonymous_student_search);
+        setContentView(R.layout.activity_student_search);
     }
 }
