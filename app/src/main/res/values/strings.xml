@@ -11,4 +11,10 @@
     <string name="reset">RESET</string>
     <string name="searchByInstructor">Search By Instructor</string>
     <string name="searchByCourse">Search By Course</string>
+    <string name="mon_initial">MON : </string>
+    <string name="tues_initial">TUES : </string>
+    <string name="wed_initial">WED : </string>
+    <string name="thur_initial">THUR : </string>
+    <string name="fri_initial">FRI : </string>
+    <string name="saveProf">SAVE PROFESSOR </string>
 </resources>

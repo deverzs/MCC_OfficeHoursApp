@@ -12,7 +12,7 @@
         android:layout_width="304dp"
         android:layout_height="192dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -24,11 +24,11 @@
         android:id="@+id/emailTextView_LOGIN"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="28dp"
         android:text="@string/email"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/MiraCosta_imageView_LOGIN"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/MiraCosta_imageView_LOGIN"
         app:layout_constraintTop_toBottomOf="@+id/MiraCosta_imageView_LOGIN" />
 
@@ -70,17 +70,6 @@
         app:layout_constraintStart_toStartOf="@+id/passwordEditText_LOGIN"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditText_LOGIN" />
 
-    <Button
-        android:id="@+id/searchOnlyButton_LOGIN"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@color/colorLightGreen2"
-        android:text="@string/search_only"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/registerTextView_LOGIN"
-        app:layout_constraintStart_toStartOf="@+id/registerTextView_LOGIN"
-        app:layout_constraintTop_toBottomOf="@+id/registerTextView_LOGIN" />
-
     <TextView
         android:id="@+id/registerTextView_LOGIN"
         android:layout_width="0dp"
@@ -93,4 +82,16 @@
         app:layout_constraintHorizontal_bias="0.422"
         app:layout_constraintStart_toStartOf="@+id/loginButton_LOGIN"
         app:layout_constraintTop_toBottomOf="@+id/loginButton_LOGIN" />
+
+    <Button
+        android:id="@+id/searchOnlyButton_LOGIN"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorLightGreen2"
+        android:text="@string/search_only"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/registerTextView_LOGIN"
+        app:layout_constraintStart_toStartOf="@+id/registerTextView_LOGIN"
+        app:layout_constraintTop_toBottomOf="@+id/registerTextView_LOGIN" />
 </androidx.constraintlayout.widget.ConstraintLayout>
