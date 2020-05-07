@@ -27,10 +27,13 @@
 
         <Button
             android:id="@+id/newSearchButton_SAVED"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:background="@color/mc_logo_blueDark"
             android:elevation="8dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:text="@string/new_search"
             android:textColor="@android:color/black"
             android:textSize="18sp" />

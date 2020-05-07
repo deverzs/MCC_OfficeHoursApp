@@ -264,11 +264,32 @@
 
     <Button
         android:id="@+id/saveProfessorButton_DETAILS"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:background="@color/colorLightGreen"
         android:elevation="8dp"
+        android:ellipsize="none"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:text="@string/saveProf"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/blank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/deleteProfessorButton_DETAILS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/mc_logo_blueDark"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="@string/deleteProf"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
 
