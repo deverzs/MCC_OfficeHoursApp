@@ -2,7 +2,7 @@ package edu.miracostacollege.mcc_officehoursapp.Model;
 
 import java.util.Objects;
 
-public class Calendar {
+public class Schedule {
 
     private int mInstructorCode;        //Unique code for the instructor
     private int mOfficeHourSection;     //Designates which section of the day this office hour is
@@ -19,8 +19,8 @@ public class Calendar {
      * @param mOfficeHourTime       Designates time of office hour
      * @param mOfficeHourLocation   Designates location of office hour
      */
-    public Calendar(int mInstructorCode, int mOfficeHourSection, int mOfficeHourDay,
-                       String mOfficeHourTime, String mOfficeHourLocation) {
+    public Schedule(int mInstructorCode, int mOfficeHourSection, int mOfficeHourDay,
+                    String mOfficeHourTime, String mOfficeHourLocation) {
         this.mInstructorCode = mInstructorCode;
         this.mOfficeHourSection = mOfficeHourSection;
         this.mOfficeHourDay = mOfficeHourDay;
@@ -47,7 +47,7 @@ public class Calendar {
 
     /**
      * Get the office hour section number
-     * @return
+     * @return in that is the office hour section
      */
     public int getmOfficeHourSection() {
         return mOfficeHourSection;
@@ -124,7 +124,7 @@ public class Calendar {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Calendar calendar = (Calendar) o;
+        Schedule calendar = (Schedule) o;
         return getmInstructorCode() == calendar.getmInstructorCode() &&
                 getmOfficeHourSection() == calendar.getmOfficeHourSection() &&
                 getmOfficeHourDay() == calendar.getmOfficeHourDay() &&

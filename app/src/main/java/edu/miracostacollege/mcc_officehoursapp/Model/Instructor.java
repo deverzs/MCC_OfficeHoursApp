@@ -3,7 +3,8 @@ package edu.miracostacollege.mcc_officehoursapp.Model;
 import java.util.Objects;
 
 
-    public class Instructor {
+public class Instructor {
+
     private int mInstructorCode;        //Unique code for the instructor
     private String mFullName;           //Full Name of instructor
     private String mPhone;              //Phone number, including extension

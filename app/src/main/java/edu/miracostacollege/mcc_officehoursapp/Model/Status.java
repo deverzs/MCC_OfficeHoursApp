@@ -43,7 +43,7 @@ public class Status {
 
     /**
      * Get the office hour section number
-     * @return
+     * @return  int that is the office hour section of the day
      */
     public int getmOfficeHourSection() {
         return mOfficeHourSection;
