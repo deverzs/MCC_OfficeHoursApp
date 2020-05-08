@@ -8,7 +8,7 @@
     tools:context=".Registration">
 
     <ImageView
-        android:id="@+id/spartaImageView_ST_REG"
+        android:id="@+id/spartaImageView_REG"
         android:layout_width="298dp"
         android:layout_height="153dp"
         android:layout_marginTop="48dp"
@@ -25,12 +25,12 @@
         android:layout_marginTop="24dp"
         android:text="@string/register"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        app:layout_constraintEnd_toEndOf="@+id/spartaImageView_ST_REG"
-        app:layout_constraintStart_toStartOf="@+id/spartaImageView_ST_REG"
-        app:layout_constraintTop_toBottomOf="@+id/spartaImageView_ST_REG" />
+        app:layout_constraintEnd_toEndOf="@+id/spartaImageView_REG"
+        app:layout_constraintStart_toStartOf="@+id/spartaImageView_REG"
+        app:layout_constraintTop_toBottomOf="@+id/spartaImageView_REG" />
 
     <EditText
-        android:id="@+id/emailEditText_ST_REG"
+        android:id="@+id/emailEditText_REG"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
@@ -43,29 +43,29 @@
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <EditText
-        android:id="@+id/passwordEditText_ST_REG"
+        android:id="@+id/passwordEditText_REG"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/emailEditText_ST_REG"
-        app:layout_constraintStart_toStartOf="@+id/emailEditText_ST_REG"
-        app:layout_constraintTop_toBottomOf="@+id/emailEditText_ST_REG" />
+        app:layout_constraintEnd_toEndOf="@+id/emailEditText_REG"
+        app:layout_constraintStart_toStartOf="@+id/emailEditText_REG"
+        app:layout_constraintTop_toBottomOf="@+id/emailEditText_REG" />
 
     <EditText
-        android:id="@+id/passwordConfirmEditText_ST_REG"
+        android:id="@+id/passwordConfirmEditText_REG"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:ems="10"
         android:hint="@string/passwordConfirm"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/passwordEditText_ST_REG"
+        app:layout_constraintEnd_toEndOf="@+id/passwordEditText_REG"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/passwordEditText_ST_REG"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEditText_ST_REG" />
+        app:layout_constraintStart_toStartOf="@+id/passwordEditText_REG"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText_REG" />
 
     <CheckBox
         android:id="@+id/professorOptionCheckBox_REG"
@@ -74,13 +74,13 @@
         android:layout_marginTop="24dp"
         android:text="@string/ProfessorOption"
         android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="@+id/passwordConfirmEditText_ST_REG"
-        app:layout_constraintStart_toStartOf="@+id/passwordConfirmEditText_ST_REG"
-        app:layout_constraintTop_toBottomOf="@+id/passwordConfirmEditText_ST_REG"
+        app:layout_constraintEnd_toEndOf="@+id/passwordConfirmEditText_REG"
+        app:layout_constraintStart_toStartOf="@+id/passwordConfirmEditText_REG"
+        app:layout_constraintTop_toBottomOf="@+id/passwordConfirmEditText_REG"
         tools:visibility="visible" />
 
     <Button
-        android:id="@+id/registerButton_ST_REG"
+        android:id="@+id/registerButton_REG"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
