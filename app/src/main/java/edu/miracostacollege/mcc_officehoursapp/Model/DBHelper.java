@@ -39,6 +39,12 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String STATUS_DAY = "day";
     public static final String STATUS_STATUS = "status";
 
+    //FIELDS (COLUMN NAMES) FOR THE LOGIN TABLE
+    public static final String LOGIN_TABLE = "Login";
+    public static final String LOGIN_KEY_FIELD_ID = "_id";
+    public static final String LOGIN_INSTR_CODE = "email";
+    public static final String LOGIN_SECTION = "password";
+    public static final String LOGIN_PROFESSOR = "professor";
 
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
