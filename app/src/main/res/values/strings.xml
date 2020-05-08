@@ -17,7 +17,7 @@
     <string name="thur_initial">THUR : </string>
     <string name="fri_initial">FRI : </string>
     <string name="saveProf">SAVE PROFESSOR </string>
-    <string name="deleteProf">DELETE PROFESSOR </string>
+    <string name="deleteProf">DELETE PROFESSOR FROM SAVED</string>
     <string name="new_search">NEW SEARCH</string>
     <string name="view_schedule">View Schedule</string>
     <string name="update_schedule">Update Schedule</string>

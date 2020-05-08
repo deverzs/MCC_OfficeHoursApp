@@ -88,6 +88,8 @@
         android:background="@color/mc_logo_blueDark"
         android:elevation="@android:dimen/notification_large_icon_height"
         android:text="@string/register"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/professorOptionCheckBox_REG"
         app:layout_constraintStart_toStartOf="@+id/professorOptionCheckBox_REG"
