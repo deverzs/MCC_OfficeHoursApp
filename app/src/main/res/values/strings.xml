@@ -19,4 +19,14 @@
     <string name="saveProf">SAVE PROFESSOR </string>
     <string name="deleteProf">DELETE PROFESSOR </string>
     <string name="new_search">NEW SEARCH</string>
+    <string name="view_schedule">View Schedule</string>
+    <string name="update_schedule">Update Schedule</string>
+    <string name="update_or_view_schedule">Update or View Schedule</string>
+    <string name="check_box_professor">I\'m a professor!</string>
+    <string name="edit_office_hours">Edit Office Hours</string>
+    <string name="cancel_office_hours">Cancel your office hours</string>
+    <string name="submit_change">Submit your change</string>
+    <string name="officehour">Office Hours</string>
+
+
 </resources>
