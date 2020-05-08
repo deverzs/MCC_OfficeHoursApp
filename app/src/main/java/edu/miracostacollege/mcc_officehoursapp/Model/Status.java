@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Status {
 
+    private long mId;                   //Database assigned
     private int mInstructorCode;        //Unique code for the instructor
     private int mOfficeHourSection;     //Designates which section of the day this office hour is
     private int mOfficeHourDay;         //Designates the day of the office hour
@@ -16,13 +17,15 @@ public class Status {
      * @param mOfficeHourSection    Designates which section of the day this office hour is
      * @param mOfficeHourDay        Designates the day of the office hour
      * @param mOfficeHourStatus     True if office hour is being conducted
+     * @param id                    Database assigned id
      */
-    public Status(int mInstructorCode, int mOfficeHourSection,
+    public Status(long id, int mInstructorCode, int mOfficeHourSection,
                        int mOfficeHourDay, boolean mOfficeHourStatus) {
         this.mInstructorCode = mInstructorCode;
         this.mOfficeHourSection = mOfficeHourSection;
         this.mOfficeHourDay = mOfficeHourDay;
         this.mOfficeHourStatus = mOfficeHourStatus;
+        this.mId = id;
     }
 
     /**
@@ -90,10 +93,12 @@ public class Status {
         this.mOfficeHourStatus = mOfficeHourStatus;
     }
 
+
     @Override
     public String toString() {
         return "Status{" +
-                "mInstructorCode=" + mInstructorCode +
+                "mId=" + mId +
+                ", mInstructorCode=" + mInstructorCode +
                 ", mOfficeHourSection=" + mOfficeHourSection +
                 ", mOfficeHourDay=" + mOfficeHourDay +
                 ", mOfficeHourStatus=" + mOfficeHourStatus +
@@ -105,7 +110,8 @@ public class Status {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Status status = (Status) o;
-        return getmInstructorCode() == status.getmInstructorCode() &&
+        return mId == status.mId &&
+                getmInstructorCode() == status.getmInstructorCode() &&
                 getmOfficeHourSection() == status.getmOfficeHourSection() &&
                 getmOfficeHourDay() == status.getmOfficeHourDay() &&
                 ismOfficeHourStatus() == status.ismOfficeHourStatus();
@@ -113,6 +119,7 @@ public class Status {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getmInstructorCode(), getmOfficeHourSection(), getmOfficeHourDay(), ismOfficeHourStatus());
+        return Objects.hash(mId, getmInstructorCode(), getmOfficeHourSection(), getmOfficeHourDay(),
+                ismOfficeHourStatus());
     }
 }

@@ -4,6 +4,7 @@ import java.util.Objects;
 
 public class Schedule {
 
+    private long mId;                   //Database assigned
     private int mInstructorCode;        //Unique code for the instructor
     private int mOfficeHourSection;     //Designates which section of the day this office hour is
     private int mOfficeHourDay;         //Designates the day of the office hour
@@ -13,21 +14,31 @@ public class Schedule {
 
     /**
      * Constructor for Calendar Table
+     * @param id                    Database assigned id
      * @param mInstructorCode       Unique code for the instructor
      * @param mOfficeHourSection    Designates which section of the day this office hour is
      * @param mOfficeHourDay        Designates the day of the office hour
      * @param mOfficeHourTime       Designates time of office hour
      * @param mOfficeHourLocation   Designates location of office hour
      */
-    public Schedule(int mInstructorCode, int mOfficeHourSection, int mOfficeHourDay,
+    public Schedule(long id, int mInstructorCode, int mOfficeHourSection, int mOfficeHourDay,
                     String mOfficeHourTime, String mOfficeHourLocation) {
         this.mInstructorCode = mInstructorCode;
         this.mOfficeHourSection = mOfficeHourSection;
         this.mOfficeHourDay = mOfficeHourDay;
         this.mOfficeHourTime = mOfficeHourTime;
         this.mOfficeHourLocation = mOfficeHourLocation;
+        this.mId = id;
     }
 
+
+    /**
+     * Database assigned id
+     * @return long id in database
+     */
+    public long getmId() {
+        return mId;
+    }
 
     /**
      * Get the instructor code
@@ -111,8 +122,9 @@ public class Schedule {
 
     @Override
     public String toString() {
-        return "Calendar{" +
-                "mInstructorCode=" + mInstructorCode +
+        return "Schedule{" +
+                "mId=" + mId +
+                ", mInstructorCode=" + mInstructorCode +
                 ", mOfficeHourSection=" + mOfficeHourSection +
                 ", mOfficeHourDay=" + mOfficeHourDay +
                 ", mOfficeHourTime='" + mOfficeHourTime + '\'' +
@@ -124,16 +136,18 @@ public class Schedule {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Schedule calendar = (Schedule) o;
-        return getmInstructorCode() == calendar.getmInstructorCode() &&
-                getmOfficeHourSection() == calendar.getmOfficeHourSection() &&
-                getmOfficeHourDay() == calendar.getmOfficeHourDay() &&
-                getmOfficeHourTime().equals(calendar.getmOfficeHourTime()) &&
-                getmOfficeHourLocation().equals(calendar.getmOfficeHourLocation());
+        Schedule schedule = (Schedule) o;
+        return getmId() == schedule.getmId() &&
+                getmInstructorCode() == schedule.getmInstructorCode() &&
+                getmOfficeHourSection() == schedule.getmOfficeHourSection() &&
+                getmOfficeHourDay() == schedule.getmOfficeHourDay() &&
+                getmOfficeHourTime().equals(schedule.getmOfficeHourTime()) &&
+                getmOfficeHourLocation().equals(schedule.getmOfficeHourLocation());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getmInstructorCode(), getmOfficeHourSection(), getmOfficeHourDay(), getmOfficeHourTime(), getmOfficeHourLocation());
+        return Objects.hash(getmId(), getmInstructorCode(), getmOfficeHourSection(),
+                getmOfficeHourDay(), getmOfficeHourTime(), getmOfficeHourLocation());
     }
 }

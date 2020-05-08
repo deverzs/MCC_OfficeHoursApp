@@ -5,6 +5,7 @@ import java.util.Objects;
 
 public class Instructor {
 
+    private long mId;                   //Database assigned
     private int mInstructorCode;        //Unique code for the instructor
     private String mFullName;           //Full Name of instructor
     private String mPhone;              //Phone number, including extension
@@ -13,20 +14,30 @@ public class Instructor {
 
     /**
      * Default Construstor - Full
+     * @param id                    Database assigned id
      * @param mInstructorCode       Unique code for the instructor
      * @param mFullName             Full Name of instructor
      * @param mPhone                Phone number, including extension
      * @param mOfficeRoomNumber     Room number of instructor's office
      * @param mAppointment          True if instructor accepts appointments
      */
-    public Instructor(int mInstructorCode, String mFullName, String mPhone,
+    public Instructor(long id, int mInstructorCode, String mFullName, String mPhone,
                        String mOfficeRoomNumber, boolean mAppointment) {
         this.mInstructorCode = mInstructorCode;
         this.mFullName = mFullName;
         this.mPhone = mPhone;
         this.mOfficeRoomNumber = mOfficeRoomNumber;
         this.mAppointment = mAppointment;
+        this.mId = id;
 
+    }
+
+    /**
+     * ID assigned by database
+     * @return long that is the database assigned id
+     */
+    public long getmId() {
+        return mId;
     }
 
     /**
@@ -112,7 +123,8 @@ public class Instructor {
     @Override
     public String toString() {
         return "Instructor{" +
-                "mInstructorCode=" + mInstructorCode +
+                "mId=" + mId +
+                ", mInstructorCode=" + mInstructorCode +
                 ", mFullName='" + mFullName + '\'' +
                 ", mPhone='" + mPhone + '\'' +
                 ", mOfficeRoomNumber='" + mOfficeRoomNumber + '\'' +
@@ -125,7 +137,8 @@ public class Instructor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Instructor that = (Instructor) o;
-        return getmInstructorCode() == that.getmInstructorCode() &&
+        return mId == that.mId &&
+                getmInstructorCode() == that.getmInstructorCode() &&
                 ismAppointment() == that.ismAppointment() &&
                 getmFullName().equals(that.getmFullName()) &&
                 getmPhone().equals(that.getmPhone()) &&
@@ -134,6 +147,7 @@ public class Instructor {
 
     @Override
     public int hashCode() {
-        return Objects.hash(getmInstructorCode(), getmFullName(), getmPhone(), getmOfficeRoomNumber(), ismAppointment());
+        return Objects.hash(mId, getmInstructorCode(), getmFullName(), getmPhone(),
+                getmOfficeRoomNumber(), ismAppointment());
     }
 }
