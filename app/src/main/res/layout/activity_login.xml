@@ -90,6 +90,7 @@
         android:layout_marginBottom="8dp"
         android:background="@color/colorLightGreen2"
         android:text="@string/search_only"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/registerTextView_LOGIN"
         app:layout_constraintStart_toStartOf="@+id/registerTextView_LOGIN"
