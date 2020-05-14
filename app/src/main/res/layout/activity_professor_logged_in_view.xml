@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/book_background"
+    tools:context=".ProfessorLoggedInView">
+
+    <Spinner
+        android:id="@+id/chooseSemesterSpinner"
+        android:layout_width="309dp"
+        android:layout_height="52dp"
+        android:layout_marginTop="36dp"
+        android:background="#5DBBE8"
+        app:layout_constraintBottom_toTopOf="@id/addScheduleButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+    <Button
+        android:id="@+id/addScheduleButton"
+        android:layout_width="311dp"
+        android:layout_height="58dp"
+        android:layout_marginTop="36dp"
+        android:background="#59BAE9"
+        android:text="@string/view_schedule"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.49"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.577" />
+
+    <Button
+        android:id="@+id/updateScheduleButton"
+        android:layout_width="311dp"
+        android:layout_height="58dp"
+        android:backgroundTint="#4DB8E4"
+        android:onClick="updateSchedule"
+        android:text="@string/update_schedule"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/addScheduleButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/chooseSemesterSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/addScheduleButton"
+        app:layout_constraintVertical_bias="0.146" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="404dp"
+        android:layout_height="97dp"
+        android:layout_marginTop="148dp"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:text="@string/update_or_view_schedule"
+        android:textColor="@android:color/background_dark"
+        android:textSize="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
