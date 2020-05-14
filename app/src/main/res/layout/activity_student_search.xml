@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/searchLinearLayout_SEARCH"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/anon_search_back"
+    android:orientation="vertical"
+    tools:context=".StudentSearch">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="358dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginTop="20dp"
+            app:srcCompat="@drawable/miracosta_logo_office" />
+
+        <TextView
+            android:id="@+id/searchInstructorTextView_SEARCH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:text="@string/searchByInstructor"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <Spinner
+            android:id="@+id/instructorSpinner_SEARCH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:scrollbarSize="20dp" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_horizontal"
+            android:text="@string/searchByCourse"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="22sp" />
+
+        <Spinner
+            android:id="@+id/courseSpinner_SEARCH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/resetButton_SEARCH"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@color/mc_logo_blueDark"
+            android:elevation="16dp"
+            android:text="@string/reset"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@android:color/black" />
+
+    </LinearLayout>
+
+    <ListView
+        android:id="@+id/professorsListView_SEARCH"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp" />
+</LinearLayout>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mc_logo_blueLighter"
+    tools:context=".Registration">
+
+    <ImageView
+        android:id="@+id/spartaImageView_REG"
+        android:layout_width="298dp"
+        android:layout_height="153dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_spartan_world" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/register"
+        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+        app:layout_constraintEnd_toEndOf="@+id/spartaImageView_REG"
+        app:layout_constraintStart_toStartOf="@+id/spartaImageView_REG"
+        app:layout_constraintTop_toBottomOf="@+id/spartaImageView_REG" />
+
+    <EditText
+        android:id="@+id/emailEditText_REG"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="@string/email"
+        android:inputType="textEmailAddress"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/passwordEditText_REG"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/emailEditText_REG"
+        app:layout_constraintStart_toStartOf="@+id/emailEditText_REG"
+        app:layout_constraintTop_toBottomOf="@+id/emailEditText_REG" />
+
+    <EditText
+        android:id="@+id/passwordConfirmEditText_REG"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:ems="10"
+        android:hint="@string/passwordConfirm"
+        android:inputType="textPassword"
+        app:layout_constraintEnd_toEndOf="@+id/passwordEditText_REG"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/passwordEditText_REG"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText_REG" />
+
+    <CheckBox
+        android:id="@+id/professorOptionCheckBox_REG"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="@string/ProfessorOption"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/passwordConfirmEditText_REG"
+        app:layout_constraintStart_toStartOf="@+id/passwordConfirmEditText_REG"
+        app:layout_constraintTop_toBottomOf="@+id/passwordConfirmEditText_REG"
+        tools:visibility="visible" />
+
+    <Button
+        android:id="@+id/registerButton_REG"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@color/mc_logo_blueDark"
+        android:elevation="@android:dimen/notification_large_icon_height"
+        android:text="@string/register"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/professorOptionCheckBox_REG"
+        app:layout_constraintStart_toStartOf="@+id/professorOptionCheckBox_REG"
+        app:layout_constraintTop_toBottomOf="@+id/professorOptionCheckBox_REG" />
+</androidx.constraintlayout.widget.ConstraintLayout>

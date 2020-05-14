@@ -7,86 +7,75 @@
     android:background="@color/mc_logo_blueLighter"
     tools:context=".Login">
 
-
     <ImageView
         android:id="@+id/MiraCosta_imageView_LOGIN"
         android:layout_width="304dp"
         android:layout_height="192dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
         android:elevation="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.012"
         app:srcCompat="@drawable/miracosta_logo" />
+
+    <TextView
+        android:id="@+id/emailTextView_LOGIN"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/email"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/MiraCosta_imageView_LOGIN"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/MiraCosta_imageView_LOGIN"
+        app:layout_constraintTop_toBottomOf="@+id/MiraCosta_imageView_LOGIN" />
 
     <EditText
         android:id="@+id/emailEditText_LOGIN"
-        android:layout_width="291dp"
-        android:layout_height="45dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="@string/email"
         android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="60dp"
-        tools:layout_editor_absoluteY="247dp" />
+        app:layout_constraintEnd_toEndOf="@+id/emailTextView_LOGIN"
+        app:layout_constraintStart_toStartOf="@+id/emailTextView_LOGIN"
+        app:layout_constraintTop_toBottomOf="@+id/emailTextView_LOGIN" />
 
     <EditText
         android:id="@+id/passwordEditText_LOGIN"
-        android:layout_width="291dp"
-        android:layout_height="43dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:ems="10"
         android:hint="@string/password"
         android:inputType="textPassword"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/emailEditText_LOGIN"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintEnd_toEndOf="@+id/emailEditText_LOGIN"
+        app:layout_constraintStart_toStartOf="@+id/emailEditText_LOGIN"
+        app:layout_constraintTop_toBottomOf="@+id/emailEditText_LOGIN" />
 
     <Button
         android:id="@+id/loginButton_LOGIN"
-        android:layout_width="282dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="32dp"
         android:background="@color/mc_logo_blueDark"
         android:elevation="16dp"
-        android:onClick="loggedIn"
         android:text="@string/login"
         android:textColor="#0D0E0E"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/passwordEditText_LOGIN"
-        app:layout_constraintHorizontal_bias="0.927"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/passwordEditText_LOGIN"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="@+id/passwordEditText_LOGIN"
+        app:layout_constraintTop_toBottomOf="@+id/passwordEditText_LOGIN" />
 
     <TextView
         android:id="@+id/registerTextView_LOGIN"
-        android:layout_width="237dp"
-        android:layout_height="31dp"
-        android:clickable="true"
-        android:onClick="registerAccount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
         android:text="@string/needAccount"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/professorCheckBox"
-        app:layout_constraintVertical_bias="0.518" />
-
-    <CheckBox
-        android:id="@+id/professorCheckBox"
-        android:layout_width="300dp"
-        android:layout_height="39dp"
-        android:layout_marginTop="40dp"
-        android:text="@string/check_box_professor"
-        android:textColor="@android:color/secondary_text_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.576"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginButton_LOGIN"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/loginButton_LOGIN" />
 </androidx.constraintlayout.widget.ConstraintLayout>

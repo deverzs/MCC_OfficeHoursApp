@@ -4,32 +4,48 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/books_splash"
-    tools:context=".SplashActivity">
+    android:background="@color/colorLightGreen2"
+    tools:context=".SplashActivity" >
 
     <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:id="@+id/spartanHead_SPLASH"
+        android:layout_width="85dp"
+        android:layout_height="112dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.402"
-        app:srcCompat="@drawable/miracosta_logo" />
+        app:srcCompat="@drawable/ic_spartan_world" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="206dp"
-        android:layout_height="63dp"
-        android:fontFamily="sans-serif-light"
-        android:text="@string/officehour"
-        android:textColor="@android:color/black"
-        android:textSize="36dp"
+    <ImageView
+        android:id="@+id/star1_SPLASH"
+        android:layout_width="61dp"
+        android:layout_height="42dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.175"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/spartanHead_SPLASH"
+        app:layout_constraintVertical_bias="0.657"
+        app:srcCompat="@drawable/white_raised_star" />
+
+    <ImageView
+        android:id="@+id/star2_SPLASH"
+        android:layout_width="72dp"
+        android:layout_height="34dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/star1_SPLASH"
+        app:layout_constraintVertical_bias="0.228"
+        app:srcCompat="@drawable/white_raised_star" />
+
+    <ImageView
+        android:id="@+id/star3_SPLASH"
+        android:layout_width="43dp"
+        android:layout_height="52dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/star2_SPLASH"
+        app:layout_constraintTop_toBottomOf="@+id/star1_SPLASH"
+        app:srcCompat="@drawable/white_raised_star" />
 </androidx.constraintlayout.widget.ConstraintLayout>

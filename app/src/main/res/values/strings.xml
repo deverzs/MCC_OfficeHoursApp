@@ -1,19 +1,10 @@
 <resources>
     <string name="app_name">MCC_OfficeHoursApp</string>
-    <string name="email">Email</string>
+    <string name="email">email</string>
     <string name="login">LOGIN</string>
     <string name="password">Password</string>
-    <string name="passwordConfirm">Re-enter Password</string>
+    <string name="passwordConfirm">Reenter Password</string>
     <string name="register">Register</string>
     <string name="needAccount">No account yet? Create one.</string>
-    <string name="officehour">Office Hours</string>
-    <string name="professor_register">Professor Register</string>
-    <string name="student_register">Student Register</string>
-    <string name="view_schedule">View Schedule</string>
-    <string name="update_schedule">Update Schedule</string>
-    <string name="update_or_view_schedule">Update or View Schedule</string>
-    <string name="check_box_professor">I\'m a professor!</string>
-    <string name="edit_office_hours">Edit Office Hours</string>
-    <string name="cancel_office_hours">Cancel your office hours</string>
-    <string name="submit_change">Submit your change</string>
+
 </resources>

@@ -1,10 +1,10 @@
 package edu.miracostacollege.mcc_officehoursapp;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ProfessorLoggedInView extends AppCompatActivity {
 
@@ -15,7 +15,7 @@ public class ProfessorLoggedInView extends AppCompatActivity {
     }
     public void updateSchedule(View v)
     {
-        Intent intent = new Intent(this, ViewScheduleActivity.class);
+        Intent intent = new Intent(this, updateScheduleActivity.class);
         startActivity(intent);
     }
 }

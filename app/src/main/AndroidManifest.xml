@@ -9,15 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".updateScheduleActivity"></activity>
-        <activity android:name=".ViewScheduleActivity" />
-        <activity android:name=".UpdateScheduleActivity" />
-        <activity android:name=".ProfessorLoggedInView" />
-        <activity android:name=".TeacherRegisterActivity" />
-        <activity android:name=".AnonymousStudentSearch" />
-        <activity android:name=".StudentRegistration" />
-        <activity android:name=".Login" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".LoggedinSavedProfs" />
+        <activity android:name=".StudentSearch" />
+        <activity android:name=".ProfessorDetails" />
+        <activity android:name=".Registration" />
+        <activity android:name=".Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

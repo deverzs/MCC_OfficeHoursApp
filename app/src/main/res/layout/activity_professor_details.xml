@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mc_logo_blueLighter"
+    android:orientation="vertical"
+    tools:context=".ProfessorDetails">
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="match_parent"
+        android:layout_height="103dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/ic_spartan_world_office_hours" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/professorNameTextView_DETAILS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
+
+        <TextView
+            android:id="@+id/extensionTextView_DETAILS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="TextView"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/colorBar1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:background="@color/mc_logo_blueDark" />
+
+    <ListView
+        android:id="@+id/calendarListView_DETAILS"
+        android:layout_width="match_parent"
+        android:layout_height="228dp" />
+
+    <TextView
+        android:id="@+id/colorBar2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:background="@color/mc_logo_blueDark" />
+
+    <TextView
+        android:id="@+id/availableByApptTextView_DETAILS"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+    <TextView
+        android:id="@+id/colorBar3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="12dp"
+        android:background="@android:color/transparent" />
+
+    <Button
+        android:id="@+id/saveProfessorButton_DETAILS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/colorLightGreen2"
+        android:elevation="8dp"
+        android:ellipsize="none"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="@string/saveProf"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/blank"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/deleteProfessorButton_DETAILS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@color/mc_logo_blueDark"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="@string/deleteProf"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+</LinearLayout>
