@@ -1,10 +1,38 @@
 <resources>
     <string name="app_name">MCC_OfficeHoursApp</string>
-    <string name="email">email</string>
+    <string name="email">Email</string>
     <string name="login">LOGIN</string>
     <string name="password">Password</string>
     <string name="passwordConfirm">Reenter Password</string>
     <string name="register">Register</string>
     <string name="needAccount">No account yet? Create one.</string>
+    <string name="ProfessorOption">Are you a MCC Professor?</string>
+    <string name="search_only">SEARCH ONLY</string>
+    <string name="reset">RESET</string>
+    <string name="searchByInstructor">Search By Instructor</string>
+    <string name="searchByCourse">Search By Course</string>
+    <string name="mon_initial">MON : </string>
+    <string name="tues_initial">TUES : </string>
+    <string name="wed_initial">WED : </string>
+    <string name="thur_initial">THUR : </string>
+    <string name="fri_initial">FRI : </string>
+    <string name="saveProf">SAVE PROFESSOR </string>
+    <string name="deleteProf">DELETE PROFESSOR FROM SAVED</string>
+    <string name="new_search">NEW SEARCH</string>
+    <string name="view_schedule">View Schedule</string>
+    <string name="update_schedule">Update Schedule</string>
+    <string name="update_or_view_schedule">Update or View Schedule</string>
+    <string name="check_box_professor">I\'m a professor!</string>
+    <string name="edit_office_hours">Edit Office Hours</string>
+    <string name="cancel_office_hours">Cancel your office hours</string>
+    <string name="submit_change">Submit your change</string>
+    <string name="officehour">Office Hours</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="google_maps_key">AIzaSyAqSKZNExFm1L1MCzef-gocL2vFucehrNg</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="pin">Pin</string>
+    <string name="verify_button">Verify</string>
+
 
 </resources>

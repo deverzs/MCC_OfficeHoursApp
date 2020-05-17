@@ -2,6 +2,10 @@ package edu.miracostacollege.mcc_officehoursapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,10 +14,29 @@ import java.util.TimerTask;
 
 public class SplashActivity extends AppCompatActivity {
 
+    private Animation shakeAnim;
+    private ImageView star1_SPLASH;
+    private ImageView star2_SPLASH;
+    private ImageView star3_SPLASH;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
+
+
+        star1_SPLASH = findViewById(R.id.star1_SPLASH);
+        star2_SPLASH = findViewById(R.id.star2_SPLASH);
+        star3_SPLASH = findViewById(R.id.star3_SPLASH);
+
+
+
+
+
+        shakeAnim = AnimationUtils.loadAnimation(this, R.anim.shake_anim);
+
+
+
 
 
         //wait 2-3 seconds, then fire Intent to main ativity
@@ -21,6 +44,11 @@ public class SplashActivity extends AppCompatActivity {
         TimerTask task = new TimerTask() {
             @Override
             public void run() {
+
+
+star1_SPLASH.startAnimation(shakeAnim);
+star2_SPLASH.startAnimation(shakeAnim);
+                star3_SPLASH.startAnimation(shakeAnim);
                 //Create an Intent to go to MainActivity
                 Intent intent = new Intent(SplashActivity.this, Login.class);
                 startActivity(intent);
@@ -34,5 +62,8 @@ public class SplashActivity extends AppCompatActivity {
         timer.schedule(task, 3000);
 
     }
+
+
     }
+
 

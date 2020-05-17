@@ -38,6 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="@+id/emailTextView_LOGIN"
         app:layout_constraintStart_toStartOf="@+id/emailTextView_LOGIN"
