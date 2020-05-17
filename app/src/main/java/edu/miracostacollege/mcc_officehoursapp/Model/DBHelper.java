@@ -6,7 +6,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
 
+
     //testing add to Sarah
+
     private Context mContext;
 
     //DATABASE VERSION AND NAME  (DATABASE CONTAINS MULTIPLE TABLES)
