@@ -5,7 +5,10 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper extends SQLiteOpenHelper {
-    //checking merge with Sarah
+
+
+    //testing add to Sarah
+
     private Context mContext;
 
     //DATABASE VERSION AND NAME  (DATABASE CONTAINS MULTIPLE TABLES)
