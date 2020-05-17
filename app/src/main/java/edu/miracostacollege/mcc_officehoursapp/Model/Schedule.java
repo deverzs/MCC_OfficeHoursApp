@@ -89,6 +89,14 @@ public class Schedule {
     }
 
     /**
+     * set the id from database
+     * @param mId DB set id
+     */
+    public void setmId(long mId) {
+        this.mId = mId;
+    }
+
+    /**
      * Get the office hour time
      * @return  string of office hour time
      */

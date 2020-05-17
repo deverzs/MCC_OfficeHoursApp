@@ -1,8 +1,13 @@
 package edu.miracostacollege.mcc_officehoursapp.Model;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -146,4 +151,241 @@ public class DBHelper extends SQLiteOpenHelper {
             onCreate(db);
 
     }
+
+    //************************* INSTRUCTOR TABLE OPERATIONS **************
+
+    public void addInstructor(Instructor instructor)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(INSTRUCTOR_INSTR_CODE, instructor.getmId());
+        values.put(INSTRUCTOR_LAST_NAME, instructor.getmLastName());
+        values.put(INSTRUCTOR_FIRST_NAME, instructor.getmFirstName());
+        values.put(INSTRUCTOR_PHONE, instructor.getmPhone());
+        values.put(INSTRUCTOR_OFFICE, instructor.getmOfficeRoomNumber());
+        values.put(INSTRUCTOR_APPOINTMENT, instructor.byAppointment());
+
+        long id = db.insert(INSTRUCTOR_TABLE, null, values);
+        instructor.setmId(id);
+        db.close();
+
+    }
+
+
+    public List<Instructor> getAllInstructors()
+    {
+        List<Instructor> instructorList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                INSTRUCTOR_TABLE,
+                new String[] {INSTRUCTOR_KEY_FIELD_ID, INSTRUCTOR_INSTR_CODE, INSTRUCTOR_LAST_NAME,
+                        INSTRUCTOR_FIRST_NAME, INSTRUCTOR_PHONE, INSTRUCTOR_OFFICE,
+                        INSTRUCTOR_APPOINTMENT} ,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+
+        if(cursor.moveToFirst())
+        {
+            do {
+                Instructor instructor =
+                        new Instructor(cursor.getLong(0),
+                                cursor.getInt(1),
+                                cursor.getString(2),
+                                cursor.getString(3),
+                                cursor.getString(4),
+                                cursor.getString(5),
+                                cursor.getInt(6));
+                                instructorList.add(instructor);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return instructorList;
+
+    }
+
+    public int deleteInstructor(Instructor instructor)
+    {
+        if (instructor == null)
+        {
+            return 0;
+        }
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int deleteRow = db.delete(INSTRUCTOR_TABLE, INSTRUCTOR_KEY_FIELD_ID + " = ?",
+                new String[] {String.valueOf(instructor.getmId())});
+
+        db.close();
+        return deleteRow;
+    }
+
+    public void deleteAllInstructors()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(INSTRUCTOR_TABLE, null, null);
+        db.close();
+
+    }
+
+    public void updateInstructor(Instructor instructor)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(INSTRUCTOR_INSTR_CODE, instructor.getmId());
+        values.put(INSTRUCTOR_LAST_NAME, instructor.getmLastName());
+        values.put(INSTRUCTOR_FIRST_NAME, instructor.getmFirstName());
+        values.put(INSTRUCTOR_PHONE, instructor.getmPhone());
+        values.put(INSTRUCTOR_OFFICE, instructor.getmOfficeRoomNumber());
+        values.put(INSTRUCTOR_APPOINTMENT, instructor.byAppointment());
+
+        db.update(INSTRUCTOR_TABLE, values, INSTRUCTOR_KEY_FIELD_ID + " = ?",
+                new String[]{String.valueOf(instructor.getmId())});
+        db.close();
+    }
+
+    public Instructor getInstructor(long id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                INSTRUCTOR_TABLE,
+                new String[] {INSTRUCTOR_KEY_FIELD_ID, INSTRUCTOR_INSTR_CODE, INSTRUCTOR_LAST_NAME,
+                        INSTRUCTOR_FIRST_NAME, INSTRUCTOR_PHONE, INSTRUCTOR_OFFICE,
+                        INSTRUCTOR_APPOINTMENT},
+                INSTRUCTOR_KEY_FIELD_ID + "=?",
+                new String[] {String.valueOf(id)},
+                null, null, null, null);
+
+        if(cursor != null) cursor.moveToFirst();
+
+        Instructor instructor = new Instructor (cursor.getLong(0),
+                cursor.getInt(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4),
+                cursor.getString(5),
+                cursor.getInt(6));
+        cursor.close();
+        db.close();
+        return instructor;
+
+    }
+
+    //************************* SCHEDULE TABLE OPERATIONS **************
+
+    public void addSchedule(Schedule schedule)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(SCHEDULE_KEY_FIELD_ID, schedule.getmId());
+        values.put(SCHEDULE_INSTR_CODE, schedule.getmInstructorCode());
+        values.put(SCHEDULE_SECTION, schedule.getmOfficeHourSection());
+        values.put(SCHEDULE_DAY, schedule.getmOfficeHourDay());
+        values.put(SCHEDULE_TIME, schedule.getmOfficeHourTime());
+        values.put(SCHEDULE_LOCATION, schedule.getmOfficeHourLocation());
+
+        long id = db.insert(SCHEDULE_TABLE, null, values);
+        schedule.setmId(id);
+        db.close();
+    }
+
+    public List<Schedule> getAllSchedules()
+    {
+        List<Schedule> scheduleList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                SCHEDULE_TABLE,
+                new String[] {SCHEDULE_KEY_FIELD_ID, SCHEDULE_INSTR_CODE, SCHEDULE_SECTION,
+                        SCHEDULE_DAY, SCHEDULE_TIME, SCHEDULE_LOCATION} ,
+                null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Schedule schedule =
+                        new Schedule(cursor.getLong(0),
+                                cursor.getInt(1),
+                                cursor.getInt(2),
+                                cursor.getInt(3),
+                                cursor.getString(4),
+                                cursor.getString(5));
+                scheduleList.add(schedule);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return scheduleList;
+    }
+
+    public int deleteSchedule(Schedule schedule)
+    {
+        if(schedule == null)
+        {
+            return 0;
+        }
+        SQLiteDatabase db = this.getWritableDatabase();
+        int deleteRow = db.delete(SCHEDULE_TABLE, SCHEDULE_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(schedule.getmId())});
+        db.close();
+        return deleteRow;
+    }
+
+    public void deleteAllSchedules()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(SCHEDULE_TABLE, null, null);
+        db.close();
+    }
+
+    public void updateSchedule(Schedule schedule)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(SCHEDULE_KEY_FIELD_ID, schedule.getmId());
+        values.put(SCHEDULE_INSTR_CODE, schedule.getmInstructorCode());
+        values.put(SCHEDULE_SECTION, schedule.getmOfficeHourSection());
+        values.put(SCHEDULE_DAY, schedule.getmOfficeHourDay());
+        values.put(SCHEDULE_TIME, schedule.getmOfficeHourTime());
+        values.put(SCHEDULE_LOCATION, schedule.getmOfficeHourLocation());
+
+        db.update(SCHEDULE_TABLE, values, SCHEDULE_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(schedule.getmId())});
+
+        db.close();
+
+    }
+
+    public Schedule getSchedule(long id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                SCHEDULE_TABLE,
+                new String[] {SCHEDULE_KEY_FIELD_ID, SCHEDULE_INSTR_CODE, SCHEDULE_SECTION,
+                        SCHEDULE_DAY, SCHEDULE_TIME, SCHEDULE_LOCATION},
+                SCHEDULE_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(id)},
+                null, null, null, null );
+
+        if(cursor != null)  cursor.moveToFirst();
+
+        Schedule schedule = new Schedule(cursor.getLong(0),
+                    cursor.getInt(1),
+                    cursor.getInt(2),
+                    cursor.getInt(3),
+                    cursor.getString(4),
+                    cursor.getString(5));
+        cursor.close();
+        db.close();
+        return schedule;
+    }
+
+
+
 }
