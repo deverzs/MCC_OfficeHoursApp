@@ -18,6 +18,12 @@ public class Login {
     }
 
 
+    public Login(String mEmail, String mPassowrd, int isProfessor) {
+        this.mEmail = mEmail;
+        this.mPassowrd = mPassowrd;
+        this.isProfessor = isProfessor;
+    }
+
     public int getIsProfessor() {
         return isProfessor;
     }
