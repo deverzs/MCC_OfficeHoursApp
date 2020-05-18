@@ -60,6 +60,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String LOGIN_KEY_FIELD_ID = "_id";
     public static final String LOGIN_INSTR_EMAIL = "email";
     public static final String LOGIN_PASSWORD = "password";
+    public static final String LOGIN_IS_VERIFIED = "verifiedProfessor";
 
     //FIELDS (COLUMN NAMES) FOR THE VERIFICATION TABLE
     public static final String VERIFICATION_TABLE = "Verification";
@@ -106,7 +107,8 @@ public class DBHelper extends SQLiteOpenHelper {
         String loginTable = "CREATE TABLE IF NOT EXISTS " + LOGIN_TABLE + " ("
                 + LOGIN_KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
                 + LOGIN_INSTR_EMAIL + " TEXT, "
-                + LOGIN_PASSWORD + " TEXT" + ")";
+                + LOGIN_PASSWORD + " TEXT, "
+                + LOGIN_IS_VERIFIED + "INTEGER" + ")";
         db.execSQL(loginTable);
 
         String statusTable = "CREATE TABLE IF NOT EXISTS " + STATUS_TABLE + " ("
@@ -494,13 +496,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //************************* LOGIN TABLE OPERATIONS **************
 
-    public void addLogin(String email, String password)
+    public void addLogin(String email, String password, int isVerified)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put(LOGIN_INSTR_EMAIL, email);
         values.put(LOGIN_PASSWORD, password);
+        values.put(LOGIN_IS_VERIFIED, isVerified);
         db.insert(LOGIN_TABLE, null, values);
         db.close();
 
@@ -509,7 +512,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public List<Login> getAllLogin()
     {
         List<Login> loginList = new ArrayList<>();
-        SQLiteDatabase db = this. getReadableDatabase();
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
                 LOGIN_TABLE,
                 new String[] {LOGIN_KEY_FIELD_ID, LOGIN_INSTR_EMAIL, LOGIN_PASSWORD},
@@ -521,7 +524,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 Login login = new Login(
                         cursor.getLong(0),
                         cursor.getString(1),
-                        cursor.getString(2));
+                        cursor.getString(2),
+                        cursor.getInt(3));
+
                 loginList.add(login);
             } while (cursor.moveToNext());
         }
@@ -552,7 +557,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
                 LOGIN_TABLE,
-                new String[] {LOGIN_KEY_FIELD_ID, LOGIN_INSTR_EMAIL, LOGIN_PASSWORD},
+                new String[] {LOGIN_KEY_FIELD_ID, LOGIN_INSTR_EMAIL, LOGIN_PASSWORD, LOGIN_IS_VERIFIED},
                 LOGIN_KEY_FIELD_ID + " =?",
                 new String[] {String.valueOf(id)},
                 null, null, null, null );
@@ -562,7 +567,8 @@ public class DBHelper extends SQLiteOpenHelper {
         Login login = new Login(
                 cursor.getLong(0),
                 cursor.getString(1),
-                cursor.getString(2));
+                cursor.getString(2),
+                cursor.getInt(3));
         cursor.close();
         db.close();
         return  login;
