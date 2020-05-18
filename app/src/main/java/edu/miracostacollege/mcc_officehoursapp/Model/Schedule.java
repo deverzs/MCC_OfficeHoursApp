@@ -31,6 +31,14 @@ public class Schedule {
         this.mId = id;
     }
 
+    public Schedule(int mInstructorCode, int mOfficeHourSection, int mOfficeHourDay,
+                    String mOfficeHourTime, String mOfficeHourLocation) {
+        this.mInstructorCode = mInstructorCode;
+        this.mOfficeHourSection = mOfficeHourSection;
+        this.mOfficeHourDay = mOfficeHourDay;
+        this.mOfficeHourTime = mOfficeHourTime;
+        this.mOfficeHourLocation = mOfficeHourLocation;
+    }
 
     /**
      * Database assigned id

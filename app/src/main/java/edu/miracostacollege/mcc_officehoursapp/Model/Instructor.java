@@ -38,6 +38,18 @@ public class Instructor {
 
     }
 
+    public Instructor(int mInstructorCode, String mFirstName, String mLastName,
+                      String mPhone, String mOfficeRoomNumber, int mAppointment) {
+        this.mInstructorCode = mInstructorCode;
+        this.mFullName = mFullName;
+        this.mFirstName = mFirstName;
+        this.mLastName = mLastName;
+        this.mPhone = mPhone;
+        this.mOfficeRoomNumber = mOfficeRoomNumber;
+        if(mAppointment == 0) this.mAppointment = false;
+        else this.mAppointment = true;
+    }
+
     /**
      * Get the first name
      * @return first name

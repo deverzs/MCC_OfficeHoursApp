@@ -2,11 +2,18 @@ package edu.miracostacollege.mcc_officehoursapp.Model;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
@@ -740,6 +747,87 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
         return  savedInstructor;
     }
+
+
+    // ******************* IMPORT FROM CSV OPERATIONS **********
+
+    public boolean importInstructorsFromCSV(String csvFileName)
+    {
+        AssetManager am = mContext.getAssets();
+        InputStream inStream = null;
+        try{
+            inStream = am.open(csvFileName);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
+        String line;
+        try{
+            while ((line = buffer.readLine()) != null)
+            {
+                String[] fields = line.split(",");
+                if(fields.length != 6) {
+                    Log.d("Instructor Finder", "Skipping bad CSV Row: " +
+                            Arrays.toString(fields));
+                    continue;
+                }
+                int instructorCode = Integer.parseInt(fields[0].trim());
+                String lastName = fields[1].trim();
+                String firstName = fields[2].trim();
+                String phone = fields[3].trim();
+                String room = fields[4].trim();
+                int appointment = Integer.parseInt(fields[5].trim());
+                addInstructor(new Instructor(instructorCode, lastName, firstName, phone, room, appointment));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return  true;
+
+    }
+
+    public boolean importScheduleFromCSV(String csvFileName)
+    {
+        AssetManager am = mContext.getAssets();
+        InputStream inStream = null;
+        try{
+            inStream = am.open(csvFileName);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
+        String line;
+        try{
+            while ((line = buffer.readLine()) != null)
+            {
+                String[] fields = line.split(",");
+                if(fields.length != 5) {
+                    Log.d("Schedule Finder", "Skipping bad CSV Row: " +
+                            Arrays.toString(fields));
+                    continue;
+                }
+                int instructorCode = Integer.parseInt(fields[0].trim());
+                int section = Integer.parseInt(fields[1].trim());
+                int day = Integer.parseInt(fields[2].trim());
+                String time = fields[3].trim();
+                String location = fields[4].trim();
+                addSchedule(new Schedule(instructorCode, section, day, time, location));
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return  true;
+
+    }
+
+
 
 
 
