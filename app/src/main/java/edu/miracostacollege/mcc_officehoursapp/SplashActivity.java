@@ -59,7 +59,8 @@ star2_SPLASH.startAnimation(shakeAnim);
 
         //let's define a timer for when task should happen
         Timer timer = new Timer();
-        timer.schedule(task, 3000);
+        timer.schedule(task, 3005);
+        // timer.schedule(task, 4000);
 
     }
 
