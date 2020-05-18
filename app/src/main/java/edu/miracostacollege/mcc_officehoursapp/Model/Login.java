@@ -7,14 +7,24 @@ public class Login {
     private long mId;                   //Database assigned
     private String mEmail;              //Email of user
     private String mPassowrd;           //password of user
+    private  int isProfessor;
 
 
-    public Login(long mId, String mEmail, String mPassowrd) {
+    public Login(long mId, String mEmail, String mPassowrd, int isProfessor) {
         this.mId = mId;
         this.mEmail = mEmail;
         this.mPassowrd = mPassowrd;
+        this.isProfessor = isProfessor;
     }
 
+
+    public int getIsProfessor() {
+        return isProfessor;
+    }
+
+    public void setIsProfessor(int isProfessor) {
+        this.isProfessor = isProfessor;
+    }
 
     public long getmId() {
         return mId;

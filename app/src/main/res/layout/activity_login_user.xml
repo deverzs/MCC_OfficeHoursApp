@@ -5,30 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/mc_logo_blueLighter"
-    tools:context=".Login">
+    tools:context=".LoginUser">
 
     <ImageView
         android:id="@+id/MiraCosta_imageView_LOGIN"
         android:layout_width="304dp"
         android:layout_height="192dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:elevation="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/miracosta_logo" />
+        app:srcCompat="@drawable/miracosta_logo_office" />
 
     <TextView
         android:id="@+id/emailTextView_LOGIN"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="28dp"
         android:text="@string/email"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/MiraCosta_imageView_LOGIN"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/MiraCosta_imageView_LOGIN"
         app:layout_constraintTop_toBottomOf="@+id/MiraCosta_imageView_LOGIN" />
 
@@ -38,7 +38,6 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:ems="10"
-        android:hint="@string/email"
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="@+id/emailTextView_LOGIN"
         app:layout_constraintStart_toStartOf="@+id/emailTextView_LOGIN"
@@ -60,23 +59,43 @@
         android:id="@+id/loginButton_LOGIN"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="36dp"
         android:background="@color/mc_logo_blueDark"
         android:elevation="16dp"
         android:text="@string/login"
-        android:textColor="#0D0E0E"
+        android:onClick="handleButtons"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@android:color/black"
         app:layout_constraintEnd_toEndOf="@+id/passwordEditText_LOGIN"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/passwordEditText_LOGIN"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditText_LOGIN" />
 
     <TextView
         android:id="@+id/registerTextView_LOGIN"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="25dp"
+        android:gravity="center_horizontal"
         android:text="@string/needAccount"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:onClick="handleRegister"
+        app:layout_constraintEnd_toEndOf="@+id/loginButton_LOGIN"
+        app:layout_constraintHorizontal_bias="0.422"
+        app:layout_constraintStart_toStartOf="@+id/loginButton_LOGIN"
         app:layout_constraintTop_toBottomOf="@+id/loginButton_LOGIN" />
+
+    <Button
+        android:id="@+id/searchOnlyButton_LOGIN"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:background="@color/colorLightGreen2"
+        android:text="@string/search_only"
+        android:textSize="18sp"
+        android:onClick="handleButtons"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/registerTextView_LOGIN"
+        app:layout_constraintStart_toStartOf="@+id/registerTextView_LOGIN"
+        app:layout_constraintTop_toBottomOf="@+id/registerTextView_LOGIN" />
 </androidx.constraintlayout.widget.ConstraintLayout>

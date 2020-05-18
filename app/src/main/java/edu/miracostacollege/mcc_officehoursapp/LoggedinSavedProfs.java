@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+//for student view
 public class LoggedinSavedProfs extends AppCompatActivity {
 
     @Override

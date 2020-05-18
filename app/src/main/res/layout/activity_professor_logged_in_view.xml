@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/orange"
+    tools:context=".ProfessorLoggedInView">
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="340dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="76dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/my_office_hours" />
+
+    <Spinner
+        android:id="@+id/chooseSemesterSpinner"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="42dp"
+        android:background="@color/headColor"
+        app:layout_constraintEnd_toEndOf="@+id/imageView8"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/imageView8"
+        app:layout_constraintTop_toBottomOf="@+id/imageView8" />
+
+    <Button
+        android:id="@+id/addScheduleButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@color/headColor"
+        android:text="@string/view_schedule"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/chooseSemesterSpinner"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/chooseSemesterSpinner"
+        app:layout_constraintTop_toBottomOf="@+id/chooseSemesterSpinner" />
+
+    <Button
+        android:id="@+id/updateScheduleButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:background="@color/headColor"
+        android:onClick="updateSchedule"
+        android:text="@string/update_schedule"
+        android:textColor="@color/white"
+        android:textColorHint="#FFFFFF"
+        android:textColorLink="#FFFFFF"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/addScheduleButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/addScheduleButton"
+        app:layout_constraintTop_toBottomOf="@+id/addScheduleButton" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="210dp"
+        android:layout_height="118dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/updateScheduleButton"
+        app:srcCompat="@drawable/miracosta_logo" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

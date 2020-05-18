@@ -50,7 +50,7 @@ star1_SPLASH.startAnimation(shakeAnim);
 star2_SPLASH.startAnimation(shakeAnim);
                 star3_SPLASH.startAnimation(shakeAnim);
                 //Create an Intent to go to MainActivity
-                Intent intent = new Intent(SplashActivity.this, Login.class);
+                Intent intent = new Intent(SplashActivity.this, LoginUser.class);
                 startActivity(intent);
                 //finish splashActivity
                 finish();
