@@ -22,6 +22,15 @@ public class Verification {
         else this.mIsVerified = true;
     }
 
+    public Verification(String mEmail, int mPin, String mFirstName, String mLastName, int mIsVerified) {
+        this.mEmail = mEmail;
+        this.mPin = mPin;
+        this.mFirstName = mFirstName;
+        this.mLastName = mLastName;
+        if(mIsVerified == 0) this.mIsVerified = false;
+        else this.mIsVerified = true;
+    }
+
     public int ismIsVerified() {
         if(mIsVerified) return 1;
         else return 0;

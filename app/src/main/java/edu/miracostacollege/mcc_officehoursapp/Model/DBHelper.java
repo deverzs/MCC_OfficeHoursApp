@@ -828,6 +828,45 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
+    public boolean importVerifiedFromCSV(String csvFileName)
+    {
+        AssetManager am = mContext.getAssets();
+        InputStream inStream = null;
+        try{
+            inStream = am.open(csvFileName);
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+        BufferedReader buffer = new BufferedReader(new InputStreamReader(inStream));
+        String line;
+        try{
+            while ((line = buffer.readLine()) != null)
+            {
+                String[] fields = line.split(",");
+                if(fields.length != 5) {
+                    Log.d("Schedule Finder", "Skipping bad CSV Row: " +
+                            Arrays.toString(fields));
+                    continue;
+                }
+                String email = fields[0].trim();
+                int pin = Integer.parseInt(fields[1].trim());
+                String last = fields[2].trim();
+                String first = fields[3].trim();
+                int verified = Integer.parseInt(fields[4].trim());
+                addVerification(new Verification(email, pin, last, first, verified));
+
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return  true;
+
+    }
+
+
 
 
 
