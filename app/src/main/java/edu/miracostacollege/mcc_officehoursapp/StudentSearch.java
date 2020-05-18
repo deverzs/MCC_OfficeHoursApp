@@ -55,8 +55,8 @@ public class StudentSearch extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 0)
                 {
-                    //
                     reset(view);
+                    return;
                 }
                 else
                 {
@@ -84,12 +84,12 @@ public class StudentSearch extends AppCompatActivity {
 
     public String[] getInstructorNames()
     {
-       String[] names = new String[allInstructorsList.size() + 1];
-       names[0] = "[SELECT INSTRUCTOR]";
-       for(int i = 1; i < names.length; i++)
-       {
-           names[i] = allInstructorsList.get(i - 1).getmFullName();
-       }
+        String[] names = new String[allInstructorsList.size() + 1];
+        names[0] = "[SELECT INSTRUCTOR]";
+        for(int i = 1; i < names.length; i++)
+        {
+            names[i] = allInstructorsList.get(i - 1).getmFullName();
+        }
         return names;
     }
 
@@ -116,14 +116,14 @@ public class StudentSearch extends AppCompatActivity {
             String cleanText = s.toString().toLowerCase();
             if(!cleanText.isEmpty())
             {
-            instructorListAdapter.clear();
-            for(Instructor i: allInstructorsList)
-            {
-                if(i.getmFullName().toLowerCase().contains(cleanText))
+                instructorListAdapter.clear();
+                for(Instructor i: allInstructorsList)
                 {
-                    instructorListAdapter.add(i);
+                    if(i.getmFullName().toLowerCase().contains(cleanText))
+                    {
+                        instructorListAdapter.add(i);
+                    }
                 }
-            }//////////
             }
         }
 
