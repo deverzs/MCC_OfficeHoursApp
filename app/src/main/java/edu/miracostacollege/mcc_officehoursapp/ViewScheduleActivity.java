@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 public class ViewScheduleActivity extends AppCompatActivity {
 //
+    //
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
