@@ -8,8 +8,9 @@ public class SavedInstructor {
     private int mInstructorCode;        //Unique code for the instructor
 
 
-    public SavedInstructor(long mId) {
+    public SavedInstructor(long mId, int mInstructorCode) {
         this.mId = mId;
+        this.mInstructorCode = mInstructorCode;
     }
 
     public long getmId() {

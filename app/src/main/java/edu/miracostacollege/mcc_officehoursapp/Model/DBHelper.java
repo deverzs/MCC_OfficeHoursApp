@@ -664,4 +664,83 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //************************* SAVED INSTRUCTOR TABLE OPERATIONS **************
 
+    public void addSavedInstructor(SavedInstructor savedInstructor)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(SAVED_INSTR_CODE, savedInstructor.getmInstructorCode());
+
+        db.insert(SAVED_TABLE, null, values);
+        db.close();
+    }
+
+    public List<SavedInstructor> getAllSavedInstructors()
+    {
+        List<SavedInstructor> savedInstructorsList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                SAVED_TABLE,
+                new String[] {SAVED_KEY_FIELD_ID, SAVED_INSTR_CODE},
+                null, null, null, null, null, null);
+        if(cursor.moveToFirst())
+        {
+            do {
+                SavedInstructor savedInstructor =
+                        new SavedInstructor(
+                                cursor.getLong(0),
+                                cursor.getInt(1));
+                savedInstructorsList.add(savedInstructor);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return savedInstructorsList;
+    }
+
+    public void deleteSavedInstructor(SavedInstructor savedInstructor)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(SAVED_TABLE, SAVED_KEY_FIELD_ID + "=?",
+                new String[] {String.valueOf(savedInstructor.getmId())});
+        db.close();
+    }
+
+    public void deleteAllSavedInstructors()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(SAVED_TABLE, null, null);
+        db.close();
+    }
+
+    public void updateSavedInstructor(SavedInstructor savedInstructor)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(SAVED_INSTR_CODE, savedInstructor.getmInstructorCode());
+        db.update(SAVED_TABLE, values, SAVED_KEY_FIELD_ID + " =?",
+                new String[]{String.valueOf(savedInstructor.getmId())});
+        db.close();
+    }
+
+    public SavedInstructor getSavedInstructor(long id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                SAVED_TABLE,
+                new String[] { SAVED_KEY_FIELD_ID, SAVED_INSTR_CODE},
+                SAVED_KEY_FIELD_ID + "=?",
+                new String[] {String.valueOf(id)},
+                null, null, null, null);
+        if(cursor != null) cursor.moveToFirst();
+        SavedInstructor savedInstructor = new SavedInstructor(
+                cursor.getLong(0),
+                cursor.getInt(1));
+        cursor.close();
+        db.close();
+        return  savedInstructor;
+    }
+
+
+
 }
