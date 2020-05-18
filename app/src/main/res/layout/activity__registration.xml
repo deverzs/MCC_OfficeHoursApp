@@ -87,6 +87,7 @@
         android:layout_marginBottom="16dp"
         android:background="@color/mc_logo_blueDark"
         android:elevation="@android:dimen/notification_large_icon_height"
+        android:onClick="registerStudent"
         android:text="@string/register"
         android:textColor="@android:color/black"
         android:textSize="18sp"
