@@ -56,7 +56,6 @@ public class StudentSearch extends AppCompatActivity {
                 if(position == 0)
                 {
                     reset(view);
-                    return;
                 }
                 else
                 {
