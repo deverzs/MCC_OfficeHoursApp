@@ -11,6 +11,7 @@ public class Status {
     private boolean mOfficeHourStatus;  //True if office hour is being conducted
 
 
+
     /**
      * Constructor for Status Table
      * @param mInstructorCode       Unique code for the instructor
@@ -20,14 +21,40 @@ public class Status {
      * @param id                    Database assigned id
      */
     public Status(long id, int mInstructorCode, int mOfficeHourSection,
-                       int mOfficeHourDay, boolean mOfficeHourStatus) {
+                       int mOfficeHourDay, int mOfficeHourStatus) {
         this.mInstructorCode = mInstructorCode;
         this.mOfficeHourSection = mOfficeHourSection;
         this.mOfficeHourDay = mOfficeHourDay;
-        this.mOfficeHourStatus = mOfficeHourStatus;
+        if(mOfficeHourStatus == 0) this.mOfficeHourStatus = false;
+        else this.mOfficeHourStatus = true;
         this.mId = id;
     }
 
+    /**
+     * retunr the database set id
+     * @return  id set by db
+     */
+    public long getmId() {
+        return mId;
+    }
+
+    /**
+     * set the id from the database
+     * @param mId database set id
+     */
+    public void setmId(long mId) {
+        this.mId = mId;
+    }
+
+    /**
+     * returns the int value of true or false
+     * @return
+     */
+    public int getStatus()
+    {
+        if(mOfficeHourStatus == true) return 1;
+        else return 0;
+    }
     /**
      * Get the instructor code
      * @return  int: Unique code for the instructor

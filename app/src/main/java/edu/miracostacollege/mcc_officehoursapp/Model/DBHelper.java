@@ -285,7 +285,6 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(SCHEDULE_KEY_FIELD_ID, schedule.getmId());
         values.put(SCHEDULE_INSTR_CODE, schedule.getmInstructorCode());
         values.put(SCHEDULE_SECTION, schedule.getmOfficeHourSection());
         values.put(SCHEDULE_DAY, schedule.getmOfficeHourDay());
@@ -348,7 +347,6 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(SCHEDULE_KEY_FIELD_ID, schedule.getmId());
         values.put(SCHEDULE_INSTR_CODE, schedule.getmInstructorCode());
         values.put(SCHEDULE_SECTION, schedule.getmOfficeHourSection());
         values.put(SCHEDULE_DAY, schedule.getmOfficeHourDay());
@@ -387,5 +385,283 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
+    //************************* STATUS TABLE OPERATIONS **************
+
+    public void addStatus(Status status)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(STATUS_INSTR_CODE, status.getmInstructorCode());
+        values.put(STATUS_SECTION, status.getmOfficeHourSection());
+        values.put(STATUS_DAY, status.getmOfficeHourDay());
+        values.put(STATUS_STATUS, status.getStatus());
+
+        long id = db.insert(STATUS_TABLE, null, values);
+        status.setmId(id);
+        db.close();
+
+    }
+
+    public List<Status> getAllStatus()
+    {
+        List<Status> statusList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                STATUS_TABLE,
+                new String[] {STATUS_KEY_FIELD_ID, STATUS_INSTR_CODE, STATUS_SECTION, STATUS_DAY, STATUS_STATUS},
+                null, null, null, null, null, null );
+        if(cursor.moveToFirst())
+        {
+            do {
+                Status status =
+                        new Status(cursor.getLong(0),
+                                cursor.getInt(1),
+                                cursor.getInt(2),
+                                cursor.getInt(3),
+                                cursor.getInt(4));
+
+                 statusList.add(status);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return statusList;
+    }
+
+    public void deleteStatus(Status status)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(STATUS_TABLE, STATUS_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(status.getmId())});
+
+        db.close();
+    }
+
+    public void deleteAllStatus()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(STATUS_TABLE, null, null);
+        db.close();
+    }
+
+    public void updateStatus(Status status)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(STATUS_INSTR_CODE, status.getmInstructorCode());
+        values.put(STATUS_SECTION, status.getmOfficeHourSection());
+        values.put(STATUS_DAY, status.getmOfficeHourDay());
+        values.put(STATUS_STATUS, status.getStatus());
+
+        db.update(STATUS_TABLE, values, STATUS_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(status.getmId())});
+        db.close();
+    }
+
+    public Status getStatus(long id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                STATUS_TABLE,
+                new String[] {STATUS_KEY_FIELD_ID, STATUS_INSTR_CODE, STATUS_SECTION, STATUS_DAY, STATUS_STATUS},
+                STATUS_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(id)},
+                null, null, null, null );
+        if(cursor != null) cursor.moveToFirst();
+
+        Status status = new Status(
+                cursor.getLong(0),
+                cursor.getInt(1),
+                cursor.getInt(2),
+                cursor.getInt(3),
+                cursor.getInt(4));
+        cursor.close();
+        db.close();
+        return status;
+
+    }
+
+    //************************* LOGIN TABLE OPERATIONS **************
+
+    public void addLogin(String email, String password)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(LOGIN_INSTR_EMAIL, email);
+        values.put(LOGIN_PASSWORD, password);
+        db.insert(LOGIN_TABLE, null, values);
+        db.close();
+
+    }
+
+    public List<Login> getAllLogin()
+    {
+        List<Login> loginList = new ArrayList<>();
+        SQLiteDatabase db = this. getReadableDatabase();
+        Cursor cursor = db.query(
+                LOGIN_TABLE,
+                new String[] {LOGIN_KEY_FIELD_ID, LOGIN_INSTR_EMAIL, LOGIN_PASSWORD},
+                null, null, null, null, null, null);
+
+        if(cursor.moveToFirst())
+        {
+            do {
+                Login login = new Login(
+                        cursor.getLong(0),
+                        cursor.getString(1),
+                        cursor.getString(2));
+                loginList.add(login);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return loginList;
+    }
+
+
+    public void deleteLogin(Login login)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(LOGIN_TABLE, LOGIN_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(login.getmId())});
+        db.close();
+    }
+
+    public void deleteAllLogin()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(LOGIN_TABLE, null, null);
+        db.close();
+    }
+
+    public Login getLogin(long id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                LOGIN_TABLE,
+                new String[] {LOGIN_KEY_FIELD_ID, LOGIN_INSTR_EMAIL, LOGIN_PASSWORD},
+                LOGIN_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(id)},
+                null, null, null, null );
+
+        if(cursor != null) cursor.moveToFirst();
+
+        Login login = new Login(
+                cursor.getLong(0),
+                cursor.getString(1),
+                cursor.getString(2));
+        cursor.close();
+        db.close();
+        return  login;
+    }
+
+    //************************* VERIFICATION TABLE OPERATIONS **************
+
+    public void addVerification(Verification verification)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(VERIFICATION_EMAIL, verification.getmEmail());
+        values.put(VERIFICATION_PIN, verification.getmPin());
+        values.put(VERIFICATION_LAST_NAME, verification.getmLastName());
+        values.put(VERIFICATION_FIRST_NAME, verification.getmFirstName());
+        values.put(VERIFICATION_IS_VERIFIED, verification.ismIsVerified()) ;
+
+        db.insert(VERIFICATION_TABLE, null, values);
+        db.close();
+    }
+
+    public List<Verification> getAllVerifications()
+    {
+        List<Verification> verificationsList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                VERIFICATION_TABLE,
+                new String[] {VERIFICATION_KEY_FIELD_ID, VERIFICATION_EMAIL, VERIFICATION_PIN,
+                        VERIFICATION_LAST_NAME, VERIFICATION_FIRST_NAME, VERIFICATION_IS_VERIFIED},
+                null, null, null, null, null, null);
+        if(cursor.moveToFirst())
+        {
+            do {
+                Verification verification = new Verification(
+                        cursor.getLong(0),
+                        cursor.getString(1),
+                        cursor.getInt(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getInt(5));
+                verificationsList.add(verification);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return verificationsList;
+    }
+
+    public void deleteVerification(Verification verification)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(VERIFICATION_TABLE, VERIFICATION_KEY_FIELD_ID + " = ?",
+                new String[] {String.valueOf(verification.getmId())});
+        db.close();
+    }
+
+    public void deleteAllVerifications()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(VERIFICATION_TABLE, null, null);
+        db.close();
+    }
+
+    public void updateVerification(Verification verification)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(VERIFICATION_EMAIL, verification.getmEmail());
+        values.put(VERIFICATION_PIN, verification.getmPin());
+        values.put(VERIFICATION_LAST_NAME, verification.getmLastName());
+        values.put(VERIFICATION_FIRST_NAME, verification.getmFirstName());
+        values.put(VERIFICATION_IS_VERIFIED, verification.ismIsVerified()) ;
+
+        db.update(VERIFICATION_TABLE, values, VERIFICATION_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(verification.getmId())});
+        db.close();
+    }
+
+    public  Verification getVerification(long id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                VERIFICATION_TABLE,
+                new String[] {VERIFICATION_KEY_FIELD_ID, VERIFICATION_EMAIL, VERIFICATION_PIN,
+                        VERIFICATION_LAST_NAME, VERIFICATION_FIRST_NAME, VERIFICATION_IS_VERIFIED},
+                VERIFICATION_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(id)},
+                null, null, null, null );
+        if(cursor != null) cursor.moveToFirst();
+
+        Verification verification = new Verification(
+                cursor.getLong(0),
+                cursor.getString(1),
+                cursor.getInt(2),
+                cursor.getString(3),
+                cursor.getString(4),
+                cursor.getInt(5));
+
+        cursor.close();
+        db.close();
+        return verification;
+    }
+
+    //************************* SAVED INSTRUCTOR TABLE OPERATIONS **************
 
 }
