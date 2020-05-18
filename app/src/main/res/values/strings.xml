@@ -33,6 +33,7 @@
     <string name="last_name">Last name</string>
     <string name="pin">Pin</string>
     <string name="verify_button">Verify</string>
+    <string name="hint_professor_name">Search by professor name</string>
 
 
 </resources>
