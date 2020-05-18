@@ -49,9 +49,7 @@ public class professorsListViewAdapter extends ArrayAdapter<Instructor> {
         TextView professorCourse3TextView_LIST = view.findViewById(R.id.professorCourse3TextView_LIST);
         TextView professorCourse4TextView_LIST = view.findViewById(R.id.professorCourse4TextView_LIST);
 
-        professorNameTextView_LIST.setText(selectedInstructor.getmFullName());
-
-
+        //professorNameTextView_LIST.setText(selectedInstructor.getmFullName());
 
 
 

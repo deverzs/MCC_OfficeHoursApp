@@ -29,11 +29,12 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView8" />
 
     <Button
-        android:id="@+id/addScheduleButton"
+        android:id="@+id/viewScheduleButton"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:background="@color/headColor"
+        android:onClick="viewSchedule"
         android:text="@string/view_schedule"
         android:textColor="@color/white"
         android:textSize="18sp"
@@ -54,10 +55,10 @@
         android:textColorHint="#FFFFFF"
         android:textColorLink="#FFFFFF"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/addScheduleButton"
+        app:layout_constraintEnd_toEndOf="@+id/viewScheduleButton"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/addScheduleButton"
-        app:layout_constraintTop_toBottomOf="@+id/addScheduleButton" />
+        app:layout_constraintStart_toStartOf="@+id/viewScheduleButton"
+        app:layout_constraintTop_toBottomOf="@+id/viewScheduleButton" />
 
     <ImageView
         android:id="@+id/imageView9"
