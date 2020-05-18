@@ -18,6 +18,7 @@ import edu.miracostacollege.mcc_officehoursapp.Model.DBHelper;
 import edu.miracostacollege.mcc_officehoursapp.Model.Instructor;
 import edu.miracostacollege.mcc_officehoursapp.Model.professorsListViewAdapter;
 
+//Checking changes after commit issues
 public class StudentSearch extends AppCompatActivity {
 
     private DBHelper db;

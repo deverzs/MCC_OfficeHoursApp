@@ -44,9 +44,7 @@ public class Registration extends AppCompatActivity {
 
         String emailUser = emailEditText.getText().toString();
 
-        Log.i(TAG, "/////Before list");
         for(Login user: allLoginList){
-            Log.i(TAG, "************EMAIL:  " + user.getmEmail());
             if(user.getmEmail().equals(emailUser)){
                 Toast.makeText(this, "This email is already in use. Log in.", Toast.LENGTH_LONG).show();
                 passwordEditText.setText("");
@@ -67,11 +65,6 @@ public class Registration extends AppCompatActivity {
                 Intent verify = new Intent(this, ProfessorVerificationActivity.class);
                 startActivity(verify);
             } else {
-                allLoginList = db.getAllLogin();
-                for(Login user: allLoginList) {
-                    Log.i(TAG, "************EMAIL:  " + user.getmEmail());
-                    Log.i(TAG, "************PASS:  " + user.getmPassowrd());
-                }
                 Intent searchIntent = new Intent(this, StudentSearch.class);
                 startActivity(searchIntent);
             }
