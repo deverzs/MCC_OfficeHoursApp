@@ -1,8 +1,13 @@
 package edu.miracostacollege.mcc_officehoursapp.Model;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DBHelper extends SQLiteOpenHelper {
 
@@ -146,4 +151,596 @@ public class DBHelper extends SQLiteOpenHelper {
             onCreate(db);
 
     }
+
+    //************************* INSTRUCTOR TABLE OPERATIONS **************
+
+    public void addInstructor(Instructor instructor)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(INSTRUCTOR_INSTR_CODE, instructor.getmId());
+        values.put(INSTRUCTOR_LAST_NAME, instructor.getmLastName());
+        values.put(INSTRUCTOR_FIRST_NAME, instructor.getmFirstName());
+        values.put(INSTRUCTOR_PHONE, instructor.getmPhone());
+        values.put(INSTRUCTOR_OFFICE, instructor.getmOfficeRoomNumber());
+        values.put(INSTRUCTOR_APPOINTMENT, instructor.byAppointment());
+
+        long id = db.insert(INSTRUCTOR_TABLE, null, values);
+        instructor.setmId(id);
+        db.close();
+
+    }
+
+
+    public List<Instructor> getAllInstructors()
+    {
+        List<Instructor> instructorList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                INSTRUCTOR_TABLE,
+                new String[] {INSTRUCTOR_KEY_FIELD_ID, INSTRUCTOR_INSTR_CODE, INSTRUCTOR_LAST_NAME,
+                        INSTRUCTOR_FIRST_NAME, INSTRUCTOR_PHONE, INSTRUCTOR_OFFICE,
+                        INSTRUCTOR_APPOINTMENT} ,
+                null,
+                null,
+                null,
+                null,
+                null,
+                null);
+
+
+        if(cursor.moveToFirst())
+        {
+            do {
+                Instructor instructor =
+                        new Instructor(cursor.getLong(0),
+                                cursor.getInt(1),
+                                cursor.getString(2),
+                                cursor.getString(3),
+                                cursor.getString(4),
+                                cursor.getString(5),
+                                cursor.getInt(6));
+                                instructorList.add(instructor);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return instructorList;
+
+    }
+
+    public int deleteInstructor(Instructor instructor)
+    {
+        if (instructor == null)
+        {
+            return 0;
+        }
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        int deleteRow = db.delete(INSTRUCTOR_TABLE, INSTRUCTOR_KEY_FIELD_ID + " = ?",
+                new String[] {String.valueOf(instructor.getmId())});
+
+        db.close();
+        return deleteRow;
+    }
+
+    public void deleteAllInstructors()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(INSTRUCTOR_TABLE, null, null);
+        db.close();
+
+    }
+
+    public void updateInstructor(Instructor instructor)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(INSTRUCTOR_INSTR_CODE, instructor.getmId());
+        values.put(INSTRUCTOR_LAST_NAME, instructor.getmLastName());
+        values.put(INSTRUCTOR_FIRST_NAME, instructor.getmFirstName());
+        values.put(INSTRUCTOR_PHONE, instructor.getmPhone());
+        values.put(INSTRUCTOR_OFFICE, instructor.getmOfficeRoomNumber());
+        values.put(INSTRUCTOR_APPOINTMENT, instructor.byAppointment());
+
+        db.update(INSTRUCTOR_TABLE, values, INSTRUCTOR_KEY_FIELD_ID + " = ?",
+                new String[]{String.valueOf(instructor.getmId())});
+        db.close();
+    }
+
+    public Instructor getInstructor(long id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                INSTRUCTOR_TABLE,
+                new String[] {INSTRUCTOR_KEY_FIELD_ID, INSTRUCTOR_INSTR_CODE, INSTRUCTOR_LAST_NAME,
+                        INSTRUCTOR_FIRST_NAME, INSTRUCTOR_PHONE, INSTRUCTOR_OFFICE,
+                        INSTRUCTOR_APPOINTMENT},
+                INSTRUCTOR_KEY_FIELD_ID + "=?",
+                new String[] {String.valueOf(id)},
+                null, null, null, null);
+
+        if(cursor != null) cursor.moveToFirst();
+
+        Instructor instructor = new Instructor (cursor.getLong(0),
+                cursor.getInt(1),
+                cursor.getString(2),
+                cursor.getString(3),
+                cursor.getString(4),
+                cursor.getString(5),
+                cursor.getInt(6));
+        cursor.close();
+        db.close();
+        return instructor;
+
+    }
+
+    //************************* SCHEDULE TABLE OPERATIONS **************
+
+    public void addSchedule(Schedule schedule)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(SCHEDULE_INSTR_CODE, schedule.getmInstructorCode());
+        values.put(SCHEDULE_SECTION, schedule.getmOfficeHourSection());
+        values.put(SCHEDULE_DAY, schedule.getmOfficeHourDay());
+        values.put(SCHEDULE_TIME, schedule.getmOfficeHourTime());
+        values.put(SCHEDULE_LOCATION, schedule.getmOfficeHourLocation());
+
+        long id = db.insert(SCHEDULE_TABLE, null, values);
+        schedule.setmId(id);
+        db.close();
+    }
+
+    public List<Schedule> getAllSchedules()
+    {
+        List<Schedule> scheduleList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                SCHEDULE_TABLE,
+                new String[] {SCHEDULE_KEY_FIELD_ID, SCHEDULE_INSTR_CODE, SCHEDULE_SECTION,
+                        SCHEDULE_DAY, SCHEDULE_TIME, SCHEDULE_LOCATION} ,
+                null, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+                Schedule schedule =
+                        new Schedule(cursor.getLong(0),
+                                cursor.getInt(1),
+                                cursor.getInt(2),
+                                cursor.getInt(3),
+                                cursor.getString(4),
+                                cursor.getString(5));
+                scheduleList.add(schedule);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return scheduleList;
+    }
+
+    public int deleteSchedule(Schedule schedule)
+    {
+        if(schedule == null)
+        {
+            return 0;
+        }
+        SQLiteDatabase db = this.getWritableDatabase();
+        int deleteRow = db.delete(SCHEDULE_TABLE, SCHEDULE_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(schedule.getmId())});
+        db.close();
+        return deleteRow;
+    }
+
+    public void deleteAllSchedules()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(SCHEDULE_TABLE, null, null);
+        db.close();
+    }
+
+    public void updateSchedule(Schedule schedule)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(SCHEDULE_INSTR_CODE, schedule.getmInstructorCode());
+        values.put(SCHEDULE_SECTION, schedule.getmOfficeHourSection());
+        values.put(SCHEDULE_DAY, schedule.getmOfficeHourDay());
+        values.put(SCHEDULE_TIME, schedule.getmOfficeHourTime());
+        values.put(SCHEDULE_LOCATION, schedule.getmOfficeHourLocation());
+
+        db.update(SCHEDULE_TABLE, values, SCHEDULE_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(schedule.getmId())});
+
+        db.close();
+
+    }
+
+    public Schedule getSchedule(long id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                SCHEDULE_TABLE,
+                new String[] {SCHEDULE_KEY_FIELD_ID, SCHEDULE_INSTR_CODE, SCHEDULE_SECTION,
+                        SCHEDULE_DAY, SCHEDULE_TIME, SCHEDULE_LOCATION},
+                SCHEDULE_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(id)},
+                null, null, null, null );
+
+        if(cursor != null)  cursor.moveToFirst();
+
+        Schedule schedule = new Schedule(cursor.getLong(0),
+                    cursor.getInt(1),
+                    cursor.getInt(2),
+                    cursor.getInt(3),
+                    cursor.getString(4),
+                    cursor.getString(5));
+        cursor.close();
+        db.close();
+        return schedule;
+    }
+
+
+    //************************* STATUS TABLE OPERATIONS **************
+
+    public void addStatus(Status status)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(STATUS_INSTR_CODE, status.getmInstructorCode());
+        values.put(STATUS_SECTION, status.getmOfficeHourSection());
+        values.put(STATUS_DAY, status.getmOfficeHourDay());
+        values.put(STATUS_STATUS, status.getStatus());
+
+        long id = db.insert(STATUS_TABLE, null, values);
+        status.setmId(id);
+        db.close();
+
+    }
+
+    public List<Status> getAllStatus()
+    {
+        List<Status> statusList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(
+                STATUS_TABLE,
+                new String[] {STATUS_KEY_FIELD_ID, STATUS_INSTR_CODE, STATUS_SECTION, STATUS_DAY, STATUS_STATUS},
+                null, null, null, null, null, null );
+        if(cursor.moveToFirst())
+        {
+            do {
+                Status status =
+                        new Status(cursor.getLong(0),
+                                cursor.getInt(1),
+                                cursor.getInt(2),
+                                cursor.getInt(3),
+                                cursor.getInt(4));
+
+                 statusList.add(status);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return statusList;
+    }
+
+    public void deleteStatus(Status status)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(STATUS_TABLE, STATUS_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(status.getmId())});
+
+        db.close();
+    }
+
+    public void deleteAllStatus()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(STATUS_TABLE, null, null);
+        db.close();
+    }
+
+    public void updateStatus(Status status)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(STATUS_INSTR_CODE, status.getmInstructorCode());
+        values.put(STATUS_SECTION, status.getmOfficeHourSection());
+        values.put(STATUS_DAY, status.getmOfficeHourDay());
+        values.put(STATUS_STATUS, status.getStatus());
+
+        db.update(STATUS_TABLE, values, STATUS_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(status.getmId())});
+        db.close();
+    }
+
+    public Status getStatus(long id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                STATUS_TABLE,
+                new String[] {STATUS_KEY_FIELD_ID, STATUS_INSTR_CODE, STATUS_SECTION, STATUS_DAY, STATUS_STATUS},
+                STATUS_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(id)},
+                null, null, null, null );
+        if(cursor != null) cursor.moveToFirst();
+
+        Status status = new Status(
+                cursor.getLong(0),
+                cursor.getInt(1),
+                cursor.getInt(2),
+                cursor.getInt(3),
+                cursor.getInt(4));
+        cursor.close();
+        db.close();
+        return status;
+
+    }
+
+    //************************* LOGIN TABLE OPERATIONS **************
+
+    public void addLogin(String email, String password)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(LOGIN_INSTR_EMAIL, email);
+        values.put(LOGIN_PASSWORD, password);
+        db.insert(LOGIN_TABLE, null, values);
+        db.close();
+
+    }
+
+    public List<Login> getAllLogin()
+    {
+        List<Login> loginList = new ArrayList<>();
+        SQLiteDatabase db = this. getReadableDatabase();
+        Cursor cursor = db.query(
+                LOGIN_TABLE,
+                new String[] {LOGIN_KEY_FIELD_ID, LOGIN_INSTR_EMAIL, LOGIN_PASSWORD},
+                null, null, null, null, null, null);
+
+        if(cursor.moveToFirst())
+        {
+            do {
+                Login login = new Login(
+                        cursor.getLong(0),
+                        cursor.getString(1),
+                        cursor.getString(2));
+                loginList.add(login);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return loginList;
+    }
+
+
+    public void deleteLogin(Login login)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(LOGIN_TABLE, LOGIN_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(login.getmId())});
+        db.close();
+    }
+
+    public void deleteAllLogin()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(LOGIN_TABLE, null, null);
+        db.close();
+    }
+
+    public Login getLogin(long id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                LOGIN_TABLE,
+                new String[] {LOGIN_KEY_FIELD_ID, LOGIN_INSTR_EMAIL, LOGIN_PASSWORD},
+                LOGIN_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(id)},
+                null, null, null, null );
+
+        if(cursor != null) cursor.moveToFirst();
+
+        Login login = new Login(
+                cursor.getLong(0),
+                cursor.getString(1),
+                cursor.getString(2));
+        cursor.close();
+        db.close();
+        return  login;
+    }
+
+    //************************* VERIFICATION TABLE OPERATIONS **************
+
+    public void addVerification(Verification verification)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(VERIFICATION_EMAIL, verification.getmEmail());
+        values.put(VERIFICATION_PIN, verification.getmPin());
+        values.put(VERIFICATION_LAST_NAME, verification.getmLastName());
+        values.put(VERIFICATION_FIRST_NAME, verification.getmFirstName());
+        values.put(VERIFICATION_IS_VERIFIED, verification.ismIsVerified()) ;
+
+        db.insert(VERIFICATION_TABLE, null, values);
+        db.close();
+    }
+
+    public List<Verification> getAllVerifications()
+    {
+        List<Verification> verificationsList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                VERIFICATION_TABLE,
+                new String[] {VERIFICATION_KEY_FIELD_ID, VERIFICATION_EMAIL, VERIFICATION_PIN,
+                        VERIFICATION_LAST_NAME, VERIFICATION_FIRST_NAME, VERIFICATION_IS_VERIFIED},
+                null, null, null, null, null, null);
+        if(cursor.moveToFirst())
+        {
+            do {
+                Verification verification = new Verification(
+                        cursor.getLong(0),
+                        cursor.getString(1),
+                        cursor.getInt(2),
+                        cursor.getString(3),
+                        cursor.getString(4),
+                        cursor.getInt(5));
+                verificationsList.add(verification);
+            } while (cursor.moveToNext());
+        }
+
+        cursor.close();
+        db.close();
+        return verificationsList;
+    }
+
+    public void deleteVerification(Verification verification)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(VERIFICATION_TABLE, VERIFICATION_KEY_FIELD_ID + " = ?",
+                new String[] {String.valueOf(verification.getmId())});
+        db.close();
+    }
+
+    public void deleteAllVerifications()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(VERIFICATION_TABLE, null, null);
+        db.close();
+    }
+
+    public void updateVerification(Verification verification)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(VERIFICATION_EMAIL, verification.getmEmail());
+        values.put(VERIFICATION_PIN, verification.getmPin());
+        values.put(VERIFICATION_LAST_NAME, verification.getmLastName());
+        values.put(VERIFICATION_FIRST_NAME, verification.getmFirstName());
+        values.put(VERIFICATION_IS_VERIFIED, verification.ismIsVerified()) ;
+
+        db.update(VERIFICATION_TABLE, values, VERIFICATION_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(verification.getmId())});
+        db.close();
+    }
+
+    public  Verification getVerification(long id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                VERIFICATION_TABLE,
+                new String[] {VERIFICATION_KEY_FIELD_ID, VERIFICATION_EMAIL, VERIFICATION_PIN,
+                        VERIFICATION_LAST_NAME, VERIFICATION_FIRST_NAME, VERIFICATION_IS_VERIFIED},
+                VERIFICATION_KEY_FIELD_ID + " =?",
+                new String[] {String.valueOf(id)},
+                null, null, null, null );
+        if(cursor != null) cursor.moveToFirst();
+
+        Verification verification = new Verification(
+                cursor.getLong(0),
+                cursor.getString(1),
+                cursor.getInt(2),
+                cursor.getString(3),
+                cursor.getString(4),
+                cursor.getInt(5));
+
+        cursor.close();
+        db.close();
+        return verification;
+    }
+
+    //************************* SAVED INSTRUCTOR TABLE OPERATIONS **************
+
+    public void addSavedInstructor(SavedInstructor savedInstructor)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(SAVED_INSTR_CODE, savedInstructor.getmInstructorCode());
+
+        db.insert(SAVED_TABLE, null, values);
+        db.close();
+    }
+
+    public List<SavedInstructor> getAllSavedInstructors()
+    {
+        List<SavedInstructor> savedInstructorsList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                SAVED_TABLE,
+                new String[] {SAVED_KEY_FIELD_ID, SAVED_INSTR_CODE},
+                null, null, null, null, null, null);
+        if(cursor.moveToFirst())
+        {
+            do {
+                SavedInstructor savedInstructor =
+                        new SavedInstructor(
+                                cursor.getLong(0),
+                                cursor.getInt(1));
+                savedInstructorsList.add(savedInstructor);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return savedInstructorsList;
+    }
+
+    public void deleteSavedInstructor(SavedInstructor savedInstructor)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(SAVED_TABLE, SAVED_KEY_FIELD_ID + "=?",
+                new String[] {String.valueOf(savedInstructor.getmId())});
+        db.close();
+    }
+
+    public void deleteAllSavedInstructors()
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.delete(SAVED_TABLE, null, null);
+        db.close();
+    }
+
+    public void updateSavedInstructor(SavedInstructor savedInstructor)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(SAVED_INSTR_CODE, savedInstructor.getmInstructorCode());
+        db.update(SAVED_TABLE, values, SAVED_KEY_FIELD_ID + " =?",
+                new String[]{String.valueOf(savedInstructor.getmId())});
+        db.close();
+    }
+
+    public SavedInstructor getSavedInstructor(long id)
+    {
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.query(
+                SAVED_TABLE,
+                new String[] { SAVED_KEY_FIELD_ID, SAVED_INSTR_CODE},
+                SAVED_KEY_FIELD_ID + "=?",
+                new String[] {String.valueOf(id)},
+                null, null, null, null);
+        if(cursor != null) cursor.moveToFirst();
+        SavedInstructor savedInstructor = new SavedInstructor(
+                cursor.getLong(0),
+                cursor.getInt(1));
+        cursor.close();
+        db.close();
+        return  savedInstructor;
+    }
+
+
+
 }

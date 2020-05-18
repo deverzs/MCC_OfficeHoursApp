@@ -8,6 +8,8 @@ public class Instructor {
     private long mId;                   //Database assigned
     private int mInstructorCode;        //Unique code for the instructor
     private String mFullName;           //Full Name of instructor
+    private String mFirstName;
+    private String mLastName;
     private String mPhone;              //Phone number, including extension
     private String mOfficeRoomNumber;   //Room number of instructor's office
     private boolean mAppointment;       //True if instructor accepts appointments
@@ -16,20 +18,64 @@ public class Instructor {
      * Default Construstor - Full
      * @param id                    Database assigned id
      * @param mInstructorCode       Unique code for the instructor
-     * @param mFullName             Full Name of instructor
+     * @param mFirstName             First Name of instructor
+     * @param mLastName             Last Name of instructor
      * @param mPhone                Phone number, including extension
      * @param mOfficeRoomNumber     Room number of instructor's office
      * @param mAppointment          True if instructor accepts appointments
      */
-    public Instructor(long id, int mInstructorCode, String mFullName, String mPhone,
-                       String mOfficeRoomNumber, boolean mAppointment) {
+    public Instructor(long id, int mInstructorCode, String mFirstName, String mLastName, String mPhone,
+                      String mOfficeRoomNumber, int mAppointment) {
         this.mInstructorCode = mInstructorCode;
-        this.mFullName = mFullName;
+        this.mFirstName = mFirstName;
+        this.mLastName = mLastName;
         this.mPhone = mPhone;
         this.mOfficeRoomNumber = mOfficeRoomNumber;
-        this.mAppointment = mAppointment;
+        if(mAppointment == 0) this.mAppointment = false;
+        else this.mAppointment = true;
         this.mId = id;
+        this.mFullName = mFirstName + " " + mLastName;
 
+    }
+
+    /**
+     * Get the first name
+     * @return first name
+     */
+    public String getmFirstName() {
+        return mFirstName;
+    }
+
+    /**
+     * Get last name
+     * @return last name
+     */
+    public String getmLastName() {
+        return mLastName;
+    }
+
+    /**
+     * set first name
+     * @param mFirstName  first name
+     */
+    public void setmFirstName(String mFirstName) {
+        this.mFirstName = mFirstName;
+    }
+
+    /**
+     * Sets the id given by database
+     * @param mId
+     */
+    public void setmId(long mId) {
+        this.mId = mId;
+    }
+
+    /**
+     * Set last name
+     * @param mLastName set last name
+     */
+    public void setmLastName(String mLastName) {
+        this.mLastName = mLastName;
     }
 
     /**
@@ -104,6 +150,15 @@ public class Instructor {
         this.mOfficeRoomNumber = mOfficeRoomNumber;
     }
 
+    /**
+     * Return integer value of appointment bool
+     * @return 1 if true 0 else
+     */
+    public int byAppointment()
+    {
+        if(ismAppointment()) return 1;
+        else return 0;
+    }
     /**
      * Get whether available  by appointment
      * @return  0=False, not available by appointment, 1=True available by appointement
