@@ -39,7 +39,7 @@
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/blacnk2"
+            android:id="@+id/blank2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

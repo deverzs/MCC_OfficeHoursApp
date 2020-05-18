@@ -10,35 +10,12 @@
         android:layout_height="match_parent">
 
         <TextView
-            android:text="TextView"
+            android:id="@+id/professorNameTextView_LIST"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:id="@+id/professorNameTextView_LIST" />
+            android:text="TextView"
+            android:textSize="34sp" />
 
-        <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/professorCourse1TextView_LIST" />
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/professorCourse2TextView_LIST"/>
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/professorCourse3TextView_LIST"/>
-
-        <TextView
-            android:text="TextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/professorCourse4TextView_LIST"/>
     </LinearLayout>
 
 
