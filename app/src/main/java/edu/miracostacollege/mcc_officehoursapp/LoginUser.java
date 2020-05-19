@@ -31,11 +31,21 @@ public class LoginUser extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_user);
 
-        //deleteDatabase(DBHelper.DATABASE_NAME);
+        //deleteDatabase(DBHelper.SCHEDULE_TABLE);
+        //deleteDatabase(DBHelper.SAVED_TABLE);
+        //deleteDatabase(DBHelper.INSTRUCTOR_TABLE);
+
         db = new DBHelper(this);
-        db.importInstructorsFromCSV("instructor.csv");
-        db.importScheduleFromCSV("schedule.csv");
-        db.importVerifiedFromCSV("verified.csv");
+
+        // deleteDatabase(DBHelper.DATABASE_NAME);
+        if (db.getAllInstructors().size() == 0)
+            db.importInstructorsFromCSV("instructor.csv");
+
+        if (db.getAllSchedules().size() == 0)
+            db.importScheduleFromCSV("schedule.csv");
+
+        if (db.getAllVerifications().size() == 0)
+            db.importVerifiedFromCSV("verified.csv");
 
     }
 
