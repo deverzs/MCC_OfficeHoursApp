@@ -36,7 +36,7 @@ public class StudentSearch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_search);
         db = new DBHelper(this);
-        db.importInstructorsFromCSV("instructors.csv");
+        db.importInstructorsFromCSV("instructor.csv");
 
         allInstructorsList = db.getAllInstructors();
 
