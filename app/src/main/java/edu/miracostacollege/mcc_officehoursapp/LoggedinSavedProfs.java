@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 
@@ -34,28 +35,36 @@ public class LoggedinSavedProfs extends AppCompatActivity {
         setContentView(R.layout.activity_loggedin_saved_profs);
         db = new DBHelper(this);
 
-       // deleteDatabase(DATABASE_NAME);
-        db.addSavedInstructor(2); //dummy
-        db.addSavedInstructor(3); //dummy
+        //db.deleteAllSavedInstructors();
+        //db.addSavedInstructor(2); //dummy
+        //db.addSavedInstructor(3); //dummy
 
         instructorList = db.getAllSavedInstructors();
+        int count = 0;
+        for(SavedInstructor s: instructorList){
+            Log.i(TAG, "//// instructor count : " + count++ + " " + s.getmInstructor().getmFullName());
+        }
 
         //Instructor List Adapter
         instructorListAdapter = new SavedInstructorListAdapter(this,
-                R.layout.activity_professor_list_item, instructorList);
+                R.layout.activity_saved_professor_list_item, instructorList);
 
         instructorListView = findViewById(R.id.professorsListView_SAVED);
         instructorListView.setAdapter(instructorListAdapter);
+
+        for(SavedInstructor i : instructorList){
+            Log.i(TAG, "//SAVED: " + i.getmInstructor().getmFullName());
+        }
 
 
 
     }
 
     public void viewInstructorDetails(View v){
-        Instructor selectedInstuctor = (Instructor) v.getTag();
+        SavedInstructor selectedInstuctor = (SavedInstructor) v.getTag();
 
         Intent intent = new Intent(this, ProfessorDetails.class);
-        intent.putExtra("Instructor", selectedInstuctor.getmId());
+        intent.putExtra("Instructor", selectedInstuctor.getmInstructor().getmId());
         startActivity(intent);
 
     }
