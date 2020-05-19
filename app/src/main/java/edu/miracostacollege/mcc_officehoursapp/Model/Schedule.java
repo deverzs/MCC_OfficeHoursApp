@@ -1,67 +1,21 @@
 package edu.miracostacollege.mcc_officehoursapp.Model;
 
-import java.util.Objects;
-
 public class Schedule {
 
-    private long mId;                   //Database assigned
-    private int mInstructorCode;        //Unique code for the instructor
+    private Instructor mInstructor;
     private int mOfficeHourSection;     //Designates which section of the day this office hour is
     private int mOfficeHourDay;         //Designates the day of the office hour
     private String mOfficeHourTime;     //Designates time of office hour
     private String mOfficeHourLocation; //Designates location of office hour
 
 
-    /**
-     * Constructor for Calendar Table
-     * @param id                    Database assigned id
-     * @param mInstructorCode       Unique code for the instructor
-     * @param mOfficeHourSection    Designates which section of the day this office hour is
-     * @param mOfficeHourDay        Designates the day of the office hour
-     * @param mOfficeHourTime       Designates time of office hour
-     * @param mOfficeHourLocation   Designates location of office hour
-     */
-    public Schedule(long id, int mInstructorCode, int mOfficeHourSection, int mOfficeHourDay,
+    public Schedule(Instructor mInstructor, int mOfficeHourSection, int mOfficeHourDay,
                     String mOfficeHourTime, String mOfficeHourLocation) {
-        this.mInstructorCode = mInstructorCode;
+        this.mInstructor = mInstructor;
         this.mOfficeHourSection = mOfficeHourSection;
         this.mOfficeHourDay = mOfficeHourDay;
         this.mOfficeHourTime = mOfficeHourTime;
         this.mOfficeHourLocation = mOfficeHourLocation;
-        this.mId = id;
-    }
-
-    public Schedule(int mInstructorCode, int mOfficeHourSection, int mOfficeHourDay,
-                    String mOfficeHourTime, String mOfficeHourLocation) {
-        this.mInstructorCode = mInstructorCode;
-        this.mOfficeHourSection = mOfficeHourSection;
-        this.mOfficeHourDay = mOfficeHourDay;
-        this.mOfficeHourTime = mOfficeHourTime;
-        this.mOfficeHourLocation = mOfficeHourLocation;
-    }
-
-    /**
-     * Database assigned id
-     * @return long id in database
-     */
-    public long getmId() {
-        return mId;
-    }
-
-    /**
-     * Get the instructor code
-     * @return  int: Unique code for the instructor
-     */
-    public int getmInstructorCode() {
-        return mInstructorCode;
-    }
-
-    /**
-     * Set instructor code
-     * @param mInstructorCode  Unique code for the instructor, int
-     */
-    public void setmInstructorCode(int mInstructorCode) {
-        this.mInstructorCode = mInstructorCode;
     }
 
     /**
@@ -70,6 +24,14 @@ public class Schedule {
      */
     public int getmOfficeHourSection() {
         return mOfficeHourSection;
+    }
+
+    public Instructor getmInstructor() {
+        return mInstructor;
+    }
+
+    public void setmInstructor(Instructor mInstructor) {
+        this.mInstructor = mInstructor;
     }
 
     /**
@@ -96,13 +58,7 @@ public class Schedule {
         this.mOfficeHourDay = mOfficeHourDay;
     }
 
-    /**
-     * set the id from database
-     * @param mId DB set id
-     */
-    public void setmId(long mId) {
-        this.mId = mId;
-    }
+
 
     /**
      * Get the office hour time
@@ -136,34 +92,4 @@ public class Schedule {
         this.mOfficeHourLocation = mOfficeHourLocation;
     }
 
-    @Override
-    public String toString() {
-        return "Schedule{" +
-                "mId=" + mId +
-                ", mInstructorCode=" + mInstructorCode +
-                ", mOfficeHourSection=" + mOfficeHourSection +
-                ", mOfficeHourDay=" + mOfficeHourDay +
-                ", mOfficeHourTime='" + mOfficeHourTime + '\'' +
-                ", mOfficeHourLocation='" + mOfficeHourLocation + '\'' +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Schedule schedule = (Schedule) o;
-        return getmId() == schedule.getmId() &&
-                getmInstructorCode() == schedule.getmInstructorCode() &&
-                getmOfficeHourSection() == schedule.getmOfficeHourSection() &&
-                getmOfficeHourDay() == schedule.getmOfficeHourDay() &&
-                getmOfficeHourTime().equals(schedule.getmOfficeHourTime()) &&
-                getmOfficeHourLocation().equals(schedule.getmOfficeHourLocation());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getmId(), getmInstructorCode(), getmOfficeHourSection(),
-                getmOfficeHourDay(), getmOfficeHourTime(), getmOfficeHourLocation());
-    }
 }
