@@ -14,6 +14,7 @@ import java.util.TimerTask;
 
 public class SplashActivity extends AppCompatActivity {
     //
+    //
 
     private Animation shakeAnim;
     private ImageView star1_SPLASH;
