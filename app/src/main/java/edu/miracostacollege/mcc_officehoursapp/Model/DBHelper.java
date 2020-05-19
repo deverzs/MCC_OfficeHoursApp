@@ -114,6 +114,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "FOREIGN KEY(" + STATUS_KEY_FIELD_ID + ")REFERENCES "
                 + SCHEDULE_TABLE + "(" + SCHEDULE_KEY_FIELD_ID + "))";
         db.execSQL(statusTable);
+
         /*
         String statusTable = "CREATE TABLE IF NOT EXISTS " + STATUS_TABLE + " ("
                 + STATUS_KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
