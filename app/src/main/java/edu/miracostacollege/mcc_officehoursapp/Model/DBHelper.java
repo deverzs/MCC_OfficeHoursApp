@@ -816,7 +816,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 int day = Integer.parseInt(fields[2].trim());
                 String time = fields[3].trim();
                 String location = fields[4].trim();
-                addSchedule(new Schedule(getInstructor(instructorCode), section, day, time, location));
+                addSchedule(new Schedule( instructorCode, getInstructor(instructorCode),section, day, time, location));
 
             }
         } catch (IOException e) {

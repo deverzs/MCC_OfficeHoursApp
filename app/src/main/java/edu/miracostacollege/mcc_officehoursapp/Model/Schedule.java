@@ -9,7 +9,7 @@ public class Schedule {
     private String mOfficeHourTime;     //Designates time of office hour
     private String mOfficeHourLocation; //Designates location of office hour
 
-
+/*
     public Schedule(Instructor mInstructor, int mOfficeHourSection, int mOfficeHourDay,
                     String mOfficeHourTime, String mOfficeHourLocation) {
         this.mInstructor = mInstructor;
@@ -18,7 +18,7 @@ public class Schedule {
         this.mOfficeHourTime = mOfficeHourTime;
         this.mOfficeHourLocation = mOfficeHourLocation;
     }
-
+*/
     public Schedule(long mId, Instructor mInstructor, int mOfficeHourSection, int mOfficeHourDay,
                     String mOfficeHourTime, String mOfficeHourLocation) {
         this.mId = mId;

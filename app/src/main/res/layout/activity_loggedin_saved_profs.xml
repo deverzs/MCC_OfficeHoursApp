@@ -32,6 +32,7 @@
             android:layout_gravity="center_horizontal"
             android:background="@color/mc_logo_blueDark"
             android:elevation="8dp"
+            android:onClick="handleNewSearch"
             android:paddingStart="16dp"
             android:paddingEnd="16dp"
             android:text="@string/new_search"
@@ -45,7 +46,8 @@
 
         <ListView
             android:id="@+id/professorsListView_SAVED"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_width="388dp"
+            android:layout_height="455dp"
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 </LinearLayout>
