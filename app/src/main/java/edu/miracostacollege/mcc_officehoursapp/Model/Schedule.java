@@ -2,6 +2,7 @@ package edu.miracostacollege.mcc_officehoursapp.Model;
 
 public class Schedule {
 
+    private  long mId;                  //Database assigned
     private Instructor mInstructor;
     private int mOfficeHourSection;     //Designates which section of the day this office hour is
     private int mOfficeHourDay;         //Designates the day of the office hour
@@ -16,6 +17,25 @@ public class Schedule {
         this.mOfficeHourDay = mOfficeHourDay;
         this.mOfficeHourTime = mOfficeHourTime;
         this.mOfficeHourLocation = mOfficeHourLocation;
+    }
+
+    public Schedule(long mId, Instructor mInstructor, int mOfficeHourSection, int mOfficeHourDay,
+                    String mOfficeHourTime, String mOfficeHourLocation) {
+        this.mId = mId;
+        this.mInstructor = mInstructor;
+        this.mOfficeHourSection = mOfficeHourSection;
+        this.mOfficeHourDay = mOfficeHourDay;
+        this.mOfficeHourTime = mOfficeHourTime;
+        this.mOfficeHourLocation = mOfficeHourLocation;
+    }
+
+
+    public long getmId() {
+        return mId;
+    }
+
+    public void setmId(long mId) {
+        this.mId = mId;
     }
 
     /**

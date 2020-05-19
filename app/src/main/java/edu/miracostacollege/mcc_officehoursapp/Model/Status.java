@@ -4,12 +4,22 @@ import java.util.Objects;
 
 public class Status {
 
+    private  long mId;
     private Schedule mSchedule;
     private int mStatus;
 
     public Status(Schedule mSchedule, int mStatus) {
+        //this.mId = mId;
         this.mSchedule = mSchedule;
         this.mStatus = mStatus;
+    }
+
+    public long getmId() {
+        return mId;
+    }
+
+    public void setmId(long mId) {
+        this.mId = mId;
     }
 
     public Schedule getmSchedule() {

@@ -38,7 +38,7 @@ public class DBHelper extends SQLiteOpenHelper {
     //FIELDS (COLUMN NAMES) FOR THE SCHEDULE TABLE
     public static final String SCHEDULE_TABLE = "Schedule";
     public static final String SCHEDULE_KEY_FIELD_ID = "_id";
-    //public static final String SCHEDULE_INSTR_CODE = "code";
+    public static final String SCHEDULE_INSTR_CODE = "code";
     public static final String SCHEDULE_SECTION = "section";
     public static final String SCHEDULE_DAY = "day";
     public static final String SCHEDULE_TIME = "time";
@@ -46,10 +46,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //FIELDS (COLUMN NAMES) FOR THE STATUS TABLE
     public static final String STATUS_TABLE = "Status";
-    public static final String STATUS_KEY_FIELD_ID = "_id"; //instructor code
-    //public static final String STATUS_INSTR_CODE = "code_status";
+    public static final String STATUS_KEY_FIELD_ID = "_id";
+    public static final String STATUS_INSTR_CODE = "code_status"; //instructor code
     public static final String STATUS_SECTION = "section_status"; //section of day
-    public static final String STATUS_DAY = "day";  //which day
+    public static final String STATUS_DAY = "day_status";  //which day
+    public static final String STATUS_TIME = "time_status";  //which time
+    public static final String STATUS_LOCATION = "location_status";  //which location
     public static final String STATUS_STATUS = "status_status"; //canceled or not
 
     //FIELDS (COLUMN NAMES) FOR THE LOGIN TABLE
@@ -93,6 +95,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
         String scheduleTable = "CREATE TABLE IF NOT EXISTS " + SCHEDULE_TABLE + " ("
                 + SCHEDULE_KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
+                + SCHEDULE_INSTR_CODE + " INTEGER, "
                 + SCHEDULE_SECTION + " INTEGER, "
                 + SCHEDULE_DAY + " INTEGER, "
                 + SCHEDULE_TIME + " TEXT, "
@@ -106,9 +109,19 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(loginTable);
 
         String statusTable = "CREATE TABLE IF NOT EXISTS " + STATUS_TABLE + " ("
+                + STATUS_KEY_FIELD_ID + " INTEGER PRIMARY KEY, " //schedule ID
+                + STATUS_STATUS + " INTEGER, "                  // boolean rep for canceled or not
+                + "FOREIGN KEY(" + STATUS_KEY_FIELD_ID + ")REFERENCES "
+                + SCHEDULE_TABLE + "(" + SCHEDULE_KEY_FIELD_ID + "))";
+        db.execSQL(statusTable);
+        /*
+        String statusTable = "CREATE TABLE IF NOT EXISTS " + STATUS_TABLE + " ("
                 + STATUS_KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
+                + STATUS_INSTR_CODE + " INTEGER, "
                 + STATUS_SECTION + " INTEGER, "
                 + STATUS_DAY + " INTEGER, "
+                + STATUS_TIME + " INTEGER, "
+                + STATUS_LOCATION + " TEXT, "
                 + STATUS_STATUS + " INTEGER, "
                 + "FOREIGN KEY(" + STATUS_KEY_FIELD_ID + ")REFERENCES "
                 + INSTRUCTOR_TABLE + "(" + INSTRUCTOR_KEY_FIELD_ID + "),"
@@ -117,7 +130,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "FOREIGN KEY(" + STATUS_DAY + ")REFERENCES "
                 + SCHEDULE_TABLE + "(" + SCHEDULE_DAY + "))";
         db.execSQL(statusTable);
-
+        */
         String verificationTable = "CREATE TABLE IF NOT EXISTS " + VERIFICATION_TABLE + " ("
                 + VERIFICATION_KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
                 + VERIFICATION_EMAIL + " TEXT, "
@@ -283,13 +296,14 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        values.put(SCHEDULE_INSTR_CODE, schedule.getmInstructor().getmId());
         values.put(SCHEDULE_SECTION, schedule.getmOfficeHourSection());
         values.put(SCHEDULE_DAY, schedule.getmOfficeHourDay());
         values.put(SCHEDULE_TIME, schedule.getmOfficeHourTime());
         values.put(SCHEDULE_LOCATION, schedule.getmOfficeHourLocation());
 
-        db.insert(SCHEDULE_TABLE, null, values);
-
+        long id = db.insert(SCHEDULE_TABLE, null, values);
+        schedule.setmId(id);
         db.close();
     }
 
@@ -299,17 +313,18 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
                 SCHEDULE_TABLE,
-                new String[] {SCHEDULE_KEY_FIELD_ID, SCHEDULE_SECTION,
+                new String[] {SCHEDULE_KEY_FIELD_ID, SCHEDULE_INSTR_CODE, SCHEDULE_SECTION,
                         SCHEDULE_DAY, SCHEDULE_TIME, SCHEDULE_LOCATION} ,
                 null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
                 Schedule schedule =
-                        new Schedule(getInstructor(cursor.getLong(0)),
-                                cursor.getInt(1),
+                        new Schedule(cursor.getLong(0),
+                                getInstructor(cursor.getInt(1)),
                                 cursor.getInt(2),
-                                cursor.getString(3),
-                                cursor.getString(4));
+                                cursor.getInt(3),
+                                cursor.getString(4),
+                                cursor.getString(5));
                 scheduleList.add(schedule);
             } while (cursor.moveToNext());
         }
@@ -343,6 +358,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
+        values.put(SCHEDULE_INSTR_CODE, schedule.getmInstructor().getmId());
         values.put(SCHEDULE_SECTION, schedule.getmOfficeHourSection());
         values.put(SCHEDULE_DAY, schedule.getmOfficeHourDay());
         values.put(SCHEDULE_TIME, schedule.getmOfficeHourTime());
@@ -360,7 +376,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
                 SCHEDULE_TABLE,
-                new String[] {SCHEDULE_KEY_FIELD_ID, SCHEDULE_SECTION,
+                new String[] {SCHEDULE_KEY_FIELD_ID, SCHEDULE_INSTR_CODE, SCHEDULE_SECTION,
                         SCHEDULE_DAY, SCHEDULE_TIME, SCHEDULE_LOCATION},
                 SCHEDULE_KEY_FIELD_ID + " =?",
                 new String[] {String.valueOf(id)},
@@ -368,11 +384,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
         if(cursor != null)  cursor.moveToFirst();
 
-        Schedule schedule = new Schedule(getInstructor(cursor.getLong(0)),
-                    cursor.getInt(1),
+        Schedule schedule = new Schedule(cursor.getLong(0),
+                    getInstructor(cursor.getInt(1)),
                     cursor.getInt(2),
-                    cursor.getString(3),
-                    cursor.getString(4));
+                    cursor.getInt(3),
+                    cursor.getString(4),
+                    cursor.getString(5));
         cursor.close();
         db.close();
         return schedule;
@@ -386,11 +403,15 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(STATUS_SECTION, status.getmSchedule().getmOfficeHourSection());
-        values.put(STATUS_DAY, status.getmSchedule().getmOfficeHourDay());
+        values.put(STATUS_KEY_FIELD_ID, status.getmSchedule().getmId());
+        //values.put(STATUS_SECTION, status.getmSchedule().getmOfficeHourSection());
+        //values.put(STATUS_DAY, status.getmSchedule().getmOfficeHourDay());
+        //values.put(STATUS_TIME, status.getmSchedule().getmOfficeHourTime());
+        //values.put(STATUS_LOCATION, status.getmSchedule().getmOfficeHourLocation());
         values.put(STATUS_STATUS, status.getmStatus());
 
-        db.insert(STATUS_TABLE, null, values);
+        long id = db.insert(STATUS_TABLE, null, values);
+        status.setmId(id);
         db.close();
 
     }
@@ -402,15 +423,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
         Cursor cursor = db.query(
                 STATUS_TABLE,
-                new String[] {STATUS_KEY_FIELD_ID, STATUS_SECTION, STATUS_DAY, STATUS_STATUS},
+                new String[] {STATUS_KEY_FIELD_ID, STATUS_STATUS},
                 null, null, null, null, null, null );
 
         if(cursor.moveToFirst())
         {
             do {
-                Instructor instructor = getInstructor(cursor.getLong(0));
-                Schedule schedule = getSchedule(instructor, cursor.getInt(1), cursor.getInt(2));
-                Status status = new Status(schedule, cursor.getInt(3));
+                Status status = new Status(getSchedule(cursor.getLong(0)),
+                        cursor.getInt(1));
                 statusList.add(status);
             } while (cursor.moveToNext());
         }
@@ -441,13 +461,11 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(STATUS_INSTR_CODE, status.getmInstructorCode());
-        values.put(STATUS_SECTION, status.getmOfficeHourSection());
-        values.put(STATUS_DAY, status.getmOfficeHourDay());
-        values.put(STATUS_STATUS, status.getStatus());
+        values.put(STATUS_KEY_FIELD_ID, status.getmSchedule().getmId());
+        values.put(STATUS_STATUS, status.getmStatus());
 
         db.update(STATUS_TABLE, values, STATUS_KEY_FIELD_ID + " =?",
-                new String[] {String.valueOf(status.getmId())});
+                new String[] {String.valueOf(status.getmSchedule().getmId())});
         db.close();
     }
 
@@ -456,18 +474,15 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
                 STATUS_TABLE,
-                new String[] {STATUS_KEY_FIELD_ID, STATUS_INSTR_CODE, STATUS_SECTION, STATUS_DAY, STATUS_STATUS},
+                new String[] {STATUS_KEY_FIELD_ID, STATUS_STATUS},
                 STATUS_KEY_FIELD_ID + " =?",
                 new String[] {String.valueOf(id)},
                 null, null, null, null );
         if(cursor != null) cursor.moveToFirst();
 
         Status status = new Status(
-                cursor.getLong(0),
-                cursor.getInt(1),
-                cursor.getInt(2),
-                cursor.getInt(3),
-                cursor.getInt(4));
+                getSchedule(cursor.getLong(0)),
+                cursor.getInt(1));
         cursor.close();
         db.close();
         return status;
