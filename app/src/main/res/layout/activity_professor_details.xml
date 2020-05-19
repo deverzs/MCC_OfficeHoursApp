@@ -48,7 +48,7 @@
         android:background="@color/mc_logo_blueDark" />
 
     <ListView
-        android:id="@+id/calendarListView_DETAILS"
+        android:id="@+id/sessionListView_DETAILS"
         android:layout_width="match_parent"
         android:layout_height="228dp" />
 

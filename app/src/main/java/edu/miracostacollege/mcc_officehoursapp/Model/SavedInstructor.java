@@ -4,29 +4,18 @@ import java.util.Objects;
 
 public class SavedInstructor {
 
-    private long mId;                   //Database assigned
-    private int mInstructorCode;        //Unique code for the instructor
+  private Instructor mInstructor;
 
-
-    public SavedInstructor(long mId, int mInstructorCode) {
-        this.mId = mId;
-        this.mInstructorCode = mInstructorCode;
+    public SavedInstructor(Instructor mInstructor) {
+        this.mInstructor = mInstructor;
     }
 
-    public long getmId() {
-        return mId;
+    public Instructor getmInstructor() {
+        return mInstructor;
     }
 
-    public void setmId(long mId) {
-        this.mId = mId;
-    }
-
-    public int getmInstructorCode() {
-        return mInstructorCode;
-    }
-
-    public void setmInstructorCode(int mInstructorCode) {
-        this.mInstructorCode = mInstructorCode;
+    public void setmInstructor(Instructor mInstructor) {
+        this.mInstructor = mInstructor;
     }
 
     @Override
@@ -34,20 +23,11 @@ public class SavedInstructor {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         SavedInstructor that = (SavedInstructor) o;
-        return getmId() == that.getmId() &&
-                getmInstructorCode() == that.getmInstructorCode();
+        return getmInstructor().equals(that.getmInstructor());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(getmId(), getmInstructorCode());
-    }
-
-    @Override
-    public String toString() {
-        return "SavedInstructor{" +
-                "mId=" + mId +
-                ", mInstructorCode=" + mInstructorCode +
-                '}';
+        return Objects.hash(getmInstructor());
     }
 }

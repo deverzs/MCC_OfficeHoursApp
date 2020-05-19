@@ -53,30 +53,7 @@ public class professorsListViewAdapter extends ArrayAdapter<Instructor> {
 
         return view;
     }
-/*
-    @NonNull
-    @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        Instructor selectedInstructor = mInstructorList.get(position);
 
-        LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-
-        View view = inflater.inflate(mResourceId, null);
-
-        LinearLayout professorsListView_SEARCH = view.findViewById(R.id.professorsListView_SEARCH);
-        TextView professorNameTextView_LIST = view.findViewById(R.id.professorNameTextView_LIST);
-        TextView professorCourse1TextView_LIST = view.findViewById(R.id.professorCourse1TextView_LIST);
-        TextView professorCourse2TextView_LIST = view.findViewById(R.id.professorCourse2TextView_LIST);
-        TextView professorCourse3TextView_LIST = view.findViewById(R.id.professorCourse3TextView_LIST);
-        TextView professorCourse4TextView_LIST = view.findViewById(R.id.professorCourse4TextView_LIST);
-
-        //professorNameTextView_LIST.setText(selectedInstructor.getmFullName());
-
-
-
-        return view;
-    }
-*/
 
 }
 

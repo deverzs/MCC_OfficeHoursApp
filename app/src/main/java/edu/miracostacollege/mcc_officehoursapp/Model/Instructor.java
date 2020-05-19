@@ -5,8 +5,7 @@ import java.util.Objects;
 
 public class Instructor {
 
-    private long mId;                   //Database assigned
-    private int mInstructorCode;        //Unique code for the instructor
+    private long mId;                  //Unique code for the instructor
     private String mFullName;           //Full Name of instructor
     private String mFirstName;
     private String mLastName;
@@ -16,29 +15,26 @@ public class Instructor {
 
     /**
      * Default Construstor - Full
-     * @param id                    Database assigned id
-     * @param mInstructorCode       Unique code for the instructor
+     * @param id                    Unique code for the instructor
      * @param mFirstName             First Name of instructor
      * @param mLastName             Last Name of instructor
      * @param mPhone                Phone number, including extension
      * @param mOfficeRoomNumber     Room number of instructor's office
      * @param mAppointment          True if instructor accepts appointments
      */
-    public Instructor(long id, int mInstructorCode, String mFirstName, String mLastName, String mPhone,
+    public Instructor(long id,  String mFirstName, String mLastName, String mPhone,
                       String mOfficeRoomNumber, int mAppointment) {
-
-    }
-
-    public Instructor(int mInstructorCode, String mFirstName, String mLastName,
-                      String mPhone, String mOfficeRoomNumber, int mAppointment) {
-        this.mInstructorCode = mInstructorCode;
         this.mFirstName = mFirstName;
         this.mLastName = mLastName;
         this.mPhone = mPhone;
         this.mOfficeRoomNumber = mOfficeRoomNumber;
         if(mAppointment == 0) this.mAppointment = false;
         else this.mAppointment = true;
-        this.mFullName = mFirstName + " " + mLastName;    }
+        this.mId = id;
+        this.mFullName = mFirstName + " " + mLastName;
+
+    }
+
 
     /**
      * Get the first name
@@ -88,21 +84,7 @@ public class Instructor {
         return mId;
     }
 
-    /**
-     * Get the instructor code
-     * @return  int: Unique code for the instructor
-     */
-    public int getmInstructorCode() {
-        return mInstructorCode;
-    }
 
-    /**
-     * Set instructor code
-     * @param mInstructorCode  Unique code for the instructor, int
-     */
-    public void setmInstructorCode(int mInstructorCode) {
-        this.mInstructorCode = mInstructorCode;
-    }
 
     /**
      * Get full name
@@ -181,7 +163,7 @@ public class Instructor {
     public String toString() {
         return "Instructor{" +
                 "mId=" + mId +
-                ", mInstructorCode=" + mInstructorCode +
+                ", mInstructorCode="  +
                 ", mFullName='" + mFullName + '\'' +
                 ", mPhone='" + mPhone + '\'' +
                 ", mOfficeRoomNumber='" + mOfficeRoomNumber + '\'' +
@@ -195,7 +177,6 @@ public class Instructor {
         if (o == null || getClass() != o.getClass()) return false;
         Instructor that = (Instructor) o;
         return mId == that.mId &&
-                getmInstructorCode() == that.getmInstructorCode() &&
                 ismAppointment() == that.ismAppointment() &&
                 getmFullName().equals(that.getmFullName()) &&
                 getmPhone().equals(that.getmPhone()) &&
@@ -204,7 +185,7 @@ public class Instructor {
 
     @Override
     public int hashCode() {
-        return Objects.hash(mId, getmInstructorCode(), getmFullName(), getmPhone(),
+        return Objects.hash(mId, getmFullName(), getmPhone(),
                 getmOfficeRoomNumber(), ismAppointment());
     }
 }
