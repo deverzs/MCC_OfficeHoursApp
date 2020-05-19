@@ -12,7 +12,7 @@ public class Verification {
     private boolean mIsVerified;
 
 
-    public Verification(long mId, String mEmail, int mPin, String mFirstName, String mLastName, int mIsVerified) {
+    public Verification(long mId, String mEmail, int mPin, String mLastName, String mFirstName, int mIsVerified) {
         this.mId = mId;
         this.mEmail = mEmail;
         this.mPin = mPin;
@@ -22,7 +22,7 @@ public class Verification {
         else this.mIsVerified = true;
     }
 
-    public Verification(String mEmail, int mPin, String mFirstName, String mLastName, int mIsVerified) {
+    public Verification(String mEmail, int mPin, String mLastName, String mFirstName, int mIsVerified) {
         this.mEmail = mEmail;
         this.mPin = mPin;
         this.mFirstName = mFirstName;

@@ -4,15 +4,30 @@
     <translate
         android:duration="100"
         android:fromXDelta="0"
-        android:toXDelta="-100%p"/>
+        android:toXDelta="-5%p"/>
     <translate
         android:duration="100"
-        android:fromXDelta="-100%p"
-        android:toXDelta="100%p"
+        android:fromXDelta="-5%p"
+        android:toXDelta="5%p"
         android:startOffset="100"/>
     <translate
         android:duration="100"
-        android:fromXDelta="100%p"
-        android:toXDelta="-100%p"
+        android:fromXDelta="5%p"
+        android:toXDelta="-5%p"
         android:startOffset="200"/>
+    <translate
+    android:duration="100"
+    android:fromXDelta="0"
+    android:toXDelta="5%p"/>
+
+    <translate
+        android:duration="100"
+        android:fromXDelta="5%p"
+        android:toXDelta="-5%p"
+        android:startOffset="400"/>
+    <translate
+        android:duration="100"
+        android:fromXDelta="-5%p"
+        android:toXDelta="5%p"
+        android:startOffset="500"/>
 </set>

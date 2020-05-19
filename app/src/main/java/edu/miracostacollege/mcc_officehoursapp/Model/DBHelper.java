@@ -407,7 +407,7 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
-        values.put(STATUS_KEY_FIELD_ID, status.getmSchedule().getmId());
+        /**values.put(STATUS_KEY_FIELD_ID, status.getmSchedule().getmId());
         //values.put(STATUS_SECTION, status.getmSchedule().getmOfficeHourSection());
         //values.put(STATUS_DAY, status.getmSchedule().getmOfficeHourDay());
         //values.put(STATUS_TIME, status.getmSchedule().getmOfficeHourTime());
@@ -417,6 +417,7 @@ public class DBHelper extends SQLiteOpenHelper {
         long id = db.insert(STATUS_TABLE, null, values);
         status.setmId(id);
         db.close();
+         **/
 
     }
 
@@ -430,7 +431,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 new String[] {STATUS_KEY_FIELD_ID, STATUS_STATUS},
                 null, null, null, null, null, null );
 
-        if(cursor.moveToFirst())
+       /** if(cursor.moveToFirst())
         {
             do {
                 Status status = new Status(getSchedule(cursor.getLong(0)),
@@ -438,7 +439,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 statusList.add(status);
             } while (cursor.moveToNext());
         }
-
+**/
         cursor.close();
         db.close();
         return statusList;
@@ -462,7 +463,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void updateStatus(Status status)
     {
-        SQLiteDatabase db = this.getWritableDatabase();
+       /** SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
 
         values.put(STATUS_KEY_FIELD_ID, status.getmSchedule().getmId());
@@ -471,11 +472,12 @@ public class DBHelper extends SQLiteOpenHelper {
         db.update(STATUS_TABLE, values, STATUS_KEY_FIELD_ID + " =?",
                 new String[] {String.valueOf(status.getmSchedule().getmId())});
         db.close();
+        **/
     }
 
-    public Status getStatus(long id)
-    {
-        SQLiteDatabase db = this.getReadableDatabase();
+    /**public Status getStatus(long id)
+    /** {
+        /**SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
                 STATUS_TABLE,
                 new String[] {STATUS_KEY_FIELD_ID, STATUS_STATUS},
@@ -490,8 +492,7 @@ public class DBHelper extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return status;
-
-    }
+    } **/
 
     //************************* LOGIN TABLE OPERATIONS **************
 

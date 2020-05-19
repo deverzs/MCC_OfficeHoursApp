@@ -1,4 +1,4 @@
-package edu.miracostacollege.mcc_officehoursapp.Model;
+package edu.miracostacollege.mcc_officehoursapp;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import java.lang.reflect.Array;
 import java.util.List;
 
+import edu.miracostacollege.mcc_officehoursapp.Model.Instructor;
 import edu.miracostacollege.mcc_officehoursapp.R;
 
 public class professorsListViewAdapter extends ArrayAdapter<Instructor> {
@@ -48,11 +49,12 @@ public class professorsListViewAdapter extends ArrayAdapter<Instructor> {
 
         professorNameTextView_LIST.setText(selectedInstructor.getmFullName());
 
-        professorsListView_SEARCH.setTag(selectedInstructor);
+//      professorsListView_SEARCH.setTag(selectedInstructor);
 
         return view;
     }
 
 
 }
+
 
