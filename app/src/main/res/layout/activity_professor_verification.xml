@@ -17,7 +17,7 @@
         app:srcCompat="@drawable/miracosta_logo" />
 
     <EditText
-        android:id="@+id/professorFirstNameEditText_PROFESSORVERIFCAITON"
+        android:id="@+id/professorFirstNameEditText_VERIFY"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
@@ -31,7 +31,7 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/professorLastNameEditText_PROFESSORVERIFICAITON"
+        android:id="@+id/professorLastNameEditText_VERIFY"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="36dp"
@@ -41,11 +41,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/professorFirstNameEditText_PROFESSORVERIFCAITON"
+        app:layout_constraintTop_toBottomOf="@+id/professorFirstNameEditText_VERIFY"
         app:layout_constraintVertical_bias="0.0" />
 
     <EditText
-        android:id="@+id/pinEditText_PROFESSORVERIFICAITON"
+        android:id="@+id/pinEditText_VERIFY"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
@@ -55,7 +55,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/professorLastNameEditText_PROFESSORVERIFICAITON"
+        app:layout_constraintTop_toBottomOf="@+id/professorLastNameEditText_VERIFY"
         app:layout_constraintVertical_bias="0.0" />
 
     <Button
@@ -63,12 +63,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/mc_logo_blueDark"
+        android:onClick="verify"
         android:text="@string/verify_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pinEditText_PROFESSORVERIFICAITON"
+        app:layout_constraintTop_toBottomOf="@+id/pinEditText_VERIFY"
         app:layout_constraintVertical_bias="0.353" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,6 +35,12 @@ public class SplashActivity extends AppCompatActivity {
 
         shakeAnim = AnimationUtils.loadAnimation(this, R.anim.shake_anim);
 
+        for(int i = 0; i < 5; i++) {
+            star1_SPLASH.startAnimation(shakeAnim);
+            star2_SPLASH.startAnimation(shakeAnim);
+            star3_SPLASH.startAnimation(shakeAnim);
+        }
+
 
 
 
@@ -46,9 +52,6 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
 
 
-star1_SPLASH.startAnimation(shakeAnim);
-star2_SPLASH.startAnimation(shakeAnim);
-                star3_SPLASH.startAnimation(shakeAnim);
                 //Create an Intent to go to MainActivity
                 Intent intent = new Intent(SplashActivity.this, LoginUser.class);
                 startActivity(intent);
@@ -59,7 +62,7 @@ star2_SPLASH.startAnimation(shakeAnim);
 
         //let's define a timer for when task should happen
         Timer timer = new Timer();
-        timer.schedule(task, 3005);
+        timer.schedule(task, 3000);
         // timer.schedule(task, 4000);
 
     }

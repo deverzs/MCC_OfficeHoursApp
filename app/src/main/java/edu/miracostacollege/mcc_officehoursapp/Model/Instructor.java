@@ -26,29 +26,19 @@ public class Instructor {
      */
     public Instructor(long id, int mInstructorCode, String mFirstName, String mLastName, String mPhone,
                       String mOfficeRoomNumber, int mAppointment) {
-        this.mInstructorCode = mInstructorCode;
-        this.mFirstName = mFirstName;
-        this.mLastName = mLastName;
-        this.mPhone = mPhone;
-        this.mOfficeRoomNumber = mOfficeRoomNumber;
-        if(mAppointment == 0) this.mAppointment = false;
-        else this.mAppointment = true;
-        this.mId = id;
-        this.mFullName = mFirstName + " " + mLastName;
 
     }
 
     public Instructor(int mInstructorCode, String mFirstName, String mLastName,
                       String mPhone, String mOfficeRoomNumber, int mAppointment) {
         this.mInstructorCode = mInstructorCode;
-        this.mFullName = mFullName;
         this.mFirstName = mFirstName;
         this.mLastName = mLastName;
         this.mPhone = mPhone;
         this.mOfficeRoomNumber = mOfficeRoomNumber;
         if(mAppointment == 0) this.mAppointment = false;
         else this.mAppointment = true;
-    }
+        this.mFullName = mFirstName + " " + mLastName;    }
 
     /**
      * Get the first name

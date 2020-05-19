@@ -2,6 +2,7 @@ package edu.miracostacollege.mcc_officehoursapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,7 +17,6 @@ import java.util.List;
 
 import edu.miracostacollege.mcc_officehoursapp.Model.DBHelper;
 import edu.miracostacollege.mcc_officehoursapp.Model.Instructor;
-import edu.miracostacollege.mcc_officehoursapp.Model.professorsListViewAdapter;
 
 //Checking changes after commit issues
 public class StudentSearch extends AppCompatActivity {
@@ -36,16 +36,16 @@ public class StudentSearch extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_student_search);
         db = new DBHelper(this);
-        db.importInstructorsFromCSV("instructors.csv");
 
-        allInstructorsList = db.getAllInstructors();
+         allInstructorsList = db.getAllInstructors();
+       filteredInstructorsList = db.getAllInstructors();
 
         instructorSpinner_SEARCH = findViewById(R.id.instructorSpinner_SEARCH);
         professorListView_SEARCH = findViewById(R.id.professorsListView_SEARCH);
         instructorName_SEARCH = findViewById(R.id.instructorName_SEARCH);
         instructorName_SEARCH.addTextChangedListener(instructorNameTextWatcher);
 
-        instructorListAdapter = new professorsListViewAdapter(this, R.layout.activity_professor_list_item, filteredInstructorsList );
+        instructorListAdapter = new professorsListViewAdapter(this, R.layout.activity_professor_list_item, filteredInstructorsList);
         professorListView_SEARCH.setAdapter(instructorListAdapter);
 
         final ArrayAdapter<String> instructorSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getInstructorNames());
@@ -57,7 +57,7 @@ public class StudentSearch extends AppCompatActivity {
                 if(position == 0)
                 {
                     reset(view);
-                    return;
+                    //return;
                 }
                 else
                 {
@@ -133,4 +133,12 @@ public class StudentSearch extends AppCompatActivity {
 
         }
     };
+
+    public void viewProfessorsSchedule(View v)
+    {
+    Instructor selectedInstructor =   (Instructor) v.getTag();
+    Intent intent = new Intent(this, ProfessorDetails.class);
+    startActivity(intent);
+    }
+
 }
