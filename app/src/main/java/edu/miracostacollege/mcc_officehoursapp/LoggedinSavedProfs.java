@@ -42,7 +42,7 @@ public class LoggedinSavedProfs extends AppCompatActivity {
 
         //Instructor List Adapter
         instructorListAdapter = new SavedInstructorListAdapter(this,
-                R.layout.activity_professor_list_item, instructorList);
+                R.layout.activity_saved_professor_list_item, instructorList);
 
         instructorListView = findViewById(R.id.professorsListView_SAVED);
         instructorListView.setAdapter(instructorListAdapter);
@@ -52,10 +52,10 @@ public class LoggedinSavedProfs extends AppCompatActivity {
     }
 
     public void viewInstructorDetails(View v){
-        Instructor selectedInstuctor = (Instructor) v.getTag();
+        SavedInstructor selectedInstuctor = (SavedInstructor) v.getTag();
 
         Intent intent = new Intent(this, ProfessorDetails.class);
-        intent.putExtra("Instructor", selectedInstuctor.getmId());
+        intent.putExtra("Instructor", selectedInstuctor.getmInstructor().getmId());
         startActivity(intent);
 
     }

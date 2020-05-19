@@ -34,8 +34,9 @@ public class SavedInstructorListAdapter extends ArrayAdapter<SavedInstructor> {
 
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(mResourceId, null);
-        LinearLayout   professorListLinearLayout = view.findViewById(R.id.professorListLinearLayout_LIST);
-        TextView savedProfessorTextView = view.findViewById(R.id.professorNameTextView_LIST);
+        LinearLayout   professorListLinearLayout = view.findViewById(R.id.professorListLinearLayout_LIST_SAVED);
+        TextView savedProfessorTextView = view.findViewById(R.id.professorNameTextView_LIST_SAVED);
+
         professorListLinearLayout.setTag(savedInstructor);
         savedProfessorTextView.setText(savedInstructor.getmInstructor().getmFullName());
 

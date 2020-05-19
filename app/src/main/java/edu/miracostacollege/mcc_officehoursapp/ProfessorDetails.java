@@ -41,7 +41,7 @@ public class ProfessorDetails extends AppCompatActivity {
 
         professorNameTextView.setText(instructor.getmFullName());
         professorPhoneTextView.setText(instructor.getmPhone());
-
+/*
         for(Schedule s: scheduleList){
             if(s.getmInstructor().getmId()==instructorID){
                 scheduleListSelected.add(s);
@@ -52,5 +52,9 @@ public class ProfessorDetails extends AppCompatActivity {
                 R.layout.activity_schedule_list_item, scheduleListSelected);
         scheduleListView = findViewById(R.id.sessionListView_DETAILS);
         scheduleListView.setAdapter(scheduleListAdapter);
+        */
+
     }
+
+
 }
