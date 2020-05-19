@@ -25,7 +25,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     //FIELDS (COLUMN NAMES) FOR THE INSTRUCTOR TABLE
-    private static final String INSTRUCTOR_TABLE = "Instructor";
+    public static final String INSTRUCTOR_TABLE = "Instructor";
     private static final String INSTRUCTOR_KEY_FIELD_ID = "_id";
     //private static final String INSTRUCTOR_INSTR_CODE = "code";
     private static final String INSTRUCTOR_FIRST_NAME = "firstName";
@@ -310,6 +310,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public List<Schedule> getAllSchedules()
     {
         List<Schedule> scheduleList = new ArrayList<>();
+        Log.i("//DBHelper before: ", " " + scheduleList.size());
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
                 SCHEDULE_TABLE,
@@ -330,6 +331,9 @@ public class DBHelper extends SQLiteOpenHelper {
         }
         cursor.close();
         db.close();
+        Log.i("//DBHelper after: ", " " + scheduleList.size());
+
+
         return scheduleList;
     }
 
@@ -673,7 +677,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //************************* SAVED INSTRUCTOR TABLE OPERATIONS **************
 
-    public void addSavedInstructor(int instructorCode)
+    public void addSavedInstructor(long instructorCode)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
