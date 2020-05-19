@@ -1,9 +1,16 @@
 package edu.miracostacollege.mcc_officehoursapp.Model;
 
+import android.os.Build;
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.RequiresApi;
+
 import java.util.Objects;
 
 
-public class Instructor {
+public class Instructor implements Parcelable
+{
 
     private long mId;                  //Unique code for the instructor
     private String mFullName;           //Full Name of instructor
@@ -106,6 +113,7 @@ public class Instructor {
      * Get phone number
      * @return  string: Phone number, including extension
      */
+    //
     public String getmPhone() {
         return mPhone;
     }
@@ -188,4 +196,55 @@ public class Instructor {
         return Objects.hash(mId, getmFullName(), getmPhone(),
                 getmOfficeRoomNumber(), ismAppointment());
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(mId);
+        dest.writeString(mFullName);
+        dest.writeString(mFirstName);
+        dest.writeString(mLastName);
+        dest.writeString(mPhone);
+        dest.writeString(mOfficeRoomNumber);
+        if(mAppointment) dest.writeInt(0);
+        else dest.writeInt(1);
+    }
+    /**
+     *    private long mId;                  //Unique code for the instructor
+     *     private String mFullName;           //Full Name of instructor
+     *     private String mFirstName;
+     *     private String mLastName;
+     *     private String mPhone;              //Phone number, including extension
+     *     private String mOfficeRoomNumber;   //Room number of instructor's office
+     *     private boolean mAppointment;
+     */
+    public static final Parcelable.Creator<Instructor> CREATOR = new Creator<Instructor>() {
+        @RequiresApi(api = Build.VERSION_CODES.Q)
+        @Override
+        public Instructor createFromParcel(Parcel source) {
+            return new Instructor(source);
+        }
+
+        @Override
+        public Instructor[] newArray(int size) {
+            return new Instructor[size];
+        }
+    };
+
+    private Instructor(Parcel parcel)
+    {
+        mId = parcel.readLong();
+        mFullName = parcel.readString();
+        mFirstName = parcel.readString();
+        mLastName = parcel.readString();
+        mPhone = parcel.readString();
+        mOfficeRoomNumber = parcel.readString();
+        if(parcel.readInt() == 0) mAppointment = true;
+        else mAppointment = false;
+    }
+
 }

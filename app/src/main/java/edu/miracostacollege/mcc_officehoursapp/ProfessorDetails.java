@@ -48,8 +48,8 @@ public class ProfessorDetails extends AppCompatActivity {
         selectedScheduleList = new ArrayList<>();
 
         Intent intent = getIntent();
-        instructorID = intent.getLongExtra("Instructor", 0);
-        instructor = db.getInstructor(instructorID);
+        Instructor instructor = intent.getParcelableExtra("SelectedInstructor");
+
 
         professorNameTextView.setText(instructor.getmFullName());
         professorPhoneTextView.setText(instructor.getmPhone());

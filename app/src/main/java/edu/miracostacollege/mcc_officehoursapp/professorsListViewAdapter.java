@@ -42,14 +42,15 @@ public class professorsListViewAdapter extends ArrayAdapter<Instructor> {
 
         LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
 
+
         View view = inflater.inflate(mResourceId, null);
 
-        LinearLayout professorsListView_SEARCH = view.findViewById(R.id.professorsListView_SEARCH);
+        LinearLayout professorsListView_SEARCH = view.findViewById(R.id.professorListLinearLayout_LIST);
+        professorsListView_SEARCH.setTag(selectedInstructor);
+
         TextView professorNameTextView_LIST = view.findViewById(R.id.professorNameTextView_LIST);
 
         professorNameTextView_LIST.setText(selectedInstructor.getmFullName());
-
-//      professorsListView_SEARCH.setTag(selectedInstructor);
 
         return view;
     }

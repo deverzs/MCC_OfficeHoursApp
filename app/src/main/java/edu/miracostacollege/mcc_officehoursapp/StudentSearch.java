@@ -37,6 +37,7 @@ public class StudentSearch extends AppCompatActivity {
         setContentView(R.layout.activity_student_search);
         db = new DBHelper(this);
 
+
          allInstructorsList = db.getAllInstructors();
        filteredInstructorsList = db.getAllInstructors();
 
@@ -137,7 +138,9 @@ public class StudentSearch extends AppCompatActivity {
     public void viewProfessorsSchedule(View v)
     {
     Instructor selectedInstructor =   (Instructor) v.getTag();
+    finish();
     Intent intent = new Intent(this, ProfessorDetails.class);
+    intent.putExtra("SelectedInstructor", selectedInstructor);
     startActivity(intent);
     }
 
