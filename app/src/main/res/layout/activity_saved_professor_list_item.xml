@@ -3,6 +3,7 @@
     android:id="@+id/professorListLinearLayout_LIST_SAVED"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:clickable="true"
     android:onClick="viewInstructorDetails">
 
     <LinearLayout

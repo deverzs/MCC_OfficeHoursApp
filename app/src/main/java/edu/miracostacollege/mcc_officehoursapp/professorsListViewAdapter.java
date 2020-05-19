@@ -49,7 +49,7 @@ public class professorsListViewAdapter extends ArrayAdapter<Instructor> {
 
         professorNameTextView_LIST.setText(selectedInstructor.getmFullName());
 
-      professorsListView_SEARCH.setTag(selectedInstructor);
+//      professorsListView_SEARCH.setTag(selectedInstructor);
 
         return view;
     }

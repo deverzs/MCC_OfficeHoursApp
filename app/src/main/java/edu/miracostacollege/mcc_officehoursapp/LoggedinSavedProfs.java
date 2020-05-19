@@ -13,7 +13,7 @@ import edu.miracostacollege.mcc_officehoursapp.Model.DBHelper;
 import edu.miracostacollege.mcc_officehoursapp.Model.Instructor;
 import edu.miracostacollege.mcc_officehoursapp.Model.SavedInstructor;
 import edu.miracostacollege.mcc_officehoursapp.Model.Schedule;
-import edu.miracostacollege.mcc_officehoursapp.Model.professorsListViewAdapter;
+import edu.miracostacollege.mcc_officehoursapp.professorsListViewAdapter;
 
 import static edu.miracostacollege.mcc_officehoursapp.Model.DBHelper.DATABASE_NAME;
 

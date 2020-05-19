@@ -22,7 +22,7 @@ public class Instructor {
      * @param mOfficeRoomNumber     Room number of instructor's office
      * @param mAppointment          True if instructor accepts appointments
      */
-    public Instructor(long id,  String mFirstName, String mLastName, String mPhone,
+    public Instructor(long id, String mFirstName, String mLastName, String mPhone,
                       String mOfficeRoomNumber, int mAppointment) {
         this.mFirstName = mFirstName;
         this.mLastName = mLastName;
