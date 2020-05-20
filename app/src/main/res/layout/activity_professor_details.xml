@@ -45,7 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:background="@color/mc_logo_blueDark" />
+        android:background="@color/mc_logo_blueDark"
+        android:textSize="8sp" />
 
     <ListView
         android:id="@+id/sessionListView_DETAILS"
@@ -57,7 +58,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:background="@color/mc_logo_blueDark" />
+        android:background="@color/mc_logo_blueDark"
+        android:textSize="8sp" />
 
     <TextView
         android:id="@+id/availableByApptTextView_DETAILS"
@@ -72,39 +74,58 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="12dp"
-        android:background="@android:color/transparent" />
+        android:background="@android:color/transparent"
+        android:textSize="8sp" />
 
     <Button
-        android:id="@+id/saveProfessorButton_DETAILS"
+        android:id="@+id/backToSearchButton_DETAILS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:background="@color/colorLightGreen2"
-        android:elevation="8dp"
-        android:ellipsize="none"
-        android:onClick="handleSaveProfessor"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:text="@string/saveProf"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:backgroundTint="@color/mc_logo_blueDark"
+        android:onClick="handleBackToSearch"
+        android:text="@string/back_to_search" />
 
     <TextView
-        android:id="@+id/blank"
+        android:id="@+id/textView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:textSize="8sp" />
+
+
+    <LinearLayout
+        android:layout_width="424dp"
+        android:layout_height="58dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/saveProfessorButton_DETAILS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorLightGreen2"
+            android:onClick="handleSaveProfessor"
+            android:text="@string/saveProf" />
+
+        <Button
+            android:id="@+id/backToSavedButton_DETAILS"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="@color/colorLightGreen2"
+            android:onClick="handleBackToSaved"
+            android:text="@string/back_to_saved" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/deleteProfessorButton_DETAILS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+
         android:layout_gravity="center_horizontal"
-        android:background="@color/mc_logo_blueDark"
+        android:backgroundTint="@color/mc_logo_blueDark"
         android:onClick="handleDeleteProfessor"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:text="@string/deleteProf"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
+        android:text="@string/deleteProf" />
 
 </LinearLayout>

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -38,8 +39,8 @@ public class StudentSearch extends AppCompatActivity {
         db = new DBHelper(this);
 
 
-         allInstructorsList = db.getAllInstructors();
-       filteredInstructorsList = db.getAllInstructors();
+        allInstructorsList = db.getAllInstructors();
+        filteredInstructorsList = db.getAllInstructors();
 
         instructorSpinner_SEARCH = findViewById(R.id.instructorSpinner_SEARCH);
         professorListView_SEARCH = findViewById(R.id.professorsListView_SEARCH);
@@ -137,11 +138,25 @@ public class StudentSearch extends AppCompatActivity {
 
     public void viewProfessorsSchedule(View v)
     {
-    Instructor selectedInstructor =   (Instructor) v.getTag();
-    finish();
-    Intent intent = new Intent(this, ProfessorDetails.class);
-    intent.putExtra("SelectedInstructor", selectedInstructor);
-    startActivity(intent);
+        //added by Zsu ******
+        Intent checkIntent = getIntent();
+        String check = checkIntent.getStringExtra("FromActivity");
+        //********
+
+        Instructor selectedInstructor =   (Instructor) v.getTag();
+        finish();
+        Intent intent = new Intent(this, ProfessorDetails.class);
+
+        //from Zsu ******
+        intent.putExtra("SelectedInstructor", selectedInstructor);
+        if(check != null &&
+                (check.equals("saved") || check.equals("registered") ||  check.equals("professor")))
+            intent.putExtra("FromActivity", "saved");
+        else if (check.equals("search")) {
+            intent.putExtra("FromActivity", "search");
+        }
+        //********
+        startActivity(intent);
     }
 
 }

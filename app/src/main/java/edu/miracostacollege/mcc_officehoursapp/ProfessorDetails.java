@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,14 +25,19 @@ public class ProfessorDetails extends AppCompatActivity {
     private List<Schedule> alSchedulesList ;
     private List<Schedule> selectedScheduleList ;
     private List<SavedInstructor> savedInstructorList ;
+    private List<Instructor> allSavedInstructorList;
     private ScheduleListAdapter scheduleListAdapter;
     private ListView scheduleListView;
     private DBHelper db;
     private Instructor instructor;
     private long instructorID;
-
+    private Button saveProfessorBuutton;
+    private Button deleteProfessorButton;
+    private Button backToSavedButton;
+    String fromActivity;
     TextView professorNameTextView;
     TextView professorPhoneTextView;
+    TextView availableByApptTextView;
 
 
 
@@ -41,31 +47,50 @@ public class ProfessorDetails extends AppCompatActivity {
         setContentView(R.layout.activity_professor_details);
         professorNameTextView  = findViewById(R.id.professorNameTextView_DETAILS);
         professorPhoneTextView = findViewById(R.id.extensionTextView_DETAILS);
+        saveProfessorBuutton = findViewById(R.id.saveProfessorButton_DETAILS);
+        deleteProfessorButton = findViewById(R.id.deleteProfessorButton_DETAILS);
+        backToSavedButton = findViewById(R.id.backToSavedButton_DETAILS);
+        availableByApptTextView = findViewById(R.id.availableByApptTextView_DETAILS);
+
         db = new DBHelper(this);
 
         alSchedulesList = db.getAllSchedules();
         savedInstructorList = db.getAllSavedInstructors();
+        allSavedInstructorList = db.getAllInstructors();
         selectedScheduleList = new ArrayList<>();
 
-        Intent intent = getIntent();
-        Instructor instructor = intent.getParcelableExtra("SelectedInstructor");
 
+        Intent intent = getIntent();
+        instructor = intent.getParcelableExtra("SelectedInstructor");
+        fromActivity = intent.getStringExtra("FromActivity");
+        instructorID = instructor.getmId();
 
         professorNameTextView.setText(instructor.getmFullName());
         professorPhoneTextView.setText(instructor.getmPhone());
-        int count = 0;
+        if(instructor.byAppointment()==1) availableByApptTextView.setText("Available by Appointment");
+        else availableByApptTextView.setText("");
+
         selectedScheduleList.clear();
-        Log.i(TAG, "//Size selected sch:" + selectedScheduleList.size());
-        for(Schedule s: alSchedulesList){
-            for(SavedInstructor i : savedInstructorList){
-                if(s.getmInstructor().getmId()==i.getmInstructor().getmId()){
-                    if(s.getmInstructor().getmId()==instructorID)
-                    selectedScheduleList.add(s);
+
+        if(fromActivity !=null && fromActivity.equals("saved")) {
+            for (Schedule s : alSchedulesList) {
+                for (SavedInstructor i : savedInstructorList) {
+                    if (s.getmInstructor().getmId() == i.getmInstructor().getmId()) {
+                        if (s.getmInstructor().getmId() == instructorID)
+                            selectedScheduleList.add(s);
+                    }
                 }
             }
-
+        }else if (fromActivity !=null && fromActivity.equals("search")){
+            saveProfessorBuutton.setVisibility(View.INVISIBLE);
+            deleteProfessorButton.setVisibility(View.INVISIBLE);
+            backToSavedButton.setVisibility(View.INVISIBLE);
+            for (Schedule s : alSchedulesList) {
+                    if (s.getmInstructor().getmId() == instructorID) {
+                            selectedScheduleList.add(s);
+                    }
+            }
         }
-
 
         //Schedule List Adapter
         scheduleListAdapter = new ScheduleListAdapter(this,
@@ -84,8 +109,9 @@ public class ProfessorDetails extends AppCompatActivity {
         if(added){
             Toast.makeText(this, "That Professor is already saved.", Toast.LENGTH_LONG).show();
         }
-        else {
+        else  {
             db.addSavedInstructor(instructorID);
+            savedInstructorList = db.getAllSavedInstructors();
             Toast.makeText(this, "Professor has been saved.", Toast.LENGTH_LONG).show();
         }
 
@@ -97,6 +123,23 @@ public class ProfessorDetails extends AppCompatActivity {
             Toast.makeText(this, "Professor has been deleted from saved.", Toast.LENGTH_LONG).show();
         }
         Intent intent = new Intent(this, StudentSearch.class);
+        startActivity(intent);
+    }
+
+    public void handleBackToSearch(View v){
+        Intent intent = new Intent(this, StudentSearch.class);
+        if (fromActivity !=null && fromActivity.equals("saved")){
+            intent.putExtra("FromActivity", "saved");
+        }
+        else if (fromActivity !=null && fromActivity.equals("search")) {
+            intent.putExtra("FromActivity", "search");
+        }
+        startActivity(intent);
+
+    }
+
+    public void handleBackToSaved(View v){
+        Intent intent = new Intent(this, LoggedinSavedProfs.class);
         startActivity(intent);
     }
 
