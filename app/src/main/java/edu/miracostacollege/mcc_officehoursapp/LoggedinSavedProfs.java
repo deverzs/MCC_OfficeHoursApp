@@ -35,10 +35,6 @@ public class LoggedinSavedProfs extends AppCompatActivity {
         setContentView(R.layout.activity_loggedin_saved_profs);
         db = new DBHelper(this);
 
-        //db.deleteAllSavedInstructors();
-        //db.addSavedInstructor(2); //dummy
-        //db.addSavedInstructor(3); //dummy
-
         instructorList = db.getAllSavedInstructors();
         int count = 0;
         for(SavedInstructor s: instructorList){

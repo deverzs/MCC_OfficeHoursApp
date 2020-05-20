@@ -49,7 +49,7 @@ public class ProfessorDetails extends AppCompatActivity {
 
         Intent intent = getIntent();
         Instructor instructor = intent.getParcelableExtra("SelectedInstructor");
-
+        //testing
 
         professorNameTextView.setText(instructor.getmFullName());
         professorPhoneTextView.setText(instructor.getmPhone());

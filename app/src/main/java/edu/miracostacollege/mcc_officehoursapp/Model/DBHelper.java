@@ -114,7 +114,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "FOREIGN KEY(" + STATUS_KEY_FIELD_ID + ")REFERENCES "
                 + SCHEDULE_TABLE + "(" + SCHEDULE_KEY_FIELD_ID + "))";
         db.execSQL(statusTable);
-
         /*
         String statusTable = "CREATE TABLE IF NOT EXISTS " + STATUS_TABLE + " ("
                 + STATUS_KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
@@ -686,6 +685,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(SAVED_INSTR_CODE, instructorCode);
 
         db.insert(SAVED_TABLE, null, values);
+
         db.close();
     }
 
