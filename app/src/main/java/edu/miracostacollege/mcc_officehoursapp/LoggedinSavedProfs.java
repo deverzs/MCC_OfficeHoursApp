@@ -65,6 +65,7 @@ public class LoggedinSavedProfs extends AppCompatActivity {
 
         Intent intent = new Intent(this, ProfessorDetails.class);
         intent.putExtra("Instructor", selectedInstuctor.getmInstructor().getmId());
+        intent.putExtra("FromActivity", "savedSearch");
         startActivity(intent);
 
     }
@@ -72,6 +73,7 @@ public class LoggedinSavedProfs extends AppCompatActivity {
     public void handleNewSearch(View v)
     {
         Intent intent = new Intent(this, StudentSearch.class);
+        intent.putExtra("FromActivity", "savedSearch");
         startActivity(intent);
     }
 }

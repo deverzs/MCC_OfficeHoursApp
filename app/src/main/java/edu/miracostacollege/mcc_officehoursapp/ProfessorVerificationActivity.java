@@ -63,7 +63,7 @@ public class ProfessorVerificationActivity extends AppCompatActivity {
                         Instructor selectedInstructor = db.getInstructor(i.getmId());
                         finish();
                         Intent intent = new Intent(this, ProfessorLoggedInView.class);
-                        intent.putExtra("SelectedInstructor", selectedInstructor);
+                        intent.putExtra("selectedInstructor", selectedInstructor);
                         startActivity(intent);
                     }
 

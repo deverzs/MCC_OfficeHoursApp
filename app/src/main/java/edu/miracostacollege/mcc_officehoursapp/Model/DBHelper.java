@@ -33,6 +33,7 @@ public class DBHelper extends SQLiteOpenHelper {
     private static final String INSTRUCTOR_PHONE = "phone";
     public static final String INSTRUCTOR_OFFICE = "office";
     public static final String INSTRUCTOR_APPOINTMENT = "appointment";
+    public static final String INSTRUCTOR_SAVED_ARRAY = "saved_Profs_list";
 
 
     //FIELDS (COLUMN NAMES) FOR THE SCHEDULE TABLE
@@ -56,7 +57,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //FIELDS (COLUMN NAMES) FOR THE LOGIN TABLE
     public static final String LOGIN_TABLE = "Login_Table";
-    //public static final String LOGIN_KEY_FIELD_ID = "_id";
+    public static final String LOGIN_KEY_FIELD_ID = "_id";
     public static final String LOGIN_EMAIL = "email_login";
     public static final String LOGIN_PASSWORD = "password";
     public static final String LOGIN_IS_VERIFIED = "verifiedProfessor";
@@ -103,7 +104,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(scheduleTable);
 
         String loginTable = "CREATE TABLE IF NOT EXISTS " + LOGIN_TABLE + " ("
-                + LOGIN_EMAIL + " TEXT PRIMARY KEY, "
+                + LOGIN_KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
+                + LOGIN_EMAIL + " TEXT, "
                 + LOGIN_PASSWORD + " TEXT, "
                 + LOGIN_IS_VERIFIED + " INTEGER" + ")";
         db.execSQL(loginTable);
@@ -142,8 +144,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 + INSTRUCTOR_TABLE + "(" + INSTRUCTOR_LAST_NAME + "),"
                 + "FOREIGN KEY(" + VERIFICATION_FIRST_NAME + ")REFERENCES "
                 + INSTRUCTOR_TABLE + "(" + INSTRUCTOR_FIRST_NAME + "),"
-                + "FOREIGN KEY(" + VERIFICATION_EMAIL + ")REFERENCES "
-                + LOGIN_TABLE + "(" + LOGIN_EMAIL + "))";
+                + "FOREIGN KEY(" + VERIFICATION_KEY_FIELD_ID + ")REFERENCES "
+                + LOGIN_TABLE + "(" + LOGIN_KEY_FIELD_ID + "))";
         db.execSQL(verificationTable);
 
         String savedTable = "CREATE TABLE IF NOT EXISTS " + SAVED_TABLE + " ("
@@ -512,16 +514,17 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
                 LOGIN_TABLE,
-                new String[] { LOGIN_EMAIL, LOGIN_PASSWORD, LOGIN_IS_VERIFIED},
+                new String[] { LOGIN_KEY_FIELD_ID, LOGIN_EMAIL, LOGIN_PASSWORD, LOGIN_IS_VERIFIED},
                 null, null, null, null, null, null);
 
         if(cursor.moveToFirst())
         {
             do {
                 Login login = new Login(
-                        cursor.getString(0),
+                        cursor.getLong(0),
                         cursor.getString(1),
-                        cursor.getInt(2));
+                        cursor.getString(2),
+                        cursor.getInt(3));
                 loginList.add(login);
             } while (cursor.moveToNext());
         }
@@ -535,7 +538,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void deleteLogin(Login login)
     {
         SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(LOGIN_TABLE, LOGIN_EMAIL + " =?",
+        db.delete(LOGIN_TABLE, LOGIN_KEY_FIELD_ID + " =?",
                 new String[] {String.valueOf(login.getmId())});
         db.close();
     }
@@ -552,8 +555,8 @@ public class DBHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
                 LOGIN_TABLE,
-                new String[] { LOGIN_EMAIL, LOGIN_PASSWORD, LOGIN_IS_VERIFIED},
-                LOGIN_EMAIL + " =?",
+                new String[] { LOGIN_KEY_FIELD_ID, LOGIN_EMAIL, LOGIN_PASSWORD, LOGIN_IS_VERIFIED},
+                LOGIN_KEY_FIELD_ID + " =?",
                 new String[] {String.valueOf(id)},
                 null, null, null, null );
 
