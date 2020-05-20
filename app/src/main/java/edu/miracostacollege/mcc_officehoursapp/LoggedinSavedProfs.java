@@ -35,11 +35,13 @@ public class LoggedinSavedProfs extends AppCompatActivity {
         setContentView(R.layout.activity_loggedin_saved_profs);
         db = new DBHelper(this);
 
-        db.deleteAllSavedInstructors();
-        db.addSavedInstructor(2); //dummy
+        Log.i(TAG, "//AT SAVED PORF");
+        //db.deleteAllSavedInstructors();
+        //db.addSavedInstructor(2); //dummy
         //db.addSavedInstructor(3); //dummy
         Log.i(TAG, "//size of savedInstr " + db.getAllSavedInstructors().size());
         instructorList = db.getAllSavedInstructors();
+        Log.i(TAG, "//MAIN list size " + instructorList.size() );
         int count = 0;
         for(SavedInstructor s: instructorList){
             Log.i(TAG, "//// instructor count : " + count++ + " " + s.getmInstructor().getmFullName());
@@ -65,7 +67,7 @@ public class LoggedinSavedProfs extends AppCompatActivity {
 
         Intent intent = new Intent(this, ProfessorDetails.class);
         intent.putExtra("SelectedInstructor", selectedInstuctor.getmInstructor()) ;
-        intent.putExtra("FromActivity", "saved");
+        intent.putExtra("FromActivity", "savedSearch");
         startActivity(intent);
 
     }
@@ -73,7 +75,7 @@ public class LoggedinSavedProfs extends AppCompatActivity {
     public void handleNewSearch(View v)
     {
         Intent intent = new Intent(this, StudentSearch.class);
-        intent.putExtra("FromActivity", "saved");
+        intent.putExtra("FromActivity", "savedSearch");
         startActivity(intent);
     }
 }

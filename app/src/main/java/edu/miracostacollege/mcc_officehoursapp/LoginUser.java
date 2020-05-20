@@ -38,7 +38,7 @@ public class LoginUser extends AppCompatActivity {
         db = new DBHelper(this);
 
 
-        // deleteDatabase(DBHelper.DATABASE_NAME);
+         //deleteDatabase(DBHelper.DATABASE_NAME);
         if (db.getAllInstructors().size() == 0)
             db.importInstructorsFromCSV("instructor.csv");
 
