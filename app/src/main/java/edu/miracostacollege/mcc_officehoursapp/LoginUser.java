@@ -37,6 +37,7 @@ public class LoginUser extends AppCompatActivity {
 
         db = new DBHelper(this);
 
+
         // deleteDatabase(DBHelper.DATABASE_NAME);
         if (db.getAllInstructors().size() == 0)
             db.importInstructorsFromCSV("instructor.csv");
@@ -52,6 +53,7 @@ public class LoginUser extends AppCompatActivity {
     public void handleLoginButton(View v)
     {
         allLoginList = db.getAllLogin();
+
         EditText emailEditText = findViewById(R.id.emailEditText_LOGIN);
         EditText passwordEditText = findViewById(R.id.passwordEditText_LOGIN);
         boolean notValid = true;
@@ -61,16 +63,19 @@ public class LoginUser extends AppCompatActivity {
 
 
         for (Login login : allLoginList) {
+
             if (email.equals(login.getmEmail())) {
                 if (password.equals(login.getmPassowrd())) {
                     notValid = false;
                     if (login.getIsProfessor() == 1) {
                          //professor
-                         Intent intentProf = new Intent(this, ProfessorLoggedInView.class);
+                        Intent intentProf = new Intent(this, ProfessorLoggedInView.class);
+                        intentProf.putExtra("FromActivity", "saved");
                          startActivity(intentProf);
                     } else {
                          //student
-                         Intent intentStudent = new Intent(this, LoggedinSavedProfs.class);
+                        Intent intentStudent = new Intent(this, LoggedinSavedProfs.class);
+                        intentStudent.putExtra("FromActivity", "saved");
                          startActivity(intentStudent);
                     }
                 }
@@ -89,6 +94,7 @@ public class LoginUser extends AppCompatActivity {
     public void handleSearchOnly(View v)
     {
         Intent searchIntent = new Intent(this, StudentSearch.class);
+        searchIntent.putExtra("FromActivity", "search");
         startActivity(searchIntent);
     }
 
