@@ -22,6 +22,7 @@ import edu.miracostacollege.mcc_officehoursapp.Model.Instructor;
 //Checking changes after commit issues
 public class StudentSearch extends AppCompatActivity {
 
+    public static final String TAG = StudentSearch.class.getSimpleName();
     private DBHelper db;
 
     private List<Instructor> allInstructorsList;
@@ -141,6 +142,7 @@ public class StudentSearch extends AppCompatActivity {
         //added by Zsu ******
         Intent checkIntent = getIntent();
         String check = checkIntent.getStringExtra("FromActivity");
+        Log.i(TAG, "//CHECK from intent: " + check);
         //********
 
         Instructor selectedInstructor =   (Instructor) v.getTag();
@@ -150,10 +152,17 @@ public class StudentSearch extends AppCompatActivity {
         //from Zsu ******
         intent.putExtra("SelectedInstructor", selectedInstructor);
         if(check != null &&
-                (check.equals("saved") || check.equals("registered") ||  check.equals("professor")))
+                (check.equals("registered") ||  check.equals("professor"))) {
+            Log.i(TAG, "//CHECK sent: saved");
             intent.putExtra("FromActivity", "saved");
+        }
         else if (check.equals("search")) {
+            Log.i(TAG, "//CHECK sent: search");
             intent.putExtra("FromActivity", "search");
+        }
+        else if(check.equals("savedSearch")){
+            Log.i(TAG, "//CHECK sent: saved");
+            intent.putExtra("FromActivity", "savedSearch");
         }
         //********
         startActivity(intent);

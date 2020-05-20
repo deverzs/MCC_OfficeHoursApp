@@ -34,6 +34,7 @@ public class ProfessorDetails extends AppCompatActivity {
     private Button saveProfessorBuutton;
     private Button deleteProfessorButton;
     private Button backToSavedButton;
+    private Button backToSearchButton;
     String fromActivity;
     TextView professorNameTextView;
     TextView professorPhoneTextView;
@@ -49,6 +50,7 @@ public class ProfessorDetails extends AppCompatActivity {
         professorPhoneTextView = findViewById(R.id.extensionTextView_DETAILS);
         saveProfessorBuutton = findViewById(R.id.saveProfessorButton_DETAILS);
         deleteProfessorButton = findViewById(R.id.deleteProfessorButton_DETAILS);
+        backToSearchButton = findViewById(R.id.backToSearchButton_DETAILS);
         backToSavedButton = findViewById(R.id.backToSavedButton_DETAILS);
         availableByApptTextView = findViewById(R.id.availableByApptTextView_DETAILS);
 
@@ -63,6 +65,7 @@ public class ProfessorDetails extends AppCompatActivity {
         Intent intent = getIntent();
         instructor = intent.getParcelableExtra("SelectedInstructor");
         fromActivity = intent.getStringExtra("FromActivity");
+        Log.i(TAG, "//From intent: " + fromActivity);
         instructorID = instructor.getmId();
 
         professorNameTextView.setText(instructor.getmFullName());
@@ -81,7 +84,7 @@ public class ProfessorDetails extends AppCompatActivity {
                     }
                 }
             }
-        }else if (fromActivity !=null && fromActivity.equals("search")){
+        }else if ((fromActivity !=null) && (fromActivity.equals("search"))){
             saveProfessorBuutton.setVisibility(View.INVISIBLE);
             deleteProfessorButton.setVisibility(View.INVISIBLE);
             backToSavedButton.setVisibility(View.INVISIBLE);
@@ -90,6 +93,14 @@ public class ProfessorDetails extends AppCompatActivity {
                             selectedScheduleList.add(s);
                     }
             }
+        }
+        else if ((fromActivity !=null) && (fromActivity.equals("savedSearch"))){
+                backToSearchButton.setVisibility(View.INVISIBLE);
+                for (Schedule s : alSchedulesList) {
+                    if (s.getmInstructor().getmId() == instructorID) {
+                        selectedScheduleList.add(s);
+                    }
+                }
         }
 
         //Schedule List Adapter
@@ -107,12 +118,14 @@ public class ProfessorDetails extends AppCompatActivity {
             if(s.getmInstructor().getmId() == instructorID ) added=true;
         }
         if(added){
-            Toast.makeText(this, "That Professor is already saved.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "That Professor is already saved.", Toast.LENGTH_SHORT).show();
         }
         else  {
             db.addSavedInstructor(instructorID);
             savedInstructorList = db.getAllSavedInstructors();
-            Toast.makeText(this, "Professor has been saved.", Toast.LENGTH_LONG).show();
+            Log.i(TAG, "//DETAILS. NEW SIZE " + savedInstructorList.size());
+            savedInstructorList = db.getAllSavedInstructors();
+            Toast.makeText(this, "Professor has been saved.", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -120,16 +133,16 @@ public class ProfessorDetails extends AppCompatActivity {
     public void handleDeleteProfessor(View v){
         for(SavedInstructor s: savedInstructorList){
             if(s.getmInstructor().getmId() == instructorID) db.deleteSavedInstructor(s);
-            Toast.makeText(this, "Professor has been deleted from saved.", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Professor has been deleted from saved.", Toast.LENGTH_SHORT).show();
         }
-        Intent intent = new Intent(this, StudentSearch.class);
+        Intent intent = new Intent(this, LoggedinSavedProfs.class);
         startActivity(intent);
     }
 
     public void handleBackToSearch(View v){
         Intent intent = new Intent(this, StudentSearch.class);
         if (fromActivity !=null && fromActivity.equals("saved")){
-            intent.putExtra("FromActivity", "saved");
+            intent.putExtra("FromActivity", "savedSearch");
         }
         else if (fromActivity !=null && fromActivity.equals("search")) {
             intent.putExtra("FromActivity", "search");
@@ -139,6 +152,8 @@ public class ProfessorDetails extends AppCompatActivity {
     }
 
     public void handleBackToSaved(View v){
+        savedInstructorList = db.getAllSavedInstructors();
+        Log.i(TAG, "//Handle SAVED. NEW SIZE " + savedInstructorList.size());
         Intent intent = new Intent(this, LoggedinSavedProfs.class);
         startActivity(intent);
     }
