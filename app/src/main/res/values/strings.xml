@@ -34,6 +34,9 @@
     <string name="pin">Pin</string>
     <string name="verify_button">Verify</string>
     <string name="hint_professor_name">Search by professor name</string>
+    <string name="back_to_saved">Back To Saved</string>
+    <string name="back_to_search">Back To Search</string>
+    <string name="map">GO TO MAP</string>
 
 
 </resources>

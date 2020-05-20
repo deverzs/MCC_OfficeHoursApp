@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -21,6 +22,7 @@ import edu.miracostacollege.mcc_officehoursapp.Model.Instructor;
 //Checking changes after commit issues
 public class StudentSearch extends AppCompatActivity {
 
+    public static final String TAG = StudentSearch.class.getSimpleName();
     private DBHelper db;
 
     private List<Instructor> allInstructorsList;
@@ -38,8 +40,8 @@ public class StudentSearch extends AppCompatActivity {
         db = new DBHelper(this);
 
 
-         allInstructorsList = db.getAllInstructors();
-       filteredInstructorsList = db.getAllInstructors();
+        allInstructorsList = db.getAllInstructors();
+        filteredInstructorsList = db.getAllInstructors();
 
         instructorSpinner_SEARCH = findViewById(R.id.instructorSpinner_SEARCH);
         professorListView_SEARCH = findViewById(R.id.professorsListView_SEARCH);
@@ -137,11 +139,33 @@ public class StudentSearch extends AppCompatActivity {
 
     public void viewProfessorsSchedule(View v)
     {
-    Instructor selectedInstructor =   (Instructor) v.getTag();
-    finish();
-    Intent intent = new Intent(this, ProfessorDetails.class);
-    intent.putExtra("SelectedInstructor", selectedInstructor);
-    startActivity(intent);
+        //added by Zsu ******
+        Intent checkIntent = getIntent();
+        String check = checkIntent.getStringExtra("FromActivity");
+        Log.i(TAG, "//CHECK from intent: " + check);
+        //********
+
+        Instructor selectedInstructor =   (Instructor) v.getTag();
+        finish();
+        Intent intent = new Intent(this, ProfessorDetails.class);
+
+        //from Zsu ******
+        intent.putExtra("SelectedInstructor", selectedInstructor);
+        if(check != null &&
+                (check.equals("registered") ||  check.equals("professor"))) {
+            Log.i(TAG, "//CHECK sent: saved");
+            intent.putExtra("FromActivity", "saved");
+        }
+        else if (check.equals("search")) {
+            Log.i(TAG, "//CHECK sent: search");
+            intent.putExtra("FromActivity", "search");
+        }
+        else if(check.equals("savedSearch")){
+            Log.i(TAG, "//CHECK sent: saved");
+            intent.putExtra("FromActivity", "savedSearch");
+        }
+        //********
+        startActivity(intent);
     }
 
 }

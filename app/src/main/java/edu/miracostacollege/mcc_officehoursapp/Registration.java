@@ -62,10 +62,15 @@ public class Registration extends AppCompatActivity {
             db.addLogin(addUser);
             if(professorOptionCheckBox.isChecked())
             {
+                Toast.makeText(this, "You have successfully created an account.",
+                        Toast.LENGTH_LONG).show();
                 Intent verify = new Intent(this, ProfessorVerificationActivity.class);
                 startActivity(verify);
             } else {
-                Intent searchIntent = new Intent(this, StudentSearch.class);
+                Toast.makeText(this, "You have successfully created an account.",
+                        Toast.LENGTH_LONG).show();
+                Intent searchIntent = new Intent(this, LoggedinSavedProfs.class);
+                searchIntent.putExtra("FromActivity", "saved");
                 startActivity(searchIntent);
             }
         }
