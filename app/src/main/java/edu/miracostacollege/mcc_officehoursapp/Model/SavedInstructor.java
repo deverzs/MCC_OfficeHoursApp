@@ -1,5 +1,8 @@
 package edu.miracostacollege.mcc_officehoursapp.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.Objects;
 
 public class SavedInstructor {

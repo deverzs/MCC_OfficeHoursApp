@@ -680,6 +680,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(SAVED_INSTR_CODE, instructorCode);
 
         db.insert(SAVED_TABLE, null, values);
+
         db.close();
     }
 

@@ -10,9 +10,12 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import edu.miracostacollege.mcc_officehoursapp.Model.Instructor;
+
 public class ProfessorLoggedInView extends AppCompatActivity {
 
     private Spinner chooseSemesterSpinner;
+    private Instructor selectedInstructor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +26,8 @@ public class ProfessorLoggedInView extends AppCompatActivity {
         final ArrayAdapter<String> instructorSpinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, getSemesterTitles() );
         chooseSemesterSpinner.setAdapter(instructorSpinnerAdapter);
 
+        getIntent();
+        selectedInstructor = getIntent().getParcelableExtra("SelectedInstructor");
 
 
     }
@@ -37,6 +42,7 @@ public class ProfessorLoggedInView extends AppCompatActivity {
                         break;
                     case 1:
                         Intent intent = new Intent(ProfessorLoggedInView.this, updateScheduleActivity.class);
+                        intent.putExtra("selectedInstructor", selectedInstructor);
                         startActivity(intent);
                         break;
                     case 2:
@@ -44,7 +50,7 @@ public class ProfessorLoggedInView extends AppCompatActivity {
                         break;
                     case 3:
                         Toast.makeText(ProfessorLoggedInView.this, "No office hours uploaded for Fall 2020.", Toast.LENGTH_LONG).show();
-
+break;
                 }
             }
 

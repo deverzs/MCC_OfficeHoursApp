@@ -202,7 +202,7 @@ public class Instructor implements Parcelable
         return 0;
     }
 
-    @Override
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(mId);
         dest.writeString(mFullName);
@@ -213,16 +213,8 @@ public class Instructor implements Parcelable
         if(mAppointment) dest.writeInt(0);
         else dest.writeInt(1);
     }
-    /**
-     *    private long mId;                  //Unique code for the instructor
-     *     private String mFullName;           //Full Name of instructor
-     *     private String mFirstName;
-     *     private String mLastName;
-     *     private String mPhone;              //Phone number, including extension
-     *     private String mOfficeRoomNumber;   //Room number of instructor's office
-     *     private boolean mAppointment;
-     */
-    public static final Parcelable.Creator<Instructor> CREATOR = new Creator<Instructor>() {
+
+  public static final Parcelable.Creator<Instructor> CREATOR = new Creator<Instructor>() {
         @RequiresApi(api = Build.VERSION_CODES.Q)
         @Override
         public Instructor createFromParcel(Parcel source) {

@@ -12,6 +12,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import edu.miracostacollege.mcc_officehoursapp.Model.DBHelper;
+import edu.miracostacollege.mcc_officehoursapp.Model.Instructor;
 import edu.miracostacollege.mcc_officehoursapp.Model.Verification;
 
 public class ProfessorVerificationActivity extends AppCompatActivity {
@@ -23,6 +24,7 @@ public class ProfessorVerificationActivity extends AppCompatActivity {
     private DBHelper db;
 
     private List<Verification> allVerificationsList;
+    private List<Instructor> allInstructorsList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,8 @@ public class ProfessorVerificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_professor_verification);
 
         db = new DBHelper(this);
+
+        allInstructorsList = db.getAllInstructors();
 
         professorFirstNameEditText_VERIFY = findViewById(R.id.professorFirstNameEditText_VERIFY);
         professorLastNameEditText_VERIFY = findViewById(R.id.professorLastNameEditText_VERIFY);
@@ -52,14 +56,19 @@ public class ProfessorVerificationActivity extends AppCompatActivity {
         for (Verification verify : allVerificationsList) {
             Log.e("SARAH", verify.toString());
             if (firstName.equalsIgnoreCase(verify.getmFirstName()) && lastName.equalsIgnoreCase(verify.getmLastName()) && pin == verify.getmPin()) {
-
                 notValid = false;
-                finish();
-                Intent intent = new Intent(this, ProfessorLoggedInView.class);
-                startActivity(intent);
+
+                for(Instructor i: allInstructorsList) {
+                    if(i.getmFirstName().equals(verify.getmFirstName()) && i.getmLastName().equalsIgnoreCase(verify.getmLastName())) {
+                        Instructor selectedInstructor = db.getInstructor(i.getmId());
+                        finish();
+                        Intent intent = new Intent(this, ProfessorLoggedInView.class);
+                        intent.putExtra("SelectedInstructor", selectedInstructor);
+                        startActivity(intent);
+                    }
 
 
-
+                }
 
 
             }
