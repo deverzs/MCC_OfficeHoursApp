@@ -158,4 +158,8 @@ public class ProfessorDetails extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void handleMap(View v){
+        Intent intent = new Intent(this, MapsActivity.class);
+    }
+
 }

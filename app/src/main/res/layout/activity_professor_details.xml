@@ -69,14 +69,6 @@
         android:text="TextView"
         android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
-    <TextView
-        android:id="@+id/colorBar3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="12dp"
-        android:background="@android:color/transparent"
-        android:textSize="8sp" />
-
     <Button
         android:id="@+id/backToSearchButton_DETAILS"
         android:layout_width="wrap_content"
@@ -86,16 +78,10 @@
         android:onClick="handleBackToSearch"
         android:text="@string/back_to_search" />
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="8sp" />
-
 
     <LinearLayout
         android:layout_width="424dp"
-        android:layout_height="58dp"
+        android:layout_height="51dp"
         android:orientation="horizontal">
 
         <Button
@@ -119,12 +105,21 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/mapButton_DETAILS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:backgroundTint="@color/mc_logo_blueDark"
+        android:onClick="handleMap"
+        android:text="@string/map" />
+
+    <Button
         android:id="@+id/deleteProfessorButton_DETAILS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
         android:layout_gravity="center_horizontal"
-        android:backgroundTint="@color/mc_logo_blueDark"
+        android:backgroundTint="@color/colorLightGreen2"
         android:onClick="handleDeleteProfessor"
         android:text="@string/deleteProf" />
 
