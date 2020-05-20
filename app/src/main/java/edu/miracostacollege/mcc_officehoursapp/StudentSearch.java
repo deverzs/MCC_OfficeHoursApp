@@ -156,11 +156,11 @@ public class StudentSearch extends AppCompatActivity {
             Log.i(TAG, "//CHECK sent: saved");
             intent.putExtra("FromActivity", "saved");
         }
-        else if (check.equals("search")) {
+        else if (check != null && check.equals("search")) {
             Log.i(TAG, "//CHECK sent: search");
             intent.putExtra("FromActivity", "search");
         }
-        else if(check.equals("savedSearch")){
+        else if(check != null && check.equals("savedSearch")){
             Log.i(TAG, "//CHECK sent: saved");
             intent.putExtra("FromActivity", "savedSearch");
         }

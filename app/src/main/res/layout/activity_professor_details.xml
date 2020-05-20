@@ -51,7 +51,8 @@
     <ListView
         android:id="@+id/sessionListView_DETAILS"
         android:layout_width="match_parent"
-        android:layout_height="228dp" />
+        android:layout_height="228dp"
+        android:paddingStart="8dp" />
 
     <TextView
         android:id="@+id/colorBar2"

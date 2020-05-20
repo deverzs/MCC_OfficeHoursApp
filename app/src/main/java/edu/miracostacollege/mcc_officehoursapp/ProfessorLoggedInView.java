@@ -60,6 +60,9 @@ break;
             }
         });
 
+        Intent intent = new Intent(this, CancelOfficeHoursActivity.class);
+        startActivity(intent);
+
     }
 
     public void viewSchedule(View v)

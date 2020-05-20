@@ -76,6 +76,7 @@ public class LoginUser extends AppCompatActivity {
                          //student
                         Intent intentStudent = new Intent(this, LoggedinSavedProfs.class);
                         intentStudent.putExtra("FromActivity", "saved");
+                        //intentStudent.putExtra("Instructor", db.getInstructor(1))
                          startActivity(intentStudent);
                     }
                 }
