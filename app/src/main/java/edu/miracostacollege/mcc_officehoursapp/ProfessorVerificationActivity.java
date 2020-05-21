@@ -13,10 +13,12 @@ import java.util.List;
 
 import edu.miracostacollege.mcc_officehoursapp.Model.DBHelper;
 import edu.miracostacollege.mcc_officehoursapp.Model.Instructor;
+import edu.miracostacollege.mcc_officehoursapp.Model.Login;
 import edu.miracostacollege.mcc_officehoursapp.Model.Verification;
 
 public class ProfessorVerificationActivity extends AppCompatActivity {
 
+    public static final String TAG = ProfessorLoggedInView.class.getSimpleName();
     private EditText professorFirstNameEditText_VERIFY;
     private EditText professorLastNameEditText_VERIFY;
     private EditText pinEditText_VERIFY;
@@ -40,10 +42,7 @@ public class ProfessorVerificationActivity extends AppCompatActivity {
         pinEditText_VERIFY = findViewById(R.id.pinEditText_VERIFY);
 
         allVerificationsList = db.getAllVerifications();
-
-
     }
-
 
 
     public void verify(View v) {
@@ -54,40 +53,37 @@ public class ProfessorVerificationActivity extends AppCompatActivity {
 
         boolean notValid = true;
         for (Verification verify : allVerificationsList) {
-            Log.e("SARAH", verify.toString());
-            if (firstName.equalsIgnoreCase(verify.getmFirstName()) && lastName.equalsIgnoreCase(verify.getmLastName()) && pin == verify.getmPin()) {
+            Log.e(TAG, "//" + verify.toString());
+            if (firstName.equalsIgnoreCase(verify.getmFirstName()) &&
+                    lastName.equalsIgnoreCase(verify.getmLastName()) && pin == verify.getmPin()) {
                 notValid = false;
 
-                for(Instructor i: allInstructorsList) {
-                    if(i.getmFirstName().equals(verify.getmFirstName()) && i.getmLastName().equalsIgnoreCase(verify.getmLastName())) {
-                        Instructor selectedInstructor = db.getInstructor(i.getmId());
+                for (Instructor i : allInstructorsList) {
+                    if (i.getmFirstName().equals(verify.getmFirstName()) &&
+                            i.getmLastName().equalsIgnoreCase(verify.getmLastName())) {
+                        verify.setmIsVerified(true);
+                        Log.i(TAG, "//verified change "+ verify.getIsVerified());
+                        db.updateVerification(verify);
+                        Intent verifyPassed = getIntent();
+                        String emailUser = verifyPassed.getStringExtra("Email");
+                        String passwordOne = verifyPassed.getStringExtra("Password");
+                        Login addUser = new Login(emailUser, passwordOne, 1);
+                        db.addLogin(addUser);
                         finish();
                         Intent intent = new Intent(this, ProfessorLoggedInView.class);
-                        intent.putExtra("selectedInstructor", selectedInstructor);
+                        intent.putExtra("SelectedInstructor", i);
                         startActivity(intent);
                     }
-
-
                 }
-
-
             }
-
-
         }
-        if(notValid)
-        {
+        if (notValid) {
 
-                Toast.makeText(this, "First or last name or pin are not valid", Toast.LENGTH_LONG).show();
-                professorLastNameEditText_VERIFY.setText("");
-                professorFirstNameEditText_VERIFY.setText("");
-                pinEditText_VERIFY.setText("");
+            Toast.makeText(this, "First or last name or pin are not valid", Toast.LENGTH_LONG).show();
+            professorLastNameEditText_VERIFY.setText("");
+            professorFirstNameEditText_VERIFY.setText("");
+            pinEditText_VERIFY.setText("");
 
         }
     }
 }
-
-
-
-
-

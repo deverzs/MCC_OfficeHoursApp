@@ -30,7 +30,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:background="@color/mc_logo_blueDark"
+            android:background="@drawable/common_google_signin_btn_text_light_normal_background"
+            android:backgroundTint="@color/colorLightGreen2"
             android:elevation="8dp"
             android:onClick="handleNewSearch"
             android:paddingStart="16dp"
@@ -47,7 +48,26 @@
         <ListView
             android:id="@+id/professorsListView_SAVED"
             android:layout_width="388dp"
-            android:layout_height="455dp"
-            android:layout_gravity="center_horizontal" />
+            android:layout_height="377dp"
+            android:layout_gravity="center_horizontal" >
+
+        </ListView>
+
+        <Button
+            android:id="@+id/buttonLogOut_SAVED"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/common_google_signin_btn_text_light_normal_background"
+            android:backgroundTint="@color/mc_logo_blueDark"
+            android:elevation="8dp"
+            android:onClick="handleLogOut"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="@string/log_out"
+            android:textColor="@android:color/black"
+            android:textSize="18sp" />
+
+
     </LinearLayout>
 </LinearLayout>

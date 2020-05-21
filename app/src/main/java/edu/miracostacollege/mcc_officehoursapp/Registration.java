@@ -58,15 +58,15 @@ public class Registration extends AppCompatActivity {
         String passwordTwo = confirmPasswordEditText.getText().toString();
 
         if(passwordOne.equals(passwordTwo)){
-            Login addUser = new Login(emailUser, passwordOne, 0);
-            db.addLogin(addUser);
             if(professorOptionCheckBox.isChecked())
             {
-                Toast.makeText(this, "You have successfully created an account.",
-                        Toast.LENGTH_LONG).show();
                 Intent verify = new Intent(this, ProfessorVerificationActivity.class);
+                verify.putExtra("Email", emailUser);
+                verify.putExtra("Password", passwordOne);
                 startActivity(verify);
             } else {
+                Login addUser = new Login(emailUser, passwordOne, 0);
+                db.addLogin(addUser);
                 Toast.makeText(this, "You have successfully created an account.",
                         Toast.LENGTH_LONG).show();
                 Intent searchIntent = new Intent(this, LoggedinSavedProfs.class);

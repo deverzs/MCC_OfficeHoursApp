@@ -15,6 +15,7 @@ import java.util.List;
 import edu.miracostacollege.mcc_officehoursapp.Model.DBHelper;
 import edu.miracostacollege.mcc_officehoursapp.Model.Instructor;
 import edu.miracostacollege.mcc_officehoursapp.Model.Login;
+import edu.miracostacollege.mcc_officehoursapp.Model.SavedInstructor;
 import edu.miracostacollege.mcc_officehoursapp.Model.Schedule;
 import edu.miracostacollege.mcc_officehoursapp.Model.Verification;
 
@@ -38,7 +39,7 @@ public class LoginUser extends AppCompatActivity {
         db = new DBHelper(this);
 
 
-         //deleteDatabase(DBHelper.DATABASE_NAME);
+        //deleteDatabase(DBHelper.DATABASE_NAME);
         if (db.getAllInstructors().size() == 0)
             db.importInstructorsFromCSV("instructor.csv");
 
@@ -66,17 +67,25 @@ public class LoginUser extends AppCompatActivity {
 
             if (email.equals(login.getmEmail())) {
                 if (password.equals(login.getmPassowrd())) {
+                    Log.i(TAG, "Prof status:" + login.getIsProfessor());
                     notValid = false;
                     if (login.getIsProfessor() == 1) {
                          //professor
-                        Intent intentProf = new Intent(this, ProfessorLoggedInView.class);
-                        intentProf.putExtra("FromActivity", "saved");
-                         startActivity(intentProf);
+                       Instructor instructor = findInstructor(login);
+                       if(instructor==null){
+                           notValid = true;
+                       }
+                       else {
+                           Intent intentProf = new Intent(this, ProfessorLoggedInView.class);
+                           intentProf.putExtra("SelectedInstructor", instructor);
+                           intentProf.putExtra("FromActivity", "professor");
+                           startActivity(intentProf);
+                       }
                     } else {
                          //student
                         Intent intentStudent = new Intent(this, LoggedinSavedProfs.class);
                         intentStudent.putExtra("FromActivity", "saved");
-                        //intentStudent.putExtra("Instructor", db.getInstructor(1))
+                       // intentStudent.putExtra("Instructor", db.getInstructor(1));
                          startActivity(intentStudent);
                     }
                 }
@@ -106,4 +115,24 @@ public class LoginUser extends AppCompatActivity {
     }
 
 
+    public Instructor findInstructor(Login login){
+        List<Verification> verify = db.getAllVerifications();
+        List<Instructor> instructors = db.getAllInstructors()  ;
+
+       for(Verification v: verify){
+           if(login.getmEmail().equals(login.getmEmail())){
+               if(v.ismIsVerified()==1){
+                   for(Instructor i: instructors){
+                       if(v.getmFirstName().equals(i.getmFirstName())){
+                               if(v.getmLastName().equals(i.getmLastName())) {
+                                   return i;
+                               }
+                       }
+                   }
+               }
+           }
+       }
+       return null;
+
+    }
 }

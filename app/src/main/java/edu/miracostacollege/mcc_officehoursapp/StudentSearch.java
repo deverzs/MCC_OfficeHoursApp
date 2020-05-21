@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
@@ -32,6 +33,8 @@ public class StudentSearch extends AppCompatActivity {
     private professorsListViewAdapter instructorListAdapter;
     private Spinner instructorSpinner_SEARCH;
     private EditText instructorName_SEARCH;
+    private Button logIn;
+    private String check;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +42,12 @@ public class StudentSearch extends AppCompatActivity {
         setContentView(R.layout.activity_student_search);
         db = new DBHelper(this);
 
-
+        logIn = findViewById(R.id.logInButton_SEARCH);
+        Intent checkIntent = getIntent();
+        check = checkIntent.getStringExtra("FromActivity");
+        if(check != null && (check.equals("savedSearch") || check.equals("professor"))){
+            logIn.setVisibility(View.INVISIBLE);
+        }
         allInstructorsList = db.getAllInstructors();
         filteredInstructorsList = db.getAllInstructors();
 
@@ -154,7 +162,7 @@ public class StudentSearch extends AppCompatActivity {
         if(check != null &&
                 (check.equals("registered") ||  check.equals("professor"))) {
             Log.i(TAG, "//CHECK sent: saved");
-            intent.putExtra("FromActivity", "saved");
+           intent.putExtra("FromActivity", "saved");
         }
         else if (check != null && check.equals("search")) {
             Log.i(TAG, "//CHECK sent: search");
@@ -168,4 +176,10 @@ public class StudentSearch extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    public void handleLogIn(View v){
+
+        Intent intent = new Intent(this, LoginUser.class);
+        startActivity(intent);
+    }
 }

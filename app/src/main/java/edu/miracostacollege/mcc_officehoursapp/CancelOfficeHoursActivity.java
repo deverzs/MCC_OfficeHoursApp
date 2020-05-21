@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Switch;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,21 +19,22 @@ import edu.miracostacollege.mcc_officehoursapp.Model.Schedule;
 public class CancelOfficeHoursActivity extends AppCompatActivity {
 
     public static final String TAG = CancelOfficeHoursActivity.class.getSimpleName();
-    private CheckBox checkBox1;
-    private CheckBox checkBox2;
-    private CheckBox checkBox3;
-    private CheckBox checkBox4;
-    private CheckBox checkBox5;
-    private CheckBox checkBox6;
-    private CheckBox checkBox7;
-    private CheckBox checkBox8;
-    private CheckBox checkBox9;
+    private Switch checkBox1;
+    private Switch checkBox2;
+    private Switch checkBox3;
+    private Switch checkBox4;
+    private Switch checkBox5;
+    private Switch checkBox6;
+    private Switch checkBox7;
+    private Switch checkBox8;
+    private Switch checkBox9;
+    private Switch checkBox10;
     private Button cancelButton;
     private Instructor instructor;
     private List<Schedule> allSessions;
     private List<Schedule> instructorSessions;
     private DBHelper db;
-    private CheckBox[] boxes = new CheckBox[9];
+    private Switch[] boxes = new Switch[10];
 
 
 
@@ -40,17 +42,18 @@ public class CancelOfficeHoursActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_cancel_office_hours);
+        setContentView(R.layout.activity_cancel_office);
 
-        checkBox1 = findViewById(R.id.checkBox1);
-        checkBox2 = findViewById(R.id.checkBox2);
-        checkBox3 = findViewById(R.id.checkBox3);
-        checkBox4 = findViewById(R.id.checkBox4);
-        checkBox5 = findViewById(R.id.checkBox5);
-        checkBox6 = findViewById(R.id.checkBox6);
-        checkBox7 = findViewById(R.id.checkBox7);
-        checkBox8 = findViewById(R.id.checkBox8);
-        checkBox9 = findViewById(R.id.checkBox9);
+        checkBox1 = findViewById(R.id.switch1);
+        checkBox2 = findViewById(R.id.switch2);
+        checkBox3 = findViewById(R.id.switch3);
+        checkBox4 = findViewById(R.id.switch4);
+        checkBox5 = findViewById(R.id.switch5);
+        checkBox6 = findViewById(R.id.switch6);
+        checkBox7 = findViewById(R.id.switch7);
+        checkBox8 = findViewById(R.id.switch8);
+        checkBox9 = findViewById(R.id.switch9);
+        checkBox10 = findViewById(R.id.switch10);
         boxes[0] = checkBox1;
         boxes[1] = checkBox2;
         boxes[2] = checkBox3;
@@ -60,12 +63,13 @@ public class CancelOfficeHoursActivity extends AppCompatActivity {
         boxes[6] = checkBox7;
         boxes[7] = checkBox8;
         boxes[8] = checkBox9;
-        cancelButton = findViewById(R.id.cancellButton_CANCEL);
+        boxes[9] = checkBox10;
+        cancelButton = findViewById(R.id.cancelButton_CANCEL);
         db = new DBHelper(this);
         instructorSessions = new ArrayList<>();
 
         Intent intent = getIntent();
-        instructor = intent.getParcelableExtra("Instructor");
+        instructor = intent.getParcelableExtra("SelectedInstructor");
         allSessions = db.getAllSchedules();
 
         for(Schedule s: allSessions){
@@ -74,7 +78,7 @@ public class CancelOfficeHoursActivity extends AppCompatActivity {
             }
         }
 
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < boxes.length; i++) {
             boxes[i].setVisibility(View.INVISIBLE);
         }
         String temp;
@@ -115,15 +119,57 @@ public class CancelOfficeHoursActivity extends AppCompatActivity {
 
     public void handleDeleteSessions(View v){
         for (int i = 0; i < instructorSessions.size() ; i++) {
-            if(boxes[i].isChecked()) db.deleteSchedule(instructorSessions.get(i));
+            if(boxes[i].isChecked()){
+               // db.deleteSchedule(instructorSessions.get(i));
+                instructorSessions.get(i).setInSession(0);
+
+                db.updateSchedule(instructorSessions.get(i));
+
+                /*
+                Schedule schedule = instructorSessions.get(i);
+                long id = schedule.getmId();
+                Instructor instructor = schedule.getmInstructor();
+                int section =schedule.getmOfficeHourSection();
+                int day = schedule.getmOfficeHourDay();
+                String time = schedule.getmOfficeHourTime();
+                String loc = schedule.getmOfficeHourLocation();
+                int session = 0;
+                schedule = new Schedule(id, instructor, section, day, time, loc, session);
+                db.updateSchedule(schedule);
+
+                 */
+            }
+            else {
+               // db.deleteSchedule(instructorSessions.get(i));
+                instructorSessions.get(i).setInSession(1);
+
+                db.updateSchedule(instructorSessions.get(i));
+                /*
+                Schedule schedule = instructorSessions.get(i);
+                long id = schedule.getmId();
+                Instructor instructor = schedule.getmInstructor();
+                int section =schedule.getmOfficeHourSection();
+                int day = schedule.getmOfficeHourDay();
+                String time = schedule.getmOfficeHourTime();
+                String loc = schedule.getmOfficeHourLocation();
+                int session = 1;
+                schedule = new Schedule(id, instructor, section, day, time, loc, session);
+                db.updateSchedule(schedule);
+
+                 */
+            }
         }
 
         Intent intent = new Intent(this, ProfessorLoggedInView.class);
+        intent.putExtra("FromActivity", "professor");
+        intent.putExtra("SelectedInstructor", instructor);
         startActivity(intent);
     }
 
     public void handleReturnToOH(View v){
         Intent intent = new Intent(this, ProfessorLoggedInView.class);
+        intent.putExtra("SelectedInstructor", instructor);
+        intent.putExtra("FromActivity", "professor");
         startActivity(intent);
     }
 }

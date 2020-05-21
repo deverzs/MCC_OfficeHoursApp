@@ -8,27 +8,36 @@ public class Schedule {
     private int mOfficeHourDay;         //Designates the day of the office hour
     private String mOfficeHourTime;     //Designates time of office hour
     private String mOfficeHourLocation; //Designates location of office hour
+    private int inSession;
 
-/*
     public Schedule(Instructor mInstructor, int mOfficeHourSection, int mOfficeHourDay,
-                    String mOfficeHourTime, String mOfficeHourLocation) {
+                    String mOfficeHourTime, String mOfficeHourLocation, int inSession) {
         this.mInstructor = mInstructor;
         this.mOfficeHourSection = mOfficeHourSection;
         this.mOfficeHourDay = mOfficeHourDay;
         this.mOfficeHourTime = mOfficeHourTime;
         this.mOfficeHourLocation = mOfficeHourLocation;
+        this.inSession = inSession;
     }
-*/
+
     public Schedule(long mId, Instructor mInstructor, int mOfficeHourSection, int mOfficeHourDay,
-                    String mOfficeHourTime, String mOfficeHourLocation) {
+                    String mOfficeHourTime, String mOfficeHourLocation, int inSession) {
         this.mId = mId;
         this.mInstructor = mInstructor;
         this.mOfficeHourSection = mOfficeHourSection;
         this.mOfficeHourDay = mOfficeHourDay;
         this.mOfficeHourTime = mOfficeHourTime;
         this.mOfficeHourLocation = mOfficeHourLocation;
+        this.inSession  = inSession;
     }
 
+    public int getInSession() {
+        return inSession;
+    }
+
+    public void setInSession(int inSession) {
+        this.inSession = inSession;
+    }
 
     public long getmId() {
         return mId;

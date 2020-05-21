@@ -15,9 +15,10 @@
             android:id="@+id/professorNameTextView_LIST_SAVED"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:text="TextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:textSize="30sp" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="24sp" />
 
         <TextView
             android:id="@+id/blank"

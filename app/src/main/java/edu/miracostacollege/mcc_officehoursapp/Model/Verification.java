@@ -36,6 +36,10 @@ public class Verification {
         else return 0;
     }
 
+    public String getIsVerified(){
+        if (mIsVerified==true) return "Professor";
+        else return "NOT professpr";
+    }
     public void setmIsVerified(boolean mIsVerified) {
         this.mIsVerified = mIsVerified;
     }

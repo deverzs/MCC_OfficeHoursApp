@@ -56,15 +56,13 @@ public class LoggedinSavedProfs extends AppCompatActivity {
             Log.i(TAG, "//SAVED: " + i.getmInstructor().getmFullName());
         }
 
-
-
     }
 
     public void viewInstructorDetails(View v){
         SavedInstructor selectedInstuctor = (SavedInstructor) v.getTag();
 
         Intent intent = new Intent(this, ProfessorDetails.class);
-        intent.putExtra("Instructor", selectedInstuctor.getmInstructor().getmId());
+        intent.putExtra("SelectedInstructor", selectedInstuctor.getmInstructor());
         intent.putExtra("FromActivity", "savedSearch");
         startActivity(intent);
 
@@ -76,4 +74,10 @@ public class LoggedinSavedProfs extends AppCompatActivity {
         intent.putExtra("FromActivity", "savedSearch");
         startActivity(intent);
     }
+
+    public void handleLogOut(View v){
+        Intent intent = new Intent(this, LoginUser.class);
+        startActivity(intent);
+    }
+
 }

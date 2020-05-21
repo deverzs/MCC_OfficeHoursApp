@@ -44,6 +44,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String SCHEDULE_DAY = "day";
     public static final String SCHEDULE_TIME = "time";
     public static final String SCHEDULE_LOCATION = "location";
+    public static final String SCHEDULE_IN_SESSION = "in_session";
 
     //FIELDS (COLUMN NAMES) FOR THE STATUS TABLE
     public static final String STATUS_TABLE = "Status";
@@ -100,7 +101,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 + SCHEDULE_SECTION + " INTEGER, "
                 + SCHEDULE_DAY + " INTEGER, "
                 + SCHEDULE_TIME + " TEXT, "
-                + SCHEDULE_LOCATION + " TEXT" + ")";
+                + SCHEDULE_LOCATION + " TEXT, "
+                + SCHEDULE_IN_SESSION + " INTEGER" + ")";
         db.execSQL(scheduleTable);
 
         String loginTable = "CREATE TABLE IF NOT EXISTS " + LOGIN_TABLE + " ("
@@ -303,6 +305,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(SCHEDULE_DAY, schedule.getmOfficeHourDay());
         values.put(SCHEDULE_TIME, schedule.getmOfficeHourTime());
         values.put(SCHEDULE_LOCATION, schedule.getmOfficeHourLocation());
+        values.put(SCHEDULE_IN_SESSION, schedule.getInSession());
 
         long id = db.insert(SCHEDULE_TABLE, null, values);
         schedule.setmId(id);
@@ -316,7 +319,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(
                 SCHEDULE_TABLE,
                 new String[] {SCHEDULE_KEY_FIELD_ID, SCHEDULE_INSTR_CODE, SCHEDULE_SECTION,
-                        SCHEDULE_DAY, SCHEDULE_TIME, SCHEDULE_LOCATION} ,
+                        SCHEDULE_DAY, SCHEDULE_TIME, SCHEDULE_LOCATION, SCHEDULE_IN_SESSION},
                 null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
@@ -326,7 +329,8 @@ public class DBHelper extends SQLiteOpenHelper {
                                 cursor.getInt(2),
                                 cursor.getInt(3),
                                 cursor.getString(4),
-                                cursor.getString(5));
+                                cursor.getString(5),
+                                cursor.getInt(6));
                 scheduleList.add(schedule);
             } while (cursor.moveToNext());
         }
@@ -365,9 +369,10 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(SCHEDULE_DAY, schedule.getmOfficeHourDay());
         values.put(SCHEDULE_TIME, schedule.getmOfficeHourTime());
         values.put(SCHEDULE_LOCATION, schedule.getmOfficeHourLocation());
+        values.put(SCHEDULE_IN_SESSION, schedule.getInSession());
 
         db.update(SCHEDULE_TABLE, values, SCHEDULE_KEY_FIELD_ID + " =?",
-                new String[] {String.valueOf(schedule.getmInstructor().getmId())});
+                new String[] {String.valueOf(schedule.getmId())});
 
         db.close();
 
@@ -379,7 +384,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(
                 SCHEDULE_TABLE,
                 new String[] {SCHEDULE_KEY_FIELD_ID, SCHEDULE_INSTR_CODE, SCHEDULE_SECTION,
-                        SCHEDULE_DAY, SCHEDULE_TIME, SCHEDULE_LOCATION},
+                        SCHEDULE_DAY, SCHEDULE_TIME, SCHEDULE_LOCATION, SCHEDULE_IN_SESSION},
                 SCHEDULE_KEY_FIELD_ID + " =?",
                 new String[] {String.valueOf(id)},
                 null, null, null, null );
@@ -391,7 +396,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 cursor.getInt(2),
                 cursor.getInt(3),
                 cursor.getString(4),
-                cursor.getString(5));
+                cursor.getString(5),
+                cursor.getInt(6));
         cursor.close();
         db.close();
         return schedule;
@@ -810,7 +816,7 @@ public class DBHelper extends SQLiteOpenHelper {
             while ((line = buffer.readLine()) != null)
             {
                 String[] fields = line.split(",");
-                if(fields.length != 5) {
+                if(fields.length != 6) {
                     Log.d("Schedule Finder", "Skipping bad CSV Row: " +
                             Arrays.toString(fields));
                     continue;
@@ -820,7 +826,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 int day = Integer.parseInt(fields[2].trim());
                 String time = fields[3].trim();
                 String location = fields[4].trim();
-                addSchedule(new Schedule( instructorCode, getInstructor(instructorCode),section, day, time, location));
+                int sessionInt = Integer.parseInt(fields[5].trim());
+                addSchedule(new Schedule( getInstructor(instructorCode),section,
+                        day, time, location, sessionInt));
 
             }
         } catch (IOException e) {

@@ -2,6 +2,7 @@ package edu.miracostacollege.mcc_officehoursapp;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,10 +15,10 @@ import edu.miracostacollege.mcc_officehoursapp.Model.Schedule;
 
 public class ScheduleListAdapter  extends ArrayAdapter<Schedule> {
 
+    public static final String TAG = ScheduleListAdapter.class.getSimpleName();
     private Context mContext;
     private List<Schedule> mScheduleList;
     private int mResourceId;
-
 
 
     public ScheduleListAdapter(Context context, int resource, List<Schedule> schedules) {
@@ -63,9 +64,16 @@ public class ScheduleListAdapter  extends ArrayAdapter<Schedule> {
                 break;
 
         }
-
+        String temp = "CANCELLED";
         timeTextView.setText(selectedSchedule.getmOfficeHourTime());
-        locationTextView.setText(selectedSchedule.getmOfficeHourLocation());
+        if(selectedSchedule.getInSession()==1) {
+            locationTextView.setText(selectedSchedule.getmOfficeHourLocation());
+        }else if(selectedSchedule.getmOfficeHourDay() == 0){
+            locationTextView.setText(selectedSchedule.getmOfficeHourLocation());
+            timeTextView.setText("");
+        }else if (selectedSchedule.getInSession()==0) {
+            locationTextView.setText(temp);
+        }
         return view;
 
 
