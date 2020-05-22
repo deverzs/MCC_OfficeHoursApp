@@ -3,19 +3,19 @@ package edu.miracostacollege.mcc_officehoursapp.Model;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import androidx.annotation.RequiresApi;
-
 import java.util.Objects;
 
-
+/**
+ * Instructor holds a unique object that represents a Professor
+ */
 public class Instructor implements Parcelable
 {
 
     private long mId;                  //Unique code for the instructor
     private String mFullName;           //Full Name of instructor
-    private String mFirstName;
-    private String mLastName;
+    private String mFirstName;          //First Name of instructor
+    private String mLastName;           //Last Name of instructor
     private String mPhone;              //Phone number, including extension
     private String mOfficeRoomNumber;   //Room number of instructor's office
     private boolean mAppointment;       //True if instructor accepts appointments
@@ -58,7 +58,7 @@ public class Instructor implements Parcelable
     public String getmLastName() {
         return mLastName;
     }
-/////
+
     /**
      * set first name
      * @param mFirstName  first name
@@ -90,8 +90,6 @@ public class Instructor implements Parcelable
     public long getmId() {
         return mId;
     }
-
-
 
     /**
      * Get full name
@@ -203,6 +201,11 @@ public class Instructor implements Parcelable
     }
 
 
+    /**
+     * Writing the object to a parcel
+     * @param dest where to write to
+     * @param flags  not sure
+     */
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeLong(mId);
         dest.writeString(mFullName);
@@ -214,6 +217,9 @@ public class Instructor implements Parcelable
         else dest.writeInt(1);
     }
 
+    /**
+     * Parcelable Creator
+     */
   public static final Parcelable.Creator<Instructor> CREATOR = new Creator<Instructor>() {
         @RequiresApi(api = Build.VERSION_CODES.Q)
         @Override
@@ -227,6 +233,10 @@ public class Instructor implements Parcelable
         }
     };
 
+    /**
+     * Creating the Instructor as a parcel object
+     * @param parcel the object that is the Instructor
+     */
     private Instructor(Parcel parcel)
     {
         mId = parcel.readLong();

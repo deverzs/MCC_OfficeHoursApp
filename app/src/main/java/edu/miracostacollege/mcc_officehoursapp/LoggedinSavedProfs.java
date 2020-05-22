@@ -18,47 +18,43 @@ import edu.miracostacollege.mcc_officehoursapp.professorsListViewAdapter;
 
 import static edu.miracostacollege.mcc_officehoursapp.Model.DBHelper.DATABASE_NAME;
 
-//for student view
+/**
+ * The Student View of their Saved Professors
+ */
 public class LoggedinSavedProfs extends AppCompatActivity {
 
     private static final String TAG = LoggedinSavedProfs.class.getSimpleName();
     private DBHelper db;
 
-    private List<SavedInstructor> instructorList;
-    private SavedInstructorListAdapter instructorListAdapter;
-    private ListView instructorListView;
-
 
     @Override
+    /**
+     * Create and inflate the activity
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loggedin_saved_profs);
         db = new DBHelper(this);
 
-        //db.deleteAllSavedInstructors();
-        //db.addSavedInstructor(2); //dummy
-        //db.addSavedInstructor(3); //dummy
-
-        instructorList = db.getAllSavedInstructors();
-        int count = 0;
-        for(SavedInstructor s: instructorList){
-            Log.i(TAG, "//// instructor count : " + count++ + " " + s.getmInstructor().getmFullName());
-        }
+        //all the saved instructors of the user
+        List<SavedInstructor> instructorList = db.getAllSavedInstructors();
 
         //Instructor List Adapter
-        instructorListAdapter = new SavedInstructorListAdapter(this,
+        SavedInstructorListAdapter instructorListAdapter = new SavedInstructorListAdapter(this,
                 R.layout.activity_saved_professor_list_item, instructorList);
 
-        instructorListView = findViewById(R.id.professorsListView_SAVED);
+        //wire up the list view and set to List adapter
+        ListView instructorListView = findViewById(R.id.professorsListView_SAVED);
         instructorListView.setAdapter(instructorListAdapter);
-
-        for(SavedInstructor i : instructorList){
-            Log.i(TAG, "//SAVED: " + i.getmInstructor().getmFullName());
-        }
 
     }
 
+    /**
+     * Move the user to the Details of the Professor
+     * @param v the list item
+     */
     public void viewInstructorDetails(View v){
+        //get the list item tag
         SavedInstructor selectedInstuctor = (SavedInstructor) v.getTag();
 
         Intent intent = new Intent(this, ProfessorDetails.class);
@@ -68,6 +64,10 @@ public class LoggedinSavedProfs extends AppCompatActivity {
 
     }
 
+    /**
+     * User moves to Search activity
+     * @param v button for new search
+     */
     public void handleNewSearch(View v)
     {
         Intent intent = new Intent(this, StudentSearch.class);
@@ -75,6 +75,10 @@ public class LoggedinSavedProfs extends AppCompatActivity {
         startActivity(intent);
     }
 
+    /**
+     * Move user to the login page
+     * @param v Button login page
+     */
     public void handleLogOut(View v){
         Intent intent = new Intent(this, LoginUser.class);
         startActivity(intent);

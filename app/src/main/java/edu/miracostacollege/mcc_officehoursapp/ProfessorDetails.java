@@ -22,63 +22,57 @@ import edu.miracostacollege.mcc_officehoursapp.Model.Schedule;
 public class ProfessorDetails extends AppCompatActivity {
 
     public static final String TAG = ProfessorDetails.class.getSimpleName();
-    private List<Schedule> alSchedulesList ;
-    private List<Schedule> selectedScheduleList ;
     private List<SavedInstructor> savedInstructorList ;
-    private List<Instructor> allSavedInstructorList;
-    private ScheduleListAdapter scheduleListAdapter;
-    private ListView scheduleListView;
     private DBHelper db;
-    private Instructor instructor;
-    private long instructorID;
-    private Button saveProfessorBuutton;
-    private Button deleteProfessorButton;
-    private Button backToSavedButton;
-    private Button backToSearchButton;
-    private Button backtoOfficeHours;
-    private String fromActivity;
-    private TextView professorNameTextView;
-    private TextView professorPhoneTextView;
-    private TextView availableByApptTextView;
-
-
+    private Instructor instructor;  //Instructor being references
+    private long instructorID;      //id of the instructor
+    private String fromActivity;    //represents the activity being referenced
 
     @Override
+    /**
+     * Create and inflate the activity
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_professor_details);
-        professorNameTextView  = findViewById(R.id.professorNameTextView_DETAILS);
-        professorPhoneTextView = findViewById(R.id.extensionTextView_DETAILS);
-        saveProfessorBuutton = findViewById(R.id.saveProfessorButton_DETAILS);
-        deleteProfessorButton = findViewById(R.id.deleteProfessorButton_DETAILS);
-        backToSearchButton = findViewById(R.id.backToSearchButton_DETAILS);
-        backToSavedButton = findViewById(R.id.backToSavedButton_DETAILS);
-        availableByApptTextView = findViewById(R.id.availableByApptTextView_DETAILS);
-        backtoOfficeHours = findViewById(R.id.returnToOHButton_DETAILS);
+
+        //wiring up views
+        TextView professorNameTextView = findViewById(R.id.professorNameTextView_DETAILS);
+        TextView professorPhoneTextView = findViewById(R.id.extensionTextView_DETAILS);
+        Button saveProfessorBuutton = findViewById(R.id.saveProfessorButton_DETAILS);
+        Button deleteProfessorButton = findViewById(R.id.deleteProfessorButton_DETAILS);
+        Button backToSearchButton = findViewById(R.id.backToSearchButton_DETAILS);
+        Button backToSavedButton = findViewById(R.id.backToSavedButton_DETAILS);
+        TextView availableByApptTextView = findViewById(R.id.availableByApptTextView_DETAILS);
+        Button backtoOfficeHours = findViewById(R.id.returnToOHButton_DETAILS);
 
         db = new DBHelper(this);
 
-        alSchedulesList = db.getAllSchedules();
+        //creating lists from the database
+        List<Schedule> alSchedulesList = db.getAllSchedules();
         savedInstructorList = db.getAllSavedInstructors();
-        allSavedInstructorList = db.getAllInstructors();
-        selectedScheduleList = new ArrayList<>();
+        List<Schedule> selectedScheduleList = new ArrayList<>();
 
-
+        //get the intent from the activity coming from
         Intent intent = getIntent();
         instructor = intent.getParcelableExtra("SelectedInstructor");
-        Log.i(TAG, "//Selected, Details: " + instructor.getmFullName());
         fromActivity = intent.getStringExtra("FromActivity");
-        Log.i(TAG, "//From intent: " + fromActivity);
-        instructorID = instructor.getmId();
 
+        //get important details of the instructor and set the text views
+        instructorID = instructor.getmId();
         professorNameTextView.setText(instructor.getmFullName());
         professorPhoneTextView.setText(instructor.getmPhone());
+
+        //check and set the appointment option of instructor
         String temp = "Available by Appointment";
         if(instructor.byAppointment()==1) availableByApptTextView.setText(temp);
         else availableByApptTextView.setText("");
 
+        //clear the selected chedule list
         selectedScheduleList.clear();
 
+        //depending on where the intent is originating, assign the buttons and read
+        //the schedules and assign the selected schedule list
         if(fromActivity !=null && fromActivity.equals("saved")) {
             for (Schedule s : alSchedulesList) {
                 for (SavedInstructor i : savedInstructorList) {
@@ -120,16 +114,18 @@ public class ProfessorDetails extends AppCompatActivity {
         }
 
         //Schedule List Adapter
-        scheduleListAdapter = new ScheduleListAdapter(this,
+        ScheduleListAdapter scheduleListAdapter = new ScheduleListAdapter(this,
                 R.layout.activity_schedule_list_item, selectedScheduleList);
-        scheduleListView = findViewById(R.id.sessionListView_DETAILS);
+        ListView scheduleListView = findViewById(R.id.sessionListView_DETAILS);
         scheduleListView.setAdapter(scheduleListAdapter);
-
-
     }
 
+    /**
+     * Save the Professor to the user's database
+     * @param v Save professor button
+     */
     public void handleSaveProfessor(View v){
-        boolean added = false;
+        boolean added = false;  //check if already added to the saved list
         for(SavedInstructor s: savedInstructorList){
             if(s.getmInstructor().getmId() == instructorID ) added=true;
         }
@@ -137,25 +133,36 @@ public class ProfessorDetails extends AppCompatActivity {
             Toast.makeText(this, "That Professor is already saved.", Toast.LENGTH_SHORT).show();
         }
         else  {
+            //adding the selected professor to the saved database
             db.addSavedInstructor(instructorID);
             savedInstructorList = db.getAllSavedInstructors();
-            Log.i(TAG, "//DETAILS. NEW SIZE " + savedInstructorList.size());
             savedInstructorList = db.getAllSavedInstructors();
             Toast.makeText(this, "Professor has been saved.", Toast.LENGTH_SHORT).show();
         }
 
     }
 
+    /**
+     * Delete the professor from the saved database of user
+     * @param v  Delete the Professor button
+     */
     public void handleDeleteProfessor(View v){
+        //find the professor to delete
         for(SavedInstructor s: savedInstructorList){
             if(s.getmInstructor().getmId() == instructorID) db.deleteSavedInstructor(s);
             Toast.makeText(this, "Professor has been deleted from saved.", Toast.LENGTH_SHORT).show();
         }
+        //Move the user back to the saved professor activity
         Intent intent = new Intent(this, LoggedinSavedProfs.class);
         startActivity(intent);
     }
 
+    /**
+     * Move user back to the Student Search Activity
+     * @param v back to search button
+     */
     public void handleBackToSearch(View v){
+        //check where the user was originating from
         Intent intent = new Intent(this, StudentSearch.class);
         if (fromActivity !=null && (fromActivity.equals("saved") || fromActivity.equals("savedSearch"))){
             intent.putExtra("FromActivity", "savedSearch");
@@ -167,20 +174,31 @@ public class ProfessorDetails extends AppCompatActivity {
 
     }
 
+    /**
+     * Move the usr back to the Saved Professor Activity
+     * @param v back to saved button
+     */
     public void handleBackToSaved(View v){
         savedInstructorList = db.getAllSavedInstructors();
-        Log.i(TAG, "//Handle SAVED. NEW SIZE " + savedInstructorList.size());
         Intent intent = new Intent(this, LoggedinSavedProfs.class);
-        intent.putExtra("FromActivity", "savedSearch"); //added need????
+        intent.putExtra("FromActivity", "savedSearch");
         startActivity(intent);
     }
 
+    /**
+     * Move the user to the map activity
+     * @param v Map button
+     */
     public void handleMap(View v){
         Intent intent = new Intent(this, MapsActivity.class);
         intent.putExtra("SelectedInstructor", instructor);
         startActivity(intent);
     }
 
+    /**
+     * Move the user back to the office hour activity, Instructors only
+     * @param v
+     */
     public void handleBackToOfficeHour(View v){
         Intent intent = new Intent(this, ProfessorLoggedInView.class);
         intent.putExtra("SelectedInstructor", instructor);

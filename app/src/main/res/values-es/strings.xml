@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MCC_OfficeHoursApp</string>
+    <string name="email">Email</string>
+    <string name="login">Iniciar Sesión</string>
+    <string name="password">Contraseña</string>
+    <string name="passwordConfirm">Volver a entrar en contraseña</string>
+    <string name="register">Registrarse</string>
+    <string name="needAccount">Sin cuenta? Crea uno.</string>
+    <string name="ProfessorOption">Es usted MCC Profesora?</string>
+    <string name="search_only">BUSCAR SOLO</string>
+    <string name="reset">Reiniciar</string>
+    <string name="searchByInstructor">Buscar Por Instructora</string>
+    <string name="searchByCourse">Buscar Por Clase</string>
+    <string name="mon_initial">LUNES:</string>
+    <string name="tues_initial">MARTES:</string>
+    <string name="wed_initial">Miércoles:</string>
+    <string name="thur_initial">JUEVES:</string>
+    <string name="fri_initial">VIERNES:</string>
+    <string name="saveProf">SALVAR PROFESORA</string>
+    <string name="deleteProf">"Eliminar Profesora "</string>
+    <string name="new_search">Nueva Búsqueda</string>
+    <string name="view_schedule">Ver Calendario</string>
+    <string name="update_schedule">Actualizar Calendario</string>
+    <string name="update_or_view_schedule">Ver o Actualizar calendario</string>
+    <string name="check_box_professor">Soy Profesora</string>
+    <string name="edit_office_hours">Editar Horas de Oficina</string>
+    <string name="cancel_office_hours">Cancelar Horas de Oficina</string>
+    <string name="submit_change">Enviar Sus Cambios</string>
+    <string name="officehour">Horas de Oficina</string>
+    <string name="title_activity_maps">Mapa</string>
+    <string name="google_maps_key">AIzaSyAqSKZNExFm1L1MCzef-gocL2vFucehrNg</string>
+    <string name="first_name">Nombre de Pila</string>
+    <string name="last_name">Apellido</string>
+    <string name="pin">PIN</string>
+    <string name="verify_button">Verificar</string>
+    <string name="hint_professor_name">Buscar Por Nombre de Profesora</string>
+    <string name="back_to_saved">De Vuelta a Guardado</string>
+    <string name="back_to_search">Volver a Buscar</string>
+    <string name="map">Ir Mapa</string>
+    <string name="cancel">Confirmar Cambio</string>
+    <string name="returnToOH">Regreso Horas de Oficina</string>
+    <string name="inSession">En Sesión</string>
+    <string name="cancelled">Cancelar</string>
+    <string name="log_out">Cerrar Sesión</string>
+    <string name="log_in">Iniciar Sesión</string>
+</resources>

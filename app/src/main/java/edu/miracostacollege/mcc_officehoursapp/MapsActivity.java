@@ -19,6 +19,9 @@ import edu.miracostacollege.mcc_officehoursapp.Model.DBHelper;
 import edu.miracostacollege.mcc_officehoursapp.Model.Instructor;
 import edu.miracostacollege.mcc_officehoursapp.Model.Schedule;
 
+/**
+ * Maps from Google to locate the campus being referenced in the list of the details activity
+ */
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -28,6 +31,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String officeHourLocation;
 
     @Override
+    /**
+     * Create and inflate the activity
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
