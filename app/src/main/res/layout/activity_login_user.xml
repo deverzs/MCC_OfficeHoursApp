@@ -59,17 +59,24 @@
         android:id="@+id/loginButton_LOGIN"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginTop="36dp"
-        android:background="@color/mc_logo_blueDark"
-        android:elevation="16dp"
-        android:text="@string/login"
+        android:background="@drawable/common_google_signin_btn_text_light_normal_background"
+        android:backgroundTint="@color/mc_logo_blueDark"
+        android:elevation="8dp"
         android:onClick="handleLoginButton"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:text="@string/login"
         android:textColor="@android:color/black"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="@+id/passwordEditText_LOGIN"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/passwordEditText_LOGIN"
         app:layout_constraintTop_toBottomOf="@+id/passwordEditText_LOGIN" />
+
+
+
 
     <TextView
         android:id="@+id/registerTextView_LOGIN"
@@ -89,13 +96,20 @@
         android:id="@+id/searchOnlyButton_LOGIN"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_marginBottom="8dp"
-        android:background="@color/colorLightGreen2"
+        android:background="@drawable/common_google_signin_btn_text_light_normal_background"
+        android:backgroundTint="@color/colorLightGreen2"
+        android:elevation="8dp"
+        android:onClick="handleSearchOnly"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
         android:text="@string/search_only"
         android:textSize="18sp"
-        android:onClick="handleSearchOnly"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/registerTextView_LOGIN"
         app:layout_constraintStart_toStartOf="@+id/registerTextView_LOGIN"
         app:layout_constraintTop_toBottomOf="@+id/registerTextView_LOGIN" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

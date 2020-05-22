@@ -37,8 +37,12 @@
     <string name="back_to_saved">Back To Saved</string>
     <string name="back_to_search">Back To Search</string>
     <string name="map">GO TO MAP</string>
-    <string name="cancel">CONFIRM CANCEL</string>
+    <string name="cancel">CONFIRM CHANGE</string>
     <string name="returnToOH">RETURN TO OFFICE HOURS</string>
+    <string name="inSession">In Session</string>
+    <string name="cancelled">Cancel</string>
+    <string name="log_out">LOGOUT</string>
+    <string name="log_in">LOGIN</string>
 
 
 </resources>

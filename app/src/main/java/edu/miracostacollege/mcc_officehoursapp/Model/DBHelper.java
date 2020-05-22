@@ -16,6 +16,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * DBHelper that contains the creation and references to the Database.
+ *
+ * These include Tables: Instructor, Login, SavedInstructor, Schedule, Status, Verification
+ * Each table can be accessed via: add, update, get, getAll and delete
+ * Also included are importing from csv files
+ */
 public class DBHelper extends SQLiteOpenHelper {
 
     private Context mContext;
@@ -27,56 +34,48 @@ public class DBHelper extends SQLiteOpenHelper {
     //FIELDS (COLUMN NAMES) FOR THE INSTRUCTOR TABLE
     private static final String INSTRUCTOR_TABLE = "Instructor";
     private static final String INSTRUCTOR_KEY_FIELD_ID = "_id";
-    //private static final String INSTRUCTOR_INSTR_CODE = "code";
     private static final String INSTRUCTOR_FIRST_NAME = "firstName";
     private static final String INSTRUCTOR_LAST_NAME = "lastName";
     private static final String INSTRUCTOR_PHONE = "phone";
-    public static final String INSTRUCTOR_OFFICE = "office";
-    public static final String INSTRUCTOR_APPOINTMENT = "appointment";
-    public static final String INSTRUCTOR_SAVED_ARRAY = "saved_Profs_list";
+    private static final String INSTRUCTOR_OFFICE = "office";
+    private static final String INSTRUCTOR_APPOINTMENT = "appointment";
 
 
     //FIELDS (COLUMN NAMES) FOR THE SCHEDULE TABLE
-    public static final String SCHEDULE_TABLE = "Schedule";
-    public static final String SCHEDULE_KEY_FIELD_ID = "_id";
-    public static final String SCHEDULE_INSTR_CODE = "code";
-    public static final String SCHEDULE_SECTION = "section";
-    public static final String SCHEDULE_DAY = "day";
-    public static final String SCHEDULE_TIME = "time";
-    public static final String SCHEDULE_LOCATION = "location";
-
-    //FIELDS (COLUMN NAMES) FOR THE STATUS TABLE
-    public static final String STATUS_TABLE = "Status";
-    public static final String STATUS_KEY_FIELD_ID = "_id";
-    public static final String STATUS_INSTR_CODE = "code_status"; //instructor code
-    public static final String STATUS_SECTION = "section_status"; //section of day
-    public static final String STATUS_DAY = "day_status";  //which day
-    public static final String STATUS_TIME = "time_status";  //which time
-    public static final String STATUS_LOCATION = "location_status";  //which location
-    public static final String STATUS_STATUS = "status_status"; //canceled or not
+    private static final String SCHEDULE_TABLE = "Schedule";
+    private static final String SCHEDULE_KEY_FIELD_ID = "_id";
+    private static final String SCHEDULE_INSTR_CODE = "code";
+    private static final String SCHEDULE_SECTION = "section";
+    private static final String SCHEDULE_DAY = "day";
+    private static final String SCHEDULE_TIME = "time";
+    private static final String SCHEDULE_LOCATION = "location";
+    private static final String SCHEDULE_IN_SESSION = "in_session";
 
     //FIELDS (COLUMN NAMES) FOR THE LOGIN TABLE
-    public static final String LOGIN_TABLE = "Login_Table";
-    public static final String LOGIN_KEY_FIELD_ID = "_id";
-    public static final String LOGIN_EMAIL = "email_login";
-    public static final String LOGIN_PASSWORD = "password";
-    public static final String LOGIN_IS_VERIFIED = "verifiedProfessor";
+    private static final String LOGIN_TABLE = "Login_Table";
+    private static final String LOGIN_KEY_FIELD_ID = "_id";
+    private static final String LOGIN_EMAIL = "email_login";
+    private static final String LOGIN_PASSWORD = "password";
+    private static final String LOGIN_IS_VERIFIED = "verifiedProfessor";
 
     //FIELDS (COLUMN NAMES) FOR THE VERIFICATION TABLE
-    public static final String VERIFICATION_TABLE = "Verification";
-    public static final String VERIFICATION_KEY_FIELD_ID = "_id";
-    public static final String VERIFICATION_EMAIL = "email_verify";
-    public static final String VERIFICATION_PIN = "pin";
-    public static final String VERIFICATION_LAST_NAME = "lastName_verify";
-    public static final String VERIFICATION_FIRST_NAME = "firstName_verify";
-    public static final String VERIFICATION_IS_VERIFIED = "isVerified";
+    private static final String VERIFICATION_TABLE = "Verification";
+    private static final String VERIFICATION_KEY_FIELD_ID = "_id";
+    private static final String VERIFICATION_EMAIL = "email_verify";
+    private static final String VERIFICATION_PIN = "pin";
+    private static final String VERIFICATION_LAST_NAME = "lastName_verify";
+    private static final String VERIFICATION_FIRST_NAME = "firstName_verify";
+    private static final String VERIFICATION_IS_VERIFIED = "isVerified";
 
     //FIELDS (COLUMN NAMES) FOR THE SAVED INSTRUCTOR  TABLE
-    public static final String SAVED_TABLE = "SavedInstructor";
-    //public static final String SAVED_KEY_FIELD_ID = "_id";
-    public static final String SAVED_INSTR_CODE = "code_saved";
+    private static final String SAVED_TABLE = "SavedInstructor";
+    private static final String SAVED_INSTR_CODE = "code_saved";
 
 
+    /**
+     * To establish the database
+     * @param context where to create
+     */
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         mContext = context;
@@ -100,7 +99,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 + SCHEDULE_SECTION + " INTEGER, "
                 + SCHEDULE_DAY + " INTEGER, "
                 + SCHEDULE_TIME + " TEXT, "
-                + SCHEDULE_LOCATION + " TEXT" + ")";
+                + SCHEDULE_LOCATION + " TEXT, "
+                + SCHEDULE_IN_SESSION + " INTEGER" + ")";
         db.execSQL(scheduleTable);
 
         String loginTable = "CREATE TABLE IF NOT EXISTS " + LOGIN_TABLE + " ("
@@ -110,29 +110,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + LOGIN_IS_VERIFIED + " INTEGER" + ")";
         db.execSQL(loginTable);
 
-        String statusTable = "CREATE TABLE IF NOT EXISTS " + STATUS_TABLE + " ("
-                + STATUS_KEY_FIELD_ID + " INTEGER PRIMARY KEY, " //schedule ID
-                + STATUS_STATUS + " INTEGER, "                  // boolean rep for canceled or not
-                + "FOREIGN KEY(" + STATUS_KEY_FIELD_ID + ")REFERENCES "
-                + SCHEDULE_TABLE + "(" + SCHEDULE_KEY_FIELD_ID + "))";
-        db.execSQL(statusTable);
-        /*
-        String statusTable = "CREATE TABLE IF NOT EXISTS " + STATUS_TABLE + " ("
-                + STATUS_KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
-                + STATUS_INSTR_CODE + " INTEGER, "
-                + STATUS_SECTION + " INTEGER, "
-                + STATUS_DAY + " INTEGER, "
-                + STATUS_TIME + " INTEGER, "
-                + STATUS_LOCATION + " TEXT, "
-                + STATUS_STATUS + " INTEGER, "
-                + "FOREIGN KEY(" + STATUS_KEY_FIELD_ID + ")REFERENCES "
-                + INSTRUCTOR_TABLE + "(" + INSTRUCTOR_KEY_FIELD_ID + "),"
-                + "FOREIGN KEY(" + STATUS_SECTION + ")REFERENCES "
-                + SCHEDULE_TABLE + "(" + SCHEDULE_SECTION + "),"
-                + "FOREIGN KEY(" + STATUS_DAY + ")REFERENCES "
-                + SCHEDULE_TABLE + "(" + SCHEDULE_DAY + "))";
-        db.execSQL(statusTable);
-        */
+
         String verificationTable = "CREATE TABLE IF NOT EXISTS " + VERIFICATION_TABLE + " ("
                 + VERIFICATION_KEY_FIELD_ID + " INTEGER PRIMARY KEY, "
                 + VERIFICATION_EMAIL + " TEXT, "
@@ -160,7 +138,6 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + INSTRUCTOR_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + SCHEDULE_TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + STATUS_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + LOGIN_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + VERIFICATION_TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + SAVED_TABLE);
@@ -170,6 +147,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //************************* INSTRUCTOR TABLE OPERATIONS **************
 
+    /**
+     * Adding an instructor to the databse
+     * @param instructor Instructor
+     */
     public void addInstructor(Instructor instructor)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -181,13 +162,16 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(INSTRUCTOR_OFFICE, instructor.getmOfficeRoomNumber());
         values.put(INSTRUCTOR_APPOINTMENT, instructor.byAppointment());
 
-        long id = db.insert(INSTRUCTOR_TABLE, null, values);
-        // instructor.setmId(id);
+        db.insert(INSTRUCTOR_TABLE, null, values);
         db.close();
 
     }
 
 
+    /**
+     * Get all instructors from database
+     * @return  a list of all Instructors
+     */
     public List<Instructor> getAllInstructors()
     {
         List<Instructor> instructorList = new ArrayList<>();
@@ -226,6 +210,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Delete an instructor from the database
+     * @param instructor  the Instructor to delete
+     * @return row of the instructor
+     */
     public int deleteInstructor(Instructor instructor)
     {
         if (instructor == null)
@@ -241,6 +230,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return deleteRow;
     }
 
+    /**
+     * Delete all instructors from database
+     */
     public void deleteAllInstructors()
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -249,6 +241,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Update an Instructor
+     * @param instructor Instructor to update
+     */
     public void updateInstructor(Instructor instructor)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -265,6 +261,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Get an Instructor
+     * @param id the long id of the isntructor
+     * @return an Instructor
+     */
     public Instructor getInstructor(long id)
     {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -293,6 +294,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //************************* SCHEDULE TABLE OPERATIONS **************
 
+    /**
+     * Add a Schedule to the database
+     * @param schedule A Schedule to add
+     */
     public void addSchedule(Schedule schedule)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -303,12 +308,17 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(SCHEDULE_DAY, schedule.getmOfficeHourDay());
         values.put(SCHEDULE_TIME, schedule.getmOfficeHourTime());
         values.put(SCHEDULE_LOCATION, schedule.getmOfficeHourLocation());
+        values.put(SCHEDULE_IN_SESSION, schedule.getInSession());
 
         long id = db.insert(SCHEDULE_TABLE, null, values);
         schedule.setmId(id);
         db.close();
     }
 
+    /**
+     * Get all schedules from the database
+     * @return  a list of schedules
+     */
     public List<Schedule> getAllSchedules()
     {
         List<Schedule> scheduleList = new ArrayList<>();
@@ -316,7 +326,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor cursor = db.query(
                 SCHEDULE_TABLE,
                 new String[] {SCHEDULE_KEY_FIELD_ID, SCHEDULE_INSTR_CODE, SCHEDULE_SECTION,
-                        SCHEDULE_DAY, SCHEDULE_TIME, SCHEDULE_LOCATION} ,
+                        SCHEDULE_DAY, SCHEDULE_TIME, SCHEDULE_LOCATION, SCHEDULE_IN_SESSION},
                 null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             do {
@@ -326,7 +336,8 @@ public class DBHelper extends SQLiteOpenHelper {
                                 cursor.getInt(2),
                                 cursor.getInt(3),
                                 cursor.getString(4),
-                                cursor.getString(5));
+                                cursor.getString(5),
+                                cursor.getInt(6));
                 scheduleList.add(schedule);
             } while (cursor.moveToNext());
         }
@@ -335,6 +346,11 @@ public class DBHelper extends SQLiteOpenHelper {
         return scheduleList;
     }
 
+    /**
+     * Delete a Schedule from the database
+     * @param schedule Schedule to delete
+     * @return the row of the schedule
+     */
     public int deleteSchedule(Schedule schedule)
     {
         if(schedule == null)
@@ -348,6 +364,9 @@ public class DBHelper extends SQLiteOpenHelper {
         return deleteRow;
     }
 
+    /**
+     * Delete all the schedules from the database
+     */
     public void deleteAllSchedules()
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -355,6 +374,10 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Update  a schedule in the database
+     * @param schedule the Schedule to update
+     */
     public void updateSchedule(Schedule schedule)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -365,21 +388,27 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(SCHEDULE_DAY, schedule.getmOfficeHourDay());
         values.put(SCHEDULE_TIME, schedule.getmOfficeHourTime());
         values.put(SCHEDULE_LOCATION, schedule.getmOfficeHourLocation());
+        values.put(SCHEDULE_IN_SESSION, schedule.getInSession());
 
         db.update(SCHEDULE_TABLE, values, SCHEDULE_KEY_FIELD_ID + " =?",
-                new String[] {String.valueOf(schedule.getmInstructor().getmId())});
+                new String[] {String.valueOf(schedule.getmId())});
 
         db.close();
 
     }
 
+    /**
+     * Get a schedule
+     * @param id the id of the schedule
+     * @return the Schedule
+     */
     public Schedule getSchedule(long id)
     {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.query(
                 SCHEDULE_TABLE,
                 new String[] {SCHEDULE_KEY_FIELD_ID, SCHEDULE_INSTR_CODE, SCHEDULE_SECTION,
-                        SCHEDULE_DAY, SCHEDULE_TIME, SCHEDULE_LOCATION},
+                        SCHEDULE_DAY, SCHEDULE_TIME, SCHEDULE_LOCATION, SCHEDULE_IN_SESSION},
                 SCHEDULE_KEY_FIELD_ID + " =?",
                 new String[] {String.valueOf(id)},
                 null, null, null, null );
@@ -391,108 +420,21 @@ public class DBHelper extends SQLiteOpenHelper {
                 cursor.getInt(2),
                 cursor.getInt(3),
                 cursor.getString(4),
-                cursor.getString(5));
+                cursor.getString(5),
+                cursor.getInt(6));
         cursor.close();
         db.close();
         return schedule;
     }
 
 
-    //************************* STATUS TABLE OPERATIONS **************
-
-    public void addStatus(Status status)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-
-        values.put(STATUS_KEY_FIELD_ID, status.getmSchedule().getmId());
-        //values.put(STATUS_SECTION, status.getmSchedule().getmOfficeHourSection());
-        //values.put(STATUS_DAY, status.getmSchedule().getmOfficeHourDay());
-        //values.put(STATUS_TIME, status.getmSchedule().getmOfficeHourTime());
-        //values.put(STATUS_LOCATION, status.getmSchedule().getmOfficeHourLocation());
-        values.put(STATUS_STATUS, status.getmStatus());
-
-        long id = db.insert(STATUS_TABLE, null, values);
-        status.setmId(id);
-        db.close();
-
-    }
-
-    public List<Status> getAllStatus()
-    {
-        List<Status> statusList = new ArrayList<>();
-        SQLiteDatabase db = this.getReadableDatabase();
-
-        Cursor cursor = db.query(
-                STATUS_TABLE,
-                new String[] {STATUS_KEY_FIELD_ID, STATUS_STATUS},
-                null, null, null, null, null, null );
-
-        if(cursor.moveToFirst())
-        {
-            do {
-                Status status = new Status(getSchedule(cursor.getLong(0)),
-                        cursor.getInt(1));
-                statusList.add(status);
-            } while (cursor.moveToNext());
-        }
-
-        cursor.close();
-        db.close();
-        return statusList;
-    }
-
-    public void deleteStatus(Status status)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(STATUS_TABLE, STATUS_KEY_FIELD_ID + " =?",
-                new String[] {String.valueOf(status.getmId())});
-
-        db.close();
-    }
-
-    public void deleteAllStatus()
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
-        db.delete(STATUS_TABLE, null, null);
-        db.close();
-    }
-
-    public void updateStatus(Status status)
-    {
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues values = new ContentValues();
-
-        values.put(STATUS_KEY_FIELD_ID, status.getmSchedule().getmId());
-        values.put(STATUS_STATUS, status.getmStatus());
-
-        db.update(STATUS_TABLE, values, STATUS_KEY_FIELD_ID + " =?",
-                new String[] {String.valueOf(status.getmSchedule().getmId())});
-        db.close();
-    }
-
-    public Status getStatus(long id)
-    {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.query(
-                STATUS_TABLE,
-                new String[] {STATUS_KEY_FIELD_ID, STATUS_STATUS},
-                STATUS_KEY_FIELD_ID + " =?",
-                new String[] {String.valueOf(id)},
-                null, null, null, null );
-        if(cursor != null) cursor.moveToFirst();
-
-        Status status = new Status(
-                getSchedule(cursor.getLong(0)),
-                cursor.getInt(1));
-        cursor.close();
-        db.close();
-        return status;
-
-    }
 
     //************************* LOGIN TABLE OPERATIONS **************
 
+    /**
+     * Add a Login to the database
+     * @param login the Login to add
+     */
     public void addLogin(Login login)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -508,6 +450,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Get all the logins from the database
+     * @return the list with the logins
+     */
     public List<Login> getAllLogin()
     {
         List<Login> loginList = new ArrayList<>();
@@ -535,6 +481,10 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
+    /**
+     * Delete the Login from the database
+     * @param login the Login to delete
+     */
     public void deleteLogin(Login login)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -543,6 +493,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Delete all the Logins from the table
+     */
     public void deleteAllLogin()
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -550,6 +503,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Get a login from the table
+     * @param id the id of the login
+     * @return Login
+     */
     public Login getLogin(long id)
     {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -574,6 +532,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //************************* VERIFICATION TABLE OPERATIONS **************
 
+    /**
+     * Add a verification to the table
+     * @param verification the Verification to add
+     */
     public void addVerification(Verification verification)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -589,6 +551,10 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * The list of the verifications
+     * @return a list
+     */
     public List<Verification> getAllVerifications()
     {
         List<Verification> verificationsList = new ArrayList<>();
@@ -617,6 +583,10 @@ public class DBHelper extends SQLiteOpenHelper {
         return verificationsList;
     }
 
+    /**
+     * Delete a verification from the table
+     * @param verification verification to delete
+     */
     public void deleteVerification(Verification verification)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -625,6 +595,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Delete all verifications
+     */
     public void deleteAllVerifications()
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -632,6 +605,10 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Update a verification in the table
+     * @param verification a Verification
+     */
     public void updateVerification(Verification verification)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -648,6 +625,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Get a verification
+     * @param id an id to verification
+     * @return the Verification
+     */
     public  Verification getVerification(long id)
     {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -675,6 +657,10 @@ public class DBHelper extends SQLiteOpenHelper {
 
     //************************* SAVED INSTRUCTOR TABLE OPERATIONS **************
 
+    /**
+     * Add  a SavedInstructor
+     * @param instructorCode the id of the instructor
+     */
     public void addSavedInstructor(long instructorCode)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -687,6 +673,10 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Get all the Saved Instructors
+     * @return a list of Saved Instructors
+     */
     public List<SavedInstructor> getAllSavedInstructors()
     {
         List<SavedInstructor> savedInstructorsList = new ArrayList<>();
@@ -708,6 +698,10 @@ public class DBHelper extends SQLiteOpenHelper {
         return savedInstructorsList;
     }
 
+    /**
+     * Delete a SavedInstructor
+     * @param savedInstructor  the SavedInstructor to delete
+     */
     public void deleteSavedInstructor(SavedInstructor savedInstructor)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -716,6 +710,9 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Delete all Saved Instructors from the database
+     */
     public void deleteAllSavedInstructors()
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -723,6 +720,10 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Update a Saved Instructor
+     * @param savedInstructor the Saved Instructor to update
+     */
     public void updateSavedInstructor(SavedInstructor savedInstructor)
     {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -734,6 +735,11 @@ public class DBHelper extends SQLiteOpenHelper {
         db.close();
     }
 
+    /**
+     * Get a Saved Instructor
+     * @param id the id of the Saved Instructor
+     * @return Saved Instructor
+     */
     public SavedInstructor getSavedInstructor(int id)
     {
         SQLiteDatabase db = this.getReadableDatabase();
@@ -755,6 +761,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     // ******************* IMPORT FROM CSV OPERATIONS **********
 
+    /**
+     * Read from a csv file to create the database for Instructors
+     * @param csvFileName file name of csv
+     * @return whether it was successful
+     */
     public boolean importInstructorsFromCSV(String csvFileName)
     {
         AssetManager am = mContext.getAssets();
@@ -793,6 +804,11 @@ public class DBHelper extends SQLiteOpenHelper {
 
     }
 
+    /**
+     * Read from a csv file to create the database for Schedules
+     * @param csvFileName file name of csv
+     * @return whether it was successful
+     */
     public boolean importScheduleFromCSV(String csvFileName)
     {
         AssetManager am = mContext.getAssets();
@@ -810,7 +826,7 @@ public class DBHelper extends SQLiteOpenHelper {
             while ((line = buffer.readLine()) != null)
             {
                 String[] fields = line.split(",");
-                if(fields.length != 5) {
+                if(fields.length != 6) {
                     Log.d("Schedule Finder", "Skipping bad CSV Row: " +
                             Arrays.toString(fields));
                     continue;
@@ -820,7 +836,9 @@ public class DBHelper extends SQLiteOpenHelper {
                 int day = Integer.parseInt(fields[2].trim());
                 String time = fields[3].trim();
                 String location = fields[4].trim();
-                addSchedule(new Schedule( instructorCode, getInstructor(instructorCode),section, day, time, location));
+                int sessionInt = Integer.parseInt(fields[5].trim());
+                addSchedule(new Schedule( getInstructor(instructorCode),section,
+                        day, time, location, sessionInt));
 
             }
         } catch (IOException e) {
@@ -832,6 +850,11 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
 
+    /**
+     * Read from a csv file to create the database for Verifications
+     * @param csvFileName file name of csv
+     * @return whether it was successful
+     */
     public boolean importVerifiedFromCSV(String csvFileName)
     {
         AssetManager am = mContext.getAssets();
@@ -869,9 +892,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return  true;
 
     }
-
-
-
 
 
 }
